@@ -136,4 +136,3 @@ echo $indexAdmin->addNavigation('uninstall.php');
 
 include './../include/install_tpl.php';
 include 'admin_footer.php';
-?>

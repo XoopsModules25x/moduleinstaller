@@ -69,4 +69,3 @@ $configs['dataPath'] = array(
     ),
     'configs'    => null
 );
-?>

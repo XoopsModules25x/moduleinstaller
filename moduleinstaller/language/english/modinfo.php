@@ -20,9 +20,9 @@
  * ****************************************************************************
  */
 
-define("_MI_INSTALLER_NAME",		"Installer");
+define("_MI_INSTALLER_NAME",        "Installer");
 define('_MI_INSTALLER_MENU_00',"Home");
-define("_MI_INSTALLER_MENU_01",	"Install Modules");
+define("_MI_INSTALLER_MENU_01",    "Install Modules");
 define('_MI_INSTALLER_MENU_02',"Uninstall Modules");
 define("_MI_INSTALLER_ADMIN_ABOUT" , "About");
 define("_MI_INSTALLER_DESC" , "Module to install and uninstall other modules");

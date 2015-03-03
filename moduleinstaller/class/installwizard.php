@@ -86,6 +86,7 @@ class XoopsInstallWizard
         // Prevent client caching
         header("Cache-Control: no-store, no-cache, must-revalidate", false);
         header("Pragma: no-cache");
+
         return true;
     }
 
@@ -96,16 +97,19 @@ class XoopsInstallWizard
                 header('WWW-Authenticate: Basic realm="XOOPS Installer"');
                 header('HTTP/1.0 401 Unauthorized');
                 echo 'You can not access this XOOPS installer.';
+
                 return false;
             }
             if(INSTALL_USER != '' && $_SERVER['PHP_AUTH_USER'] != INSTALL_USER) {
                 header('HTTP/1.0 401 Unauthorized');
                 echo 'You can not access this XOOPS installer.';
+
                 return false;
             }
             if(INSTALL_PASSWORD != $_SERVER['PHP_AUTH_PW']){
                 header('HTTP/1.0 401 Unauthorized');
                 echo 'You can not access this XOOPS installer.';
+
                 return false;
             }
         }
@@ -123,6 +127,7 @@ class XoopsInstallWizard
         if (!$GLOBALS['xoopsUser']->isAdmin()) {
             return false;
         }
+
         return true;
     }
 
@@ -170,6 +175,7 @@ class XoopsInstallWizard
         $proto   = ( @$_SERVER['HTTPS'] == 'on') ? 'https' : 'http';
         $host    = $_SERVER['HTTP_HOST'];
         $base    = substr( $_SERVER['PHP_SELF'], 0, strrpos($_SERVER['PHP_SELF'], '/'));
+
         return $proto . '://' . $host . $base;
     }
 
@@ -194,6 +200,7 @@ class XoopsInstallWizard
             }
         }
         $page = $pages[$pageIndex];
+
         return $this->baseLocation() . "/page_{$page}.php";
     }
 
@@ -234,8 +241,8 @@ class XoopsInstallWizard
             }
             $ret .= "</fieldset>\n" . $hidden. "\n" . $form->renderValidationJS(true);
         }
+
         return $ret;
     }
 
 }
-?>

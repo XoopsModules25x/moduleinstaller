@@ -67,5 +67,3 @@ $pages = array(
                                     'name'  => WELCOME,
                                     'title' => WELCOME_TITLE),
                 );
-
-?>
