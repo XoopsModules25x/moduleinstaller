@@ -134,7 +134,6 @@ define("SAVED_MAINFILE_MSG","The installer has saved the specified settings to <
 define("DATA_ALREADY_INSERTED","XOOPS data found in database.<br />Press <em>next</em> to go to the next step.");
 define("DATA_INSERTED","Initial data have been inserted into database.<br />Press <em>next</em> to go to the next step.");
 
-
 // %s is database name
 define("DATABASE_CREATED","Database %s created!"); // L43
 // %s is table name
@@ -165,7 +164,6 @@ define("ERR_READ_MAINFILE","Could not open mainfile.php for reading");
 define("ERR_INVALID_DBCHARSET","The charset '%s' is not supported.");
 define("ERR_INVALID_DBCOLLATION","The collation '%s' is not supported.");
 define("ERR_CHARSET_NOT_SET","Default character set is not set for XOOPS database.");
-
 
 define("_INSTALL_CHARSET","UTF-8");
 
@@ -213,4 +211,3 @@ define("PASSWORD_BETTER","Better");
 define("PASSWORD_MEDIUM","Medium");
 define("PASSWORD_STRONG","Strong");
 define("PASSWORD_STRONGEST","Strongest");
-?>

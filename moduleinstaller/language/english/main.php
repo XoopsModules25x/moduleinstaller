@@ -13,7 +13,6 @@
  * @license             http://www.gnu.org/licenses/gpl-2.0.html GNU Public License
  * @package	moduleinstaller
  * @since		1.0
- * @author 	Michael Beck (Mamba) 
+ * @author 	Michael Beck (Mamba)
  * @version	$Id $
 **/
-

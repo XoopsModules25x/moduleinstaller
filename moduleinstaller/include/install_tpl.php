@@ -46,8 +46,8 @@ include_once '../../../language/' . $wizard->language . '/global.php';
         if (file_exists('language/' . $wizard->language . '/style.css')) {
             echo '<link charset="UTF-8" rel="stylesheet" type="text/css" media="all" href="language/' . $wizard->language . '/style.css" />';
         } else {
-		$xoTheme->addStylesheet( XOOPS_URL . "/modules/" . $xoopsModule->getVar("dirname") . "/css/style.css" );
-		}
+        $xoTheme->addStylesheet( XOOPS_URL . "/modules/" . $xoopsModule->getVar("dirname") . "/css/style.css" );
+        }
     ?>
     
     <script type="text/javascript" src="./js/prototype-1.6.0.3.js"></script>
