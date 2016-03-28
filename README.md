@@ -1,8 +1,3 @@
-#ModuleInstaller
-[![Software License](https://img.shields.io/badge/license-GPL-brightgreen.svg?style=flat)](LICENSE) 
-
-XOOPS module to install and uninstall other modules in bulk
-
 ![alt XOOPS CMS](http://xoops.org/images/logoXoops4GithubRepository.png)
 ## ModuleInstaller for  [XOOPS CMS 2.5.8+](https://xoops.org)
 [![Software License](https://img.shields.io/badge/license-GPL-brightgreen.svg?style=flat)](LICENSE)
