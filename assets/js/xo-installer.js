@@ -67,7 +67,7 @@ function passwordStrength(password)
         //if password has at least one number give 1 point
         if (password.match(/\d+/)) score++;
 
-        //if password has at least one special caracther give 1 point
+        //if password has at least one special character give 1 point
         if ( password.match(/.[!,@,#,$,%,^,&,*,?,_,~,-,(,)]/) )        score++;
 
         //if password bigger than 12 give another 1 point
@@ -112,5 +112,38 @@ function suggestPasswordCopy(id)
     passwordStrength(adminpass.value)
     return true;
 }
+
+
+function selectAll() {
+//    alert('You are clicking on me');
+    var radios = document.getElementsByTagName("input");
+    var modules = document.getElementsByTagName("input");
+    for (var i = 0; i < radios.length; i++) {
+
+        if (radios[i].type === "radio" && radios[i].id.slice(-1) === "1") {
+            radios[i].checked = true;
+
+            radios[i].parentNode.parentNode.style.background = '#E6EFC2';
+        } else {
+            radios[i].checked = false;
+        }
+    }
+}
+
+
+function unselectAll() {
+//    alert('You are clicking on me');
+    var radios = document.getElementsByTagName("input");
+    for (var i = 0; i < radios.length; i++) {
+
+        if (radios[i].type === "radio" && radios[i].id.slice(-1) === "2") {
+            radios[i].checked = true;
+            radios[i].parentNode.parentNode.style.background = 'transparent';
+        } else {
+            radios[i].checked = false;
+        }
+    }
+}
+
 
 window.onload = xoopsExternalLinks;

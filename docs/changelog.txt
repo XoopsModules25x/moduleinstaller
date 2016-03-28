@@ -1,3 +1,21 @@
-1.00 Beta [2011/07/22] (Mamba)
+1.02 RC 1         2016-03-27
 =================================
-First beta release
+- moved all images, CSS, and JS files to /assets (mamba)
+- added tab for bulk Updates (mamba)
+- added patches for Core files, required for "bulk Update" to work, located in /extras (mamba)
+- XOOPS 2.5.8 and PHP 7 (mamba)
+
+1.01 Beta 1         2014-03-18
+=================================
+- added option to select and un-select ALL modules (mamba)
+
+1.00 Final          2014-02-15
+=================================
+- fixed highlight of selected modules (mamba)
+- removed System and ModuleInstaller from the list of modules that can be uninstalled (mamba)
+- updated to prototype.js 1.71
+
+
+1.00 Beta           2011-07-22
+=================================
+First beta release    (Mamba)

@@ -28,15 +28,15 @@ img {
     text-align:                 left;
     background:                 #f3f3f3 url(../img/wizard_bg.png) no-repeat 0 90px;
     border-top:                 1px solid #e3e3e3;
-	-webkit-border-bottom-right-radius: 8px;
-	-webkit-border-bottom-left-radius: 8px;
-	-moz-border-radius-bottomright: 8px;
-	-moz-border-radius-bottomleft: 8px;
-	border-bottom-right-radius: 8px;
-	border-bottom-left-radius: 8px;
-	border-bottom: 2px solid #ccc;
-	border-right: 2px solid #ccc;
-	border-left: 2px solid #ccc;
+    -webkit-border-bottom-right-radius: 8px;
+    -webkit-border-bottom-left-radius: 8px;
+    -moz-border-radius-bottomright: 8px;
+    -moz-border-radius-bottomleft: 8px;
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+    border-bottom: 2px solid #ccc;
+    border-right: 2px solid #ccc;
+    border-left: 2px solid #ccc;
 }
 #pageslist {
     float:                      left;
@@ -80,11 +80,11 @@ h1 {
     background:                 url(../img/dark-navcp.png) repeat-x;
     height:                     40px;
     padding:                    0.1em 1em 0 1em;
-	text-shadow:				1px 1px 2px #ccc;
+    text-shadow:                1px 1px 2px #ccc;
     -moz-border-radius: 8px;
-	-webkit-border-radius: 8px;
-	-khtml-border-radius: 8px;
-	border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -khtml-border-radius: 8px;
+    border-radius: 8px;
 }
 #step {float: right; margin:  5px;}
 #step2 {float: left; margin:  5px;}
@@ -99,7 +99,7 @@ ul, ol { margin:0; padding:0 20px;}
     padding-bottom:             2px;
     background:                 url(../img/bullet.png) no-repeat left center;
 }
-#pageslist li.current { 
+#pageslist li.current {
     background-image: url(../img/bullet-current.png);
     background-color: #E9FF8F;
     filter:                         alpha(opacity=60);
@@ -107,9 +107,9 @@ ul, ol { margin:0; padding:0 20px;}
     -webkit-opacity:                0.6;
     -khtml-opacity:                 0.6;
     opacity:                        0.6;
-    margin-bottom:    2px; 
+    margin-bottom:    2px;
 }
-#pageslist li.disabled { 
+#pageslist li.disabled {
     background-image: url(../img/bullet-disabled.png);
 }
 
@@ -121,8 +121,8 @@ ul, ol { margin:0; padding:0 20px;}
 }
 
 form { margin:    0;}
-select#support { border-color:	#ccc;}
-h1, h2 { font-family: "Lucida Grande", "Trebuchet MS", sans-serif; text-shadow:	1px 1px 2px #ccc;}
+select#support { border-color:  #ccc;}
+h1, h2 { font-family: "Lucida Grande", "Trebuchet MS", sans-serif; text-shadow: 1px 1px 2px #ccc;}
 h2 {
     margin-top:                 0;
     border-bottom:              1px solid #ccc;
@@ -182,21 +182,21 @@ td, th {
 }
 
 fieldset {
-	margin: .5em;
-	padding: 1em;
-	border: 1px solid #333;
-	color: #000;
-	-moz-border-radius: 6px;
-	-webkit-border-radius: 6px;
-	-khtml-border-radius: 6px;
-	border-radius: 6px;
+    margin: .5em;
+    padding: 1em;
+    border: 1px solid #333;
+    color: #000;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -khtml-border-radius: 6px;
+    border-radius: 6px;
 }
 legend {
     margin:                     0;
     padding:                    0 10px;
     font-size:                  1.1em;
     font-weight:                bold;
-	text-shadow:				1px 1px 2px #ccc;
+    text-shadow:                1px 1px 2px #ccc;
 }
 
 .xolabel {
@@ -220,12 +220,12 @@ legend {
     padding:                    5px;
     color:                      #333;
     list-style-type:            none;
-	background-color:	#F4FAFF;
-	border:				1px solid #E4EAEF;
-	-moz-border-radius: 8px;
-	-webkit-border-radius: 8px;
-	-khtml-border-radius: 8px;
-	border-radius: 8px;
+    background-color:   #F4FAFF;
+    border:             1px solid #E4EAEF;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -khtml-border-radius: 8px;
+    border-radius: 8px;
 }
 body.show-help .xoform-help { display: block;}
 
@@ -237,14 +237,14 @@ ul.diags1 {
     overflow:                   auto;
     width: 60%;
     padding:                    5px;
-    margin:                     0px;
+    margin:                     0;
     border:                     1px solid #d0d0d0;
     list-style-type:            none;
     border-radius: 8px;
-	-moz-border-radius: 8px;
-	-webkit-border-radius: 8px;
-	-khtml-border-radius: 8px;
-	background-color:  #FBE3E4;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -khtml-border-radius: 8px;
+    background-color:  #FBE3E4;
 }
 /*================================================*/
 
@@ -252,13 +252,13 @@ ul.diags, ul.log {
 /*    height:                     310px;*/
     overflow:                   auto;
     padding:                    5px;
-    margin:                     0px;
+    margin:                     0;
     border:                     1px solid #d0d0d0;
     list-style-type:            none;
     border-radius: 8px;
-	-moz-border-radius: 8px;
-	-webkit-border-radius: 8px;
-	-khtml-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -khtml-border-radius: 8px;
 }
 
 /*ul.log {
@@ -280,7 +280,7 @@ ul.diags li.failure, ul.log li.failure {
 }
 
 .module td {
-    margin:                     0px;
+    margin:                     0;
     padding:                    2px;
     background-color:           transparent;
 }
@@ -325,18 +325,18 @@ ul.diags li.failure, ul.log li.failure {
     border:                     1px solid #ccc;
     list-style-type:            none;
     border-radius: 8px;
-	-moz-border-radius: 8px;
-	-webkit-border-radius: 8px;
-	-khtml-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -khtml-border-radius: 8px;
 }
 .resultMsg, .successMsg {
     background-color:           #E6EFC2;
     color:                      #529214;
     border-color:               #C6D880;
     border-radius: 8px;
-	-moz-border-radius: 8px;
-	-webkit-border-radius: 8px;
-	-khtml-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -khtml-border-radius: 8px;
 }
 .errorMsg a {background-color: transparent; color: #D12F19;}
 .confirmMsg a {background-color: transparent; color: #817134;}
@@ -348,9 +348,9 @@ ul.diags li.failure, ul.log li.failure {
     color:                      #D12F19;
     border-color:               #FBC2C4;
     -moz-border-radius: 8px;
-	-webkit-border-radius: 8px;
-	-khtml-border-radius: 8px;
-	border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -khtml-border-radius: 8px;
+    border-radius: 8px;
 }
 
 .directory, .files {
@@ -378,51 +378,51 @@ ul.diags li.failure, ul.log li.failure {
 }
 /* Form element */
 input[type=submit],input[type=reset],input[type=button],.xo-formbuttons,.formButton,button
-	{
-	margin: 2px 5px 2px 5px;
-	background-color: #D3D2D6;
-	padding: 4px 8px;
-	color: #405A80;
-	font-size: 1em;
-	font-weight: bold;
-	border: 1px solid #ccc;
-	border-radius: 5px;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	-khtml-border-radius: 5px;
-	box-shadow: 0 20px 10px -10px rgba(255, 255, 255, 0.3) inset;
-	-moz-box-shadow: 0 20px 10px -10px rgba(255, 255, 255, 0.3) inset;
-	-webkit-box-shadow: 0 20px 10px -10px rgba(255, 255, 255, 0.3) inset;
-	-khtml-box-shadow: 0 20px 10px -10px rgba(255, 255, 255, 0.3) inset;
-	cursor: pointer;
+    {
+    margin: 2px 5px 2px 5px;
+    background-color: #D3D2D6;
+    padding: 4px 8px;
+    color: #405A80;
+    font-size: 1em;
+    font-weight: bold;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    box-shadow: 0 20px 10px -10px rgba(255, 255, 255, 0.3) inset;
+    -moz-box-shadow: 0 20px 10px -10px rgba(255, 255, 255, 0.3) inset;
+    -webkit-box-shadow: 0 20px 10px -10px rgba(255, 255, 255, 0.3) inset;
+    -khtml-box-shadow: 0 20px 10px -10px rgba(255, 255, 255, 0.3) inset;
+    cursor: pointer;
 }
 
 input[type=submit]:hover,input[type=reset]:hover,input[type=button]:hover,.xo-formbuttons:hover,.formButton:hover,button:hover
-	{
-	background-color: #E6EBFF;
-	padding: 4px 8px;
-	color: inherit;
-	cursor: pointer;
+    {
+    background-color: #E6EBFF;
+    padding: 4px 8px;
+    color: inherit;
+    cursor: pointer;
 }
 
 input[type=text],input[type=password],input[type=checkbox],input[type=file],textarea
-	{
-	border: 1px solid #ccc;
-	margin: 2px 5px 2px 0;
-	padding: 2px;
-	background-color: #f7f7f7;
-	padding-left: .2em;
-	color: inherit;
-	border: #ccc solid 1px;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	-khtml-border-radius: 5px;
-	border-radius: 5px;
-	
+    {
+    border: 1px solid #ccc;
+    margin: 2px 5px 2px 0;
+    padding: 2px;
+    background-color: #f7f7f7;
+    padding-left: .2em;
+    color: inherit;
+    border: #ccc solid 1px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    border-radius: 5px;
+
 }
 
 input[type=text],input[type=password],input[type=file] {
-	width:                      60%;
+    width:                      60%;
     margin-bottom:              .25em;
     background:                 #f7f7f7 url(../img/form-input.png) no-repeat left top;
     padding:                    1px .25em;
@@ -431,27 +431,27 @@ input[type=text],input[type=password],input[type=file] {
 }
 
 input[type=text]:hover,input[type=password]:hover,input[type=file]:hover,input[type=checkbox]:hover,textarea:hover
-	{
-	background-color: #EFEFEF;
-	color: inherit;
-	border: 1px solid #E9CB38;
+    {
+    background-color: #EFEFEF;
+    color: inherit;
+    border: 1px solid #E9CB38;
 }
 
 input[type=text]:focus,input[type=password]:focus,input[type=file]:focus,input[type=checkbox]:focus,textarea:focus
-	{
-	background-color: #F4FAFF;
-	color: #333;
-	border: #139EE8 solid 1px;
-	outline: 1px solid #139EE8;
-	-moz-outline-radius: 5px;
-	-webkit-outline-radius: 5px;
-	-khtml-outline-radius: 5px;
-	border-outline: 5px;
+    {
+    background-color: #F4FAFF;
+    color: #333;
+    border: #139EE8 solid 1px;
+    outline: 1px solid #139EE8;
+    -moz-outline-radius: 5px;
+    -webkit-outline-radius: 5px;
+    -khtml-outline-radius: 5px;
+    border-outline: 5px;
 }
 
 input[type=checkbox],input[type=radio] {
-	margin: 3px;
-	padding: 2px;
+    margin: 3px;
+    padding: 2px;
 }
 
 select {
@@ -470,7 +470,7 @@ select {
     opacity:                        0.8;
 }
 select[name=lang] {
-    min-width:                  10em
+    min-width:                  10em;
 }
 .option {
     padding-left:               27px;
@@ -535,9 +535,9 @@ textarea {
 
 /*==================== logger ============================*/
 #xo-logger-tabs {
-    margin:				5px;
-	padding-top:		10px;
-	font-size:			95%;
+    margin:             5px;
+    padding-top:        10px;
+    font-size:          95%;
 }
 
 #xo-logger-tabs a {
