@@ -2,10 +2,10 @@
 
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-$dirname        = basename(dirname(__DIR__));
-$module_handler = xoops_getHandler('module');
-$module         = $module_handler->getByDirname($dirname);
-$pathIcon32     = $module->getInfo('icons32');
+$dirname       = basename(dirname(__DIR__));
+$moduleHandler = xoops_getHandler('module');
+$module        = $moduleHandler->getByDirname($dirname);
+$pathIcon32    = $module->getInfo('icons32');
 
 //xoops_loadLanguage('admin', $dirname);
 

@@ -245,7 +245,7 @@ class XoopsInstallWizard
     /**
      * @return string
      */
-    public function CreateForm()
+    public function createForm()
     {
         $hidden = '';
         $ret    = '';

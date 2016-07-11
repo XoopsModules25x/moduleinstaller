@@ -15,12 +15,11 @@
  **/
 include_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
-
 $xoopsOption['checkadmin'] = true;
 $xoopsOption['hascommon']  = true;
 require_once './../include/common.inc.php';
 require_once XOOPS_ROOT_PATH . '/modules/system/admin/modulesadmin/modulesadmin.php';
-defined('XOOPS_INSTALL') || exit('XOOPS Installation wizard die');
+defined('XOOPS_INSTALL') || die('XOOPS Installation wizard die');
 
 if (!@include_once XOOPS_ROOT_PATH . "/language/{$wizard->language}/global.php") {
     include_once XOOPS_ROOT_PATH . '/language/english/global.php';
@@ -36,6 +35,38 @@ require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
 $pageHasForm = true;
 $pageHasHelp = false;
 
+/**
+ * @param $dirname
+ */
+
+/*
+function xoops_module_update($dirname) {
+
+//http://localhost/257final/modules/system/admin.php?fct=modulesadmin&op=update&module=mypoints
+
+$url = XOOPS_URL . "/modules/system/admin.php?fct=modulesadmin&op=update&module=".$dirname;
+//$ch = curl_init();
+//curl_setopt($ch, CURLOPT_URL,$url);
+//curl_setopt($ch, CURLOPT_RETURNTRANSFER,1); // return into a variable
+//curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+//$result = curl_exec($ch);
+//curl_close($ch);
+
+
+$crl = curl_init();
+curl_setopt($crl, CURLOPT_URL, $url);
+@curl_setopt($crl, CURLOPT_HEADER, 0);
+@curl_setopt($crl, CURLOPT_NOBODY, 1);
+@curl_setopt($crl, CURLOPT_FOLLOWLOCATION, true);
+curl_setopt($crl, CURLOPT_RETURNTRANSFER, 1);
+$res = curl_exec($crl);
+curl_close($crl);
+return $res;
+
+}
+
+*/
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     include_once XOOPS_ROOT_PATH . '/class/xoopsblock.php';
     include_once XOOPS_ROOT_PATH . '/kernel/module.php';
@@ -47,16 +78,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $xoopsConfig    = $config_handler->getConfigsByCat(XOOPS_CONF);
 
     $msgs = array();
-    foreach ($_REQUEST['modules'] as $dirname => $installmod) {
-        if ($installmod) {
-            $msgs[] = xoops_module_install($dirname);
+    foreach ($_REQUEST['modules'] as $dirname => $updateModule) {
+        if ($updateModule) {
+            $msgs[] = xoops_module_update($dirname);
         }
     }
 
     $pageHasForm = false;
 
     if (count($msgs) > 0) {
-        $content = "<div class='x2-note successMsg'>" . INSTALLED_MODULES . "</div><ul class='log'>";
+        $content = "<div class='x2-note successMsg'>" . UPDATED_MODULES . "</div><ul class='log'>";
         foreach ($msgs as $msg) {
             $content .= "<dt>{$msg}</dt>";
         }
@@ -91,10 +122,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $javascript = '';
     $content    = "<ul class='log'><li>";
     $content .= "<table class='module'>\n";
-    //    $content .= "<input type='button' name='getTotal1' id='getTotal1' value='Select All' onclick='selectAll();' /> <input type='button' name='getTotal1' id='getTotal1' value='Unselect All' onclick='unselectAll();' /><br>";
+    //remove System module and itself from the list of modules that can be uninstalled
+    //    $dirlist = array_diff($dirlist, array('system', 'moduleinstaller'));
     foreach ($dirlist as $file) {
         clearstatcache();
-        if (!in_array($file, $listed_mods)) {
+        if (in_array($file, $listed_mods)) {
             $value = 0;
             $style = '';
             if (in_array($file, $wizard->configs['modules'])) {
@@ -115,10 +147,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             $content .= "<tr id='" . $file . "'" . $style . ">\n";
             $content .= "    <td class='img' ><img src='" . XOOPS_URL . '/modules/' . $module->getInfo('dirname') . '/' . $module->getInfo('image') . "' alt='" . $module->getInfo('name') . "'/></td>\n";
-            $content .= '    <td>';
+
+            $moduleHandlerInDB = xoops_getHandler('module');
+            $moduleInDB        = $moduleHandler->getByDirname($module->getInfo('dirname'));
+            // Save current version for use in the update function
+            $prevVersion = round($moduleInDB->getVar('version') / 100, 2);
+
+            $content = round($module->getInfo('version'), 2) != $prevVersion ? $content . "    <td ><span style='color: #FF0000; font-weight: bold;'>" : $content . '    <td><span>';
             $content .= '        ' . $module->getInfo('name') . '&nbsp;' . number_format(round($module->getInfo('version'), 2), 2) . '&nbsp;' . $module->getInfo('module_status') . '&nbsp;(folder: /' . $module->getInfo('dirname') . ')';
             $content .= '        <br>' . $module->getInfo('description');
-            $content .= "    </td>\n";
+            $content .= "    </span></td>\n";
             $content .= "    <td class='yesno'>";
             $content .= $moduleYN->render();
             $content .= "    </td></tr>\n";
@@ -132,7 +170,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $content     = "<div class='x2-note confirmMsg'>" . NO_MODULES_FOUND . '</div>';
     }
 }
-
 $indexAdmin = new ModuleAdmin();
 echo $indexAdmin->addNavigation(basename(__FILE__));
 

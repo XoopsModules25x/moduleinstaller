@@ -76,8 +76,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Get installed modules
-    $module_handler = xoops_getHandler('module');
-    $installed_mods = $module_handler->getObjects();
+    $moduleHandler  = xoops_getHandler('module');
+    $installed_mods = $moduleHandler->getObjects();
     $listed_mods    = array();
     foreach ($installed_mods as $module) {
         $listed_mods[] = $module->getVar('dirname');
@@ -103,7 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             $file   = trim($file);
-            $module = $module_handler->create();
+            $module = $moduleHandler->create();
             if (!$module->loadInfo($file, false)) {
                 continue;
             }
@@ -117,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $content .= "    <td class='img' ><img src='" . XOOPS_URL . '/modules/' . $module->getInfo('dirname') . '/' . $module->getInfo('image') . "' alt='" . $module->getInfo('name') . "'/></td>\n";
             $content .= '    <td>';
             $content .= '        ' . $module->getInfo('name') . '&nbsp;' . number_format(round($module->getInfo('version'), 2), 2) . '&nbsp;' . $module->getInfo('module_status') . '&nbsp;(folder: /' . $module->getInfo('dirname') . ')';
-            $content .= '        <br />' . $module->getInfo('description');
+            $content .= '        <br>' . $module->getInfo('description');
             $content .= "    </td>\n";
             $content .= "    <td class='yesno'>";
             $content .= $moduleYN->render();

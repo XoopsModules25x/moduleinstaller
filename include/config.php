@@ -31,11 +31,13 @@ $configs['conf_names'] = array(
     'meta_keywords',
     'meta_description',
     'meta_author',
-    'meta_copyright');
+    'meta_copyright'
+);
 
 // languages config files
 $configs['language_files'] = array(
-    'global');
+    'global'
+);
 
 // extension_loaded
 $configs['extensions'] = array(
@@ -44,7 +46,8 @@ $configs['extensions'] = array(
     'xml'      => array('XML', sprintf(PHP_EXTENSION, XML_PARSING)),
     'zlib'     => array('Zlib', sprintf(PHP_EXTENSION, ZLIB_COMPRESSION)),
     'gd'       => array((function_exists('gd_info') && $gdlib = @gd_info()) ? 'GD ' . $gdlib['GD Version'] : '', sprintf(PHP_EXTENSION, IMAGE_FUNCTIONS)),
-    'exif'     => array('Exif', sprintf(PHP_EXTENSION, IMAGE_METAS)));
+    'exif'     => array('Exif', sprintf(PHP_EXTENSION, IMAGE_METAS))
+);
 
 // Writable files and directories
 $configs['writable'] = array('uploads/', 'uploads/avatars/', 'uploads/images/', 'uploads/ranks/', 'uploads/smilies/', 'mainfile.php', 'include/license.php', 'xoops_data/data/secure.php');
@@ -55,12 +58,15 @@ $configs['modules'] = array();
 // xoops_lib, xoops_data directories
 $configs['xoopsPathDefault'] = array(
     'lib'  => 'xoops_lib',
-    'data' => 'xoops_data');
+    'data' => 'xoops_data'
+);
 
 // writable xoops_lib, xoops_data directories
 $configs['dataPath'] = array(
     'caches'  => array(
         'xoops_cache',
         'smarty_cache',
-        'smarty_compile'),
-    'configs' => null);
+        'smarty_compile'
+    ),
+    'configs' => null
+);
