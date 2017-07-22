@@ -38,7 +38,7 @@ if (empty($xoopsOption['hascommon'])) {
     $xoopsOption['nocommon'] = true;
     session_start();
 }
-include_once dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
+require_once __DIR__ . '/../../../mainfile.php';
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 /*
 error_reporting( 0 );
@@ -49,10 +49,10 @@ error_reporting(E_ALL);
 $xoopsLogger->activated = true;
 */
 
-include_once dirname(__DIR__) . '/class/installwizard.php';
-include_once XOOPS_ROOT_PATH . '/include/version.php';
-include_once XOOPS_ROOT_PATH . '/include/functions.php';
-include_once XOOPS_ROOT_PATH . '/class/module.textsanitizer.php';
+require_once __DIR__ . '/../class/installwizard.php';
+require_once XOOPS_ROOT_PATH . '/include/version.php';
+require_once XOOPS_ROOT_PATH . '/include/functions.php';
+require_once XOOPS_ROOT_PATH . '/class/module.textsanitizer.php';
 
 $pageHasHelp = false;
 $pageHasForm = false;

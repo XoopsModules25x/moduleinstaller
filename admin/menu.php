@@ -2,12 +2,18 @@
 
 // defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
 
-$dirname       = basename(dirname(__DIR__));
-$moduleHandler = xoops_getHandler('module');
-$module        = $moduleHandler->getByDirname($dirname);
-$pathIcon32    = $module->getInfo('icons32');
+$moduleDirName = basename(dirname(__DIR__));
 
-//xoops_loadLanguage('admin', $dirname);
+if (false !== ($moduleHelper = Xmf\Module\Helper::getHelper($moduleDirName))) {
+} else {
+    $moduleHelper = Xmf\Module\Helper::getHelper('system');
+}
+$adminObject = \Xmf\Module\Admin::getInstance();
+
+$pathIcon32 = \Xmf\Module\Admin::menuIconPath('');
+//$pathModIcon32 = $moduleHelper->getModule()->getInfo('modicons32');
+
+$moduleHelper->loadLanguage('modinfo');
 
 $adminmenu = array();
 
