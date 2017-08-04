@@ -147,7 +147,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $form->addElement($moduleYN);
 
             $content .= "<tr id='" . $file . "'" . $style . ">\n";
-            $content .= "    <td class='img' ><img src='" . XOOPS_URL . '/modules/' . $module->getInfo('dirname') . '/' . $module->getInfo('image') . "' alt='" . $module->getInfo('name') . "'/></td>\n";
+            $content .= "    <td class='img' ><img src='" . XOOPS_URL . '/modules/' . $module->getInfo('dirname') . '/' . $module->getInfo('image') . "' alt='" . $module->getInfo('name') . "'></td>\n";
 
             $moduleHandlerInDB = xoops_getHandler('module');
             $moduleInDB        = $moduleHandler->getByDirname($module->getInfo('dirname'));
