@@ -2,7 +2,7 @@
     <h1 class="head">Help:
         <a class="ui-corner-all tooltip" href="<{$xoops_url}>/modules/moduleinstaller/admin/index.php"
            title="Back to the administration of Module Installer"> Module Installer <img src="<{xoAdminIcons home.png}>"
-                                                                                         alt="Back to the Administration of Module Installer"/>
+                                                                                         alt="Back to the Administration of Module Installer">
         </a></h1>
     <!-- -----Help Content ---------- -->
 
