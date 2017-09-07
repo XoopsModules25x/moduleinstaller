@@ -22,61 +22,61 @@
  * @author      Taiwen Jiang <phppp@users.sourceforge.net>
  * @author      DuGris (aka L. JEN) <dugris@frxoops.org>
  */
-$pages = array(
-    'langselect'      => array(
+$pages = [
+    'langselect'      => [
         'name'  => LANGUAGE_SELECTION,
         'title' => LANGUAGE_SELECTION_TITLE
-    ),
-    'start'           => array(
+    ],
+    'start'           => [
         'name'  => INTRODUCTION,
         'title' => INTRODUCTION_TITLE
-    ),
-    'modcheck'        => array(
+    ],
+    'modcheck'        => [
         'name'  => CONFIGURATION_CHECK,
         'title' => CONFIGURATION_CHECK_TITLE
-    ),
-    'pathsettings'    => array(
+    ],
+    'pathsettings'    => [
         'name'  => PATHS_SETTINGS,
         'title' => PATHS_SETTINGS_TITLE
-    ),
-    'dbconnection'    => array(
+    ],
+    'dbconnection'    => [
         'name'  => DATABASE_CONNECTION,
         'title' => DATABASE_CONNECTION_TITLE
-    ),
-    'dbsettings'      => array(
+    ],
+    'dbsettings'      => [
         'name'  => DATABASE_CONFIG,
         'title' => DATABASE_CONFIG_TITLE
-    ),
-    'configsave'      => array(
+    ],
+    'configsave'      => [
         'name'  => CONFIG_SAVE,
         'title' => CONFIG_SAVE_TITLE
-    ),
-    'tablescreate'    => array(
+    ],
+    'tablescreate'    => [
         'name'  => TABLES_CREATION,
         'title' => TABLES_CREATION_TITLE
-    ),
-    'siteinit'        => array(
+    ],
+    'siteinit'        => [
         'name'  => INITIAL_SETTINGS,
         'title' => INITIAL_SETTINGS_TITLE
-    ),
-    'tablesfill'      => array(
+    ],
+    'tablesfill'      => [
         'name'  => DATA_INSERTION,
         'title' => DATA_INSERTION_TITLE
-    ),
-    'configsite'      => array(
+    ],
+    'configsite'      => [
         'name'  => CONFIG_SITE,
         'title' => CONFIG_SITE_TITLE
-    ),
-    'theme'           => array(
+    ],
+    'theme'           => [
         'name'  => THEME,
         'title' => THEME_TITLE
-    ),
-    'moduleinstaller' => array(
+    ],
+    'moduleinstaller' => [
         'name'  => MODULES,
         'title' => MODULES_TITLE
-    ),
-    'end'             => array(
+    ],
+    'end'             => [
         'name'  => WELCOME,
         'title' => WELCOME_TITLE
-    )
-);
+    ]
+];

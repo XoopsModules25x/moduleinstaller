@@ -18,13 +18,13 @@ if (!defined('XOOPS_INSTALL')) {
     die('XOOPS Custom Installation die');
 }
 
-$configs = array();
+$configs = [];
 
 // setup config site info
-$configs['db_types'] = array('mysql');
+$configs['db_types'] = ['mysql'];
 
 // setup config site info
-$configs['conf_names'] = array(
+$configs['conf_names'] = [
     'sitename',
     'slogan',
     'allow_register',
@@ -32,28 +32,28 @@ $configs['conf_names'] = array(
     'meta_description',
     'meta_author',
     'meta_copyright'
-);
+];
 
 // languages config files
-$configs['language_files'] = array(
+$configs['language_files'] = [
     'global'
-);
+];
 
 // extension_loaded
-$configs['extensions'] = array(
-    'mbstring' => array('MBString', sprintf(PHP_EXTENSION, CHAR_ENCODING)),
-    'iconv'    => array('Iconv', sprintf(PHP_EXTENSION, ICONV_CONVERSION)),
-    'xml'      => array('XML', sprintf(PHP_EXTENSION, XML_PARSING)),
-    'zlib'     => array('Zlib', sprintf(PHP_EXTENSION, ZLIB_COMPRESSION)),
-    'gd'       => array(
+$configs['extensions'] = [
+    'mbstring' => ['MBString', sprintf(PHP_EXTENSION, CHAR_ENCODING)],
+    'iconv'    => ['Iconv', sprintf(PHP_EXTENSION, ICONV_CONVERSION)],
+    'xml'      => ['XML', sprintf(PHP_EXTENSION, XML_PARSING)],
+    'zlib'     => ['Zlib', sprintf(PHP_EXTENSION, ZLIB_COMPRESSION)],
+    'gd'       => [
         (function_exists('gd_info') && $gdlib = @gd_info()) ? 'GD ' . $gdlib['GD Version'] : '',
         sprintf(PHP_EXTENSION, IMAGE_FUNCTIONS)
-    ),
-    'exif'     => array('Exif', sprintf(PHP_EXTENSION, IMAGE_METAS))
-);
+    ],
+    'exif'     => ['Exif', sprintf(PHP_EXTENSION, IMAGE_METAS)]
+];
 
 // Writable files and directories
-$configs['writable'] = array(
+$configs['writable'] = [
     'uploads/',
     'uploads/avatars/',
     'uploads/images/',
@@ -62,23 +62,23 @@ $configs['writable'] = array(
     'mainfile.php',
     'include/license.php',
     'xoops_data/data/secure.php'
-);
+];
 
 // Modules to be installed by default
-$configs['modules'] = array();
+$configs['modules'] = [];
 
 // xoops_lib, xoops_data directories
-$configs['xoopsPathDefault'] = array(
+$configs['xoopsPathDefault'] = [
     'lib'  => 'xoops_lib',
     'data' => 'xoops_data'
-);
+];
 
 // writable xoops_lib, xoops_data directories
-$configs['dataPath'] = array(
-    'caches'  => array(
+$configs['dataPath'] = [
+    'caches'  => [
         'xoops_cache',
         'smarty_cache',
         'smarty_compile'
-    ),
+    ],
     'configs' => null
-);
+];

@@ -39,7 +39,7 @@ if (empty($xoopsOption['hascommon'])) {
     session_start();
 }
 require_once __DIR__ . '/../../../mainfile.php';
-// defined('XOOPS_ROOT_PATH') || exit('XOOPS root path not defined');
+// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 /*
 error_reporting( 0 );
 if (isset($xoopsLogger)) {
@@ -63,5 +63,5 @@ if (!$wizard->xoInit()) {
 }
 
 if (!@is_array($_SESSION['settings'])) {
-    $_SESSION['settings'] = array();
+    $_SESSION['settings'] = [];
 }

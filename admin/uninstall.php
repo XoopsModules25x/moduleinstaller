@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $configHandler = xoops_getHandler('config');
     $xoopsConfig   = $configHandler->getConfigsByCat(XOOPS_CONF);
 
-    $msgs = array();
+    $msgs = [];
     foreach ($_REQUEST['modules'] as $dirname => $installmod) {
         if ($installmod) {
             $msgs[] = xoops_module_uninstall($dirname);
@@ -79,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     /** @var XoopsModuleHandler $moduleHandler */
     $moduleHandler  = xoops_getHandler('module');
     $installed_mods = $moduleHandler->getObjects();
-    $listed_mods    = array();
+    $listed_mods    = [];
     foreach ($installed_mods as $module) {
         $listed_mods[] = $module->getVar('dirname');
     }
@@ -92,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $content    = "<ul class='log'><li>";
     $content    .= "<table class='module'>\n";
     //remove System module and itself from the list of modules that can be uninstalled
-    $dirlist = array_diff($dirlist, array('system', 'moduleinstaller'));
+    $dirlist = array_diff($dirlist, ['system', 'moduleinstaller']);
     foreach ($dirlist as $file) {
         clearstatcache();
         if (in_array($file, $listed_mods)) {

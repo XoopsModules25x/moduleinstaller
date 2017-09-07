@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $configHandler = xoops_getHandler('config');
     $xoopsConfig   = $configHandler->getConfigsByCat(XOOPS_CONF);
 
-    $msgs = array();
+    $msgs = [];
     foreach ($_REQUEST['modules'] as $dirname => $updateModule) {
         if ($updateModule) {
             $msgs[] = xoops_module_update($dirname);
@@ -111,7 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     /** @var XoopsModuleHandler $moduleHandler */
     $moduleHandler  = xoops_getHandler('module');
     $installed_mods = $moduleHandler->getObjects();
-    $listed_mods    = array();
+    $listed_mods    = [];
     foreach ($installed_mods as $module) {
         $listed_mods[] = $module->getVar('dirname');
     }
