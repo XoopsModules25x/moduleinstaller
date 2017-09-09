@@ -14,25 +14,32 @@ $pathIcon32 = \Xmf\Module\Admin::menuIconPath('');
 
 $moduleHelper->loadLanguage('modinfo');
 
-$adminmenu = [];
+$adminmenu[] = [
+    'title' => _MI_INSTALLER_MENU_00,
+    'link'  => 'admin/index.php',
+    'icon'  => $pathIcon32 . '/home.png',
+];
 
-$i                      = 1;
-'title' =>  _MI_INSTALLER_MENU_00,
-'link' =>  'admin/index.php',
-'icon' =>  $pathIcon32 . '/home.png',
-++$i;
-'title' =>  _MI_INSTALLER_MENU_01,
-'link' =>  'admin/install.php',
-'icon' =>  $pathIcon32 . '/add.png',
-++$i;
-'title' =>  _MI_INSTALLER_MENU_03,
-'link' =>  'admin/update.php',
-'icon' =>  $pathIcon32 . '/update.png',
-++$i;
-'title' =>  _MI_INSTALLER_MENU_02,
-'link' =>  'admin/uninstall.php',
-'icon' =>  $pathIcon32 . '/delete.png',
-++$i;
-'title' =>  _MI_INSTALLER_ADMIN_ABOUT,
-'link' =>  'admin/about.php',
-'icon' =>  $pathIcon32 . '/about.png',
+$adminmenu[] = [
+    'title' => _MI_INSTALLER_MENU_01,
+    'link'  => 'admin/install.php',
+    'icon'  => $pathIcon32 . '/add.png',
+];
+
+$adminmenu[] = [
+    'title' => _MI_INSTALLER_MENU_03,
+    'link'  => 'admin/update.php',
+    'icon'  => $pathIcon32 . '/update.png',
+];
+
+$adminmenu[] = [
+    'title' => _MI_INSTALLER_MENU_02,
+    'link'  => 'admin/uninstall.php',
+    'icon'  => $pathIcon32 . '/delete.png',
+];
+
+$adminmenu[] = [
+    'title' => _MI_INSTALLER_ADMIN_ABOUT,
+    'link'  => 'admin/about.php',
+    'icon'  => $pathIcon32 . '/about.png',
+];
