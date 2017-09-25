@@ -35,7 +35,7 @@ require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
 $pageHasForm = true;
 $pageHasHelp = false;
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ('POST' === $_SERVER['REQUEST_METHOD']) {
     require_once XOOPS_ROOT_PATH . '/class/xoopsblock.php';
     require_once XOOPS_ROOT_PATH . '/kernel/module.php';
     require_once XOOPS_ROOT_PATH . '/include/cp_functions.php';
@@ -128,7 +128,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     $content .= '</table>';
     $content .= "</li></ul><script type='text/javascript'>" . $javascript . '</script>';
-    if ($toinstal == 0) {
+    if (0 == $toinstal) {
         $pageHasForm = false;
         $content     = "<div class='x2-note confirmMsg'>" . NO_MODULES_FOUND . '</div>';
     }
