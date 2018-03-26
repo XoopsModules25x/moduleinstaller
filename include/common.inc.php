@@ -25,6 +25,8 @@
  * @author      DuGris (aka L. JEN) <dugris@frxoops.org>
  **/
 
+use XoopsModules\Moduleinstaller;
+
 /**
  * If non-empty, only this user can access this installer
  */
@@ -39,7 +41,7 @@ if (empty($xoopsOption['hascommon'])) {
     session_start();
 }
 require_once __DIR__ . '/../../../mainfile.php';
-// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+// defined('XOOPS_ROOT_PATH') || die('Restricted access');
 /*
 error_reporting( 0 );
 if (isset($xoopsLogger)) {
@@ -49,7 +51,7 @@ error_reporting(E_ALL);
 $xoopsLogger->activated = true;
 */
 
-require_once __DIR__ . '/../class/installwizard.php';
+// require_once __DIR__ . '/../class/installwizard.php';
 require_once XOOPS_ROOT_PATH . '/include/version.php';
 require_once XOOPS_ROOT_PATH . '/include/functions.php';
 require_once XOOPS_ROOT_PATH . '/class/module.textsanitizer.php';
@@ -57,7 +59,7 @@ require_once XOOPS_ROOT_PATH . '/class/module.textsanitizer.php';
 $pageHasHelp = false;
 $pageHasForm = false;
 
-$wizard = new XoopsInstallWizard();
+$wizard = new Moduleinstaller\InstallWizard();
 if (!$wizard->xoInit()) {
     exit();
 }

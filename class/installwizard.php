@@ -1,4 +1,5 @@
-<?php
+<?php namespace XoopsModules\Moduleinstaller;
+
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -23,7 +24,7 @@
  * @author      Taiwen Jiang <phppp@users.sourceforge.net>
  * @author      DuGris (aka L. JEN) <dugris@frxoops.org>
  */
-class XoopsInstallWizard
+class  InstallWizard
 {
     public $language    = 'english';
     public $pages       = [];

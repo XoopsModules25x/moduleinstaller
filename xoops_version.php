@@ -19,15 +19,15 @@
  * ****************************************************************************
  */
 
-// defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+// defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 include __DIR__ . '/preloads/autoloader.php';
 
 $moduleDirName = basename(__DIR__);
 
-$modversion['version']       = '1.02';
-$modversion['module_status'] = 'Final';
-$modversion['release_date']  = '2016/10/07';
+$modversion['version']       = '1.03';
+$modversion['module_status'] = 'Beta 1';
+$modversion['release_date']  = '2018/03/21';
 $modversion['name']          = _MI_INSTALLER_NAME;
 $modversion['description']   = _MI_INSTALLER_DESC;
 $modversion['author']        = 'Michael Beck';

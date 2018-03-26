@@ -17,7 +17,9 @@
  * @author       XOOPS Development Team
  */
 
-if ((!defined('XOOPS_ROOT_PATH')) || !($GLOBALS['xoopsUser'] instanceof XoopsUser)
+use XoopsModules\Moduleinstaller;
+
+if ((!defined('XOOPS_ROOT_PATH')) || !($GLOBALS['xoopsUser'] instanceof \XoopsUser)
     || !$GLOBALS['xoopsUser']->IsAdmin()
 ) {
     exit('Restricted access' . PHP_EOL);
@@ -32,7 +34,7 @@ function tableExists($tablename)
 {
     $result = $GLOBALS['xoopsDB']->queryF("SHOW TABLES LIKE '$tablename'");
 
-    return ($GLOBALS['xoopsDB']->getRowsNum($result) > 0) ? true : false;
+    return $GLOBALS['xoopsDB']->getRowsNum($result) > 0;
 }
 
 /**
@@ -42,7 +44,7 @@ function tableExists($tablename)
  *
  * @return bool true if ready to install, false if not
  */
-function xoops_module_pre_update_moduleinstaller(XoopsModule $module)
+function xoops_module_pre_update_moduleinstaller(\XoopsModule $module)
 {
     $moduleDirName = basename(dirname(__DIR__));
     /** @var Moduleinstaller\Helper $helper */
@@ -64,32 +66,22 @@ function xoops_module_pre_update_moduleinstaller(XoopsModule $module)
  * @return bool true if update successful, false if not
  */
 
-function xoops_module_update_moduleinstaller(XoopsModule $module, $previousVersion = null)
+function xoops_module_update_moduleinstaller(\XoopsModule $module, $previousVersion = null)
 {
     $moduleDirName = basename(dirname(__DIR__));
     $capsDirName   = strtoupper($moduleDirName);
 
+
     /** @var Moduleinstaller\Helper $helper */
     /** @var Moduleinstaller\Utility $utility */
-    /** @var Moduleinstaller\Configurator $configurator */
+    /** @var Moduleinstaller\Common\Configurator $configurator */
     $helper  = Moduleinstaller\Helper::getInstance();
     $utility = new Moduleinstaller\Utility();
-    $configurator = new Moduleinstaller\Configurator();
+    $configurator = new Moduleinstaller\Common\Configurator();
+
+    $helper->loadLanguage('common');
 
     if ($previousVersion < 240) {
-
-        //rename column EXAMPLE
-        $tables     = new Tables();
-        $table      = 'moduleinstallerx_categories';
-        $column     = 'ordre';
-        $newName    = 'order';
-        $attributes = "INT(5) NOT NULL DEFAULT '0'";
-        if ($tables->useTable($table)) {
-            $tables->alterColumn($table, $column, $attributes, $newName);
-            if (!$tables->executeQueue()) {
-                echo '<br>' . _AM_XXXXX_UPGRADEFAILED0 . ' ' . $migrate->getLastError();
-            }
-        }
 
         //delete old HTML templates
         if (count($configurator->templateFolders) > 0) {
@@ -98,7 +90,7 @@ function xoops_module_update_moduleinstaller(XoopsModule $module, $previousVersi
                 if (is_dir($templateFolder)) {
                     $templateList = array_diff(scandir($templateFolder, SCANDIR_SORT_NONE), ['..', '.']);
                     foreach ($templateList as $k => $v) {
-                        $fileInfo = new SplFileInfo($templateFolder . $v);
+                        $fileInfo = new \SplFileInfo($templateFolder . $v);
                         if ('html' === $fileInfo->getExtension() && 'index.html' !== $fileInfo->getFilename()) {
                             if (file_exists($templateFolder . $v)) {
                                 unlink($templateFolder . $v);
@@ -136,16 +128,16 @@ function xoops_module_update_moduleinstaller(XoopsModule $module, $previousVersi
         if (count($configurator->uploadFolders) > 0) {
             //    foreach (array_keys($GLOBALS['uploadFolders']) as $i) {
             foreach (array_keys($configurator->uploadFolders) as $i) {
-                $utilityClass::createFolder($configurator->uploadFolders[$i]);
+                $utility::createFolder($configurator->uploadFolders[$i]);
             }
         }
 
         //  ---  COPY blank.png FILES ---------------
-        if (count($configurator->blankFiles) > 0) {
+        if (count($configurator->copyBlankFiles) > 0) {
             $file = __DIR__ . '/../assets/images/blank.png';
-            foreach (array_keys($configurator->blankFiles) as $i) {
-                $dest = $configurator->blankFiles[$i] . '/blank.png';
-                $utilityClass::copyFile($file, $dest);
+            foreach (array_keys($configurator->copyBlankFiles) as $i) {
+                $dest = $configurator->copyBlankFiles[$i] . '/blank.png';
+                $utility::copyFile($file, $dest);
             }
         }
 
@@ -156,8 +148,6 @@ function xoops_module_update_moduleinstaller(XoopsModule $module, $previousVersi
         /** @var XoopsGroupPermHandler $gpermHandler */
         $gpermHandler = xoops_getHandler('groupperm');
         return $gpermHandler->deleteByModule($module->getVar('mid'), 'item_read');
-
     }
     return true;
 }
-

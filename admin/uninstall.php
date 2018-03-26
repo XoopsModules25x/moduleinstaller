@@ -109,8 +109,8 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
                 continue;
             }
 
-            $form     = new XoopsThemeForm('', 'modules', 'index.php', 'post', true);
-            $moduleYN = new XoopsFormRadioYN('', 'modules[' . $module->getInfo('dirname') . ']', $value, _YES, _NO);
+            $form     = new \XoopsThemeForm('', 'modules', 'index.php', 'post', true);
+            $moduleYN = new \XoopsFormRadioYN('', 'modules[' . $module->getInfo('dirname') . ']', $value, _YES, _NO);
             $moduleYN->setExtra("onclick='selectModule(\"" . $file . "\", this)'");
             $form->addElement($moduleYN);
 

@@ -31,10 +31,6 @@ img {
     padding: .5em;
     text-align: left;
     background: #f3f3f3 url(../img/wizard_bg.png) no-repeat 0 90px;
-    -webkit-border-bottom-right-radius: 8px;
-    -webkit-border-bottom-left-radius: 8px;
-    -moz-border-radius-bottomright: 8px;
-    -moz-border-radius-bottomleft: 8px;
     border-bottom-right-radius: 8px;
     border-bottom-left-radius: 8px;
     border: 2px solid #ccc;
@@ -87,9 +83,6 @@ h1 {
     height: 40px;
     padding: 0.1em 1em 0 1em;
     text-shadow: 1px 1px 2px #ccc;
-    -moz-border-radius: 8px;
-    -webkit-border-radius: 8px;
-    -khtml-border-radius: 8px;
     border-radius: 8px;
 }
 
@@ -120,9 +113,6 @@ ul, ol {
 #pageslist li.current {
     background: #E9FF8F url(../img/bullet-current.png);
     filter: alpha(opacity=60);
-    -moz-opacity: 0.6;
-    -webkit-opacity: 0.6;
-    -khtml-opacity: 0.6;
     opacity: 0.6;
     margin-bottom: 2px;
 }
@@ -187,9 +177,6 @@ table {
     border-collapse: collapse;
     margin-bottom: 1em;
     filter: alpha(opacity=80);
-    -moz-opacity: 0.8;
-    -webkit-opacity: 0.8;
-    -khtml-opacity: 0.8;
     opacity: 0.8;
 }
 
@@ -218,9 +205,6 @@ fieldset {
     padding: 1em;
     border: 1px solid #333;
     color: #000;
-    -moz-border-radius: 6px;
-    -webkit-border-radius: 6px;
-    -khtml-border-radius: 6px;
     border-radius: 6px;
 }
 
@@ -258,9 +242,6 @@ legend {
     list-style-type: none;
     background-color: #F4FAFF;
     border: 1px solid #E4EAEF;
-    -moz-border-radius: 8px;
-    -webkit-border-radius: 8px;
-    -khtml-border-radius: 8px;
     border-radius: 8px;
 }
 
@@ -281,9 +262,6 @@ ul.diags1 {
     border: 1px solid #d0d0d0;
     list-style-type: none;
     border-radius: 8px;
-    -moz-border-radius: 8px;
-    -webkit-border-radius: 8px;
-    -khtml-border-radius: 8px;
     background-color: #FBE3E4;
 }
 
@@ -297,9 +275,6 @@ ul.diags, ul.log {
     border: 1px solid #d0d0d0;
     list-style-type: none;
     border-radius: 8px;
-    -moz-border-radius: 8px;
-    -webkit-border-radius: 8px;
-    -khtml-border-radius: 8px;
 }
 
 /*ul.log {
@@ -375,9 +350,6 @@ ul.diags li.failure, ul.log li.failure {
     border: 1px solid #ccc;
     list-style-type: none;
     border-radius: 8px;
-    -moz-border-radius: 8px;
-    -webkit-border-radius: 8px;
-    -khtml-border-radius: 8px;
 }
 
 .resultMsg, .successMsg {
@@ -385,9 +357,6 @@ ul.diags li.failure, ul.log li.failure {
     color: #529214;
     border-color: #C6D880;
     border-radius: 8px;
-    -moz-border-radius: 8px;
-    -webkit-border-radius: 8px;
-    -khtml-border-radius: 8px;
 }
 
 .errorMsg a {
@@ -409,9 +378,6 @@ ul.diags li.failure, ul.log li.failure {
     background: #FBE3E4 no-repeat 10px;
     color: #D12F19;
     border-color: #FBC2C4;
-    -moz-border-radius: 8px;
-    -webkit-border-radius: 8px;
-    -khtml-border-radius: 8px;
     border-radius: 8px;
 }
 
@@ -448,13 +414,7 @@ input[type=submit], input[type=reset], input[type=button], .xo-formbuttons, .for
     font-weight: bold;
     border: 1px solid #ccc;
     border-radius: 5px;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -khtml-border-radius: 5px;
     box-shadow: 0 20px 10px -10px rgba(255, 255, 255, 0.3) inset;
-    -moz-box-shadow: 0 20px 10px -10px rgba(255, 255, 255, 0.3) inset;
-    -webkit-box-shadow: 0 20px 10px -10px rgba(255, 255, 255, 0.3) inset;
-    -khtml-box-shadow: 0 20px 10px -10px rgba(255, 255, 255, 0.3) inset;
     cursor: pointer;
 }
 
@@ -471,10 +431,6 @@ input[type=text], input[type=password], input[type=checkbox], input[type=file], 
     background-color: #f7f7f7;
     padding: 2px 2px 2px .2em;
     color: inherit;
-    border: #ccc solid 1px;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -khtml-border-radius: 5px;
     border-radius: 5px;
 
 }
@@ -499,9 +455,6 @@ input[type=text]:focus, input[type=password]:focus, input[type=file]:focus, inpu
     color: #333;
     border: #139EE8 solid 1px;
     outline: 1px solid #139EE8;
-    -moz-outline-radius: 5px;
-    -webkit-outline-radius: 5px;
-    -khtml-outline-radius: 5px;
     border-outline: 5px;
 }
 
@@ -517,9 +470,6 @@ select {
     color: #000;
     border: 1px solid #000;
     filter: alpha(opacity=80);
-    -moz-opacity: 0.8;
-    -webkit-opacity: 0.8;
-    -khtml-opacity: 0.8;
     opacity: 0.8;
 }
 

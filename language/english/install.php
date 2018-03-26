@@ -20,7 +20,7 @@
 define('SHOW_HIDE_HELP', 'Show/hide help text');
 
 // License
-define('LICENSE_NOT_WRITEABLE', 'License is %s . <br><span style="colour:#ff0000">Make ../include/license.php Writable</span>');
+define('LICENSE_NOT_WRITEABLE', 'License is %s . <br><span style="color:#ff0000">Make ../include/license.php Writable</span>');
 define('LICENSE_IS_WRITEABLE', 'License is %s');
 
 // Configuration check page
