@@ -35,16 +35,16 @@ function xoops_module_uninstall_moduleinstaller(\XoopsModule $module)
 //    return true;
 
     $moduleDirName = basename(dirname(__DIR__));
-    $xsitemapHelper      = \Xmf\Module\Helper::getHelper($moduleDirName);
+     $helper      =XXX\Helper::getInstance();
 
-    /** @var Moduleinstaller\Utility $utilityClass */
-    $utilityClass     = ucfirst($moduleDirName) . 'Utility';
-    if (!class_exists($utilityClass)) {
+    /** @var Moduleinstaller\Utility $utility */
+    $utility     = ucfirst($moduleDirName) . 'Utility';
+    if (!class_exists($utility)) {
         xoops_load('utility', $moduleDirName);
     }
 
     $success = true;
-    $xsitemapHelper->loadLanguage('admin');
+    $helper->loadLanguage('admin');
 
 
     //------------------------------------------------------------------
@@ -56,7 +56,7 @@ function xoops_module_uninstall_moduleinstaller(\XoopsModule $module)
         $dirInfo = new \SplFileInfo($old_dir);
         if ($dirInfo->isDir()) {
             // The directory exists so delete it
-            if (false === $utilityClass::rrmdir($old_dir)) {
+            if (false === $utility::rrmdir($old_dir)) {
                 $module->setErrors(sprintf(constant('CO_' . $moduleDirNameUpper . '_ERROR_BAD_DEL_PATH'), $old_dir));
                 $success = false;
             }
