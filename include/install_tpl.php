@@ -28,7 +28,7 @@
 
 defined('XOOPS_INSTALL') || die('XOOPS Installation wizard die');
 
-require_once __DIR__ . '/../../../language/' . $wizard->language . '/global.php';
+require_once  dirname(dirname(dirname(__DIR__))) . '/language/' . $wizard->language . '/global.php';
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

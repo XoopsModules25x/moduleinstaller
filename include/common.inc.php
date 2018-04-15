@@ -40,7 +40,7 @@ if (empty($xoopsOption['hascommon'])) {
     $xoopsOption['nocommon'] = true;
     session_start();
 }
-require_once __DIR__ . '/../../../mainfile.php';
+require_once  dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
 // defined('XOOPS_ROOT_PATH') || die('Restricted access');
 /*
 error_reporting( 0 );
@@ -51,7 +51,7 @@ error_reporting(E_ALL);
 $xoopsLogger->activated = true;
 */
 
-// require_once __DIR__ . '/../class/installwizard.php';
+// require_once  dirname(__DIR__) . '/class/installwizard.php';
 require_once XOOPS_ROOT_PATH . '/include/version.php';
 require_once XOOPS_ROOT_PATH . '/include/functions.php';
 require_once XOOPS_ROOT_PATH . '/class/module.textsanitizer.php';

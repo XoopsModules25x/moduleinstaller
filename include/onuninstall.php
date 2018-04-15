@@ -35,14 +35,10 @@ function xoops_module_uninstall_moduleinstaller(\XoopsModule $module)
 //    return true;
 
     $moduleDirName = basename(dirname(__DIR__));
-     $helper      =XXX\Helper::getInstance();
+     $helper      = Moduleinstaller\Helper::getInstance();
 
     /** @var Moduleinstaller\Utility $utility */
-    $utility     = ucfirst($moduleDirName) . 'Utility';
-    if (!class_exists($utility)) {
-        xoops_load('utility', $moduleDirName);
-    }
-
+    $utility = new \XoopsModules\Moduleinstaller\Utility();
     $success = true;
     $helper->loadLanguage('admin');
 

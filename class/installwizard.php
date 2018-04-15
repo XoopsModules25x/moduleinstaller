@@ -44,11 +44,11 @@ class  InstallWizard
         // Load the main language file
         $this->initLanguage(!empty($_COOKIE['xo_install_lang']) ? $_COOKIE['xo_install_lang'] : 'english');
         // Setup pages
-        require_once __DIR__ . '/../include/page.php';
+        require_once  dirname(__DIR__) . '/include/page.php';
         $this->pages = $pages;
 
         // Load default configs
-        require_once __DIR__ . '/../include/config.php';
+        require_once  dirname(__DIR__) . '/include/config.php';
         $this->configs = $configs;
         /*
         // Database type
