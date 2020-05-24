@@ -1,10 +1,11 @@
 <?php
+
 /**
  * See the enclosed file license.txt for licensing information.
- * If you did not receive this file, get it at http://www.gnu.org/licenses/gpl-2.0.html
+ * If you did not receive this file, get it at https://www.gnu.org/licenses/gpl-2.0.html
  *
  * @copyright   XOOPS Project (https://xoops.org)
- * @license     http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License (GPL)
+ * @license     https://www.gnu.org/licenses/gpl-2.0.html GNU General Public License (GPL)
  * @package     installer
  * @since       2.3.0
  * @author      Haruki Setoyama  <haruki@planewave.org>
@@ -13,9 +14,8 @@
  * @author      Taiwen Jiang <phppp@users.sourceforge.net>
  * @author      DuGris (aka L. JEN) <dugris@frxoops.org>
  */
-
 if (!defined('XOOPS_INSTALL')) {
-    die('XOOPS Custom Installation die');
+    exit('XOOPS Custom Installation die');
 }
 
 $configs = [];
@@ -31,12 +31,12 @@ $configs['conf_names'] = [
     'meta_keywords',
     'meta_description',
     'meta_author',
-    'meta_copyright'
+    'meta_copyright',
 ];
 
 // languages config files
 $configs['language_files'] = [
-    'global'
+    'global',
 ];
 
 // extension_loaded
@@ -47,9 +47,9 @@ $configs['extensions'] = [
     'zlib'     => ['Zlib', sprintf(PHP_EXTENSION, ZLIB_COMPRESSION)],
     'gd'       => [
         (function_exists('gd_info') && $gdlib = @gd_info()) ? 'GD ' . $gdlib['GD Version'] : '',
-        sprintf(PHP_EXTENSION, IMAGE_FUNCTIONS)
+        sprintf(PHP_EXTENSION, IMAGE_FUNCTIONS),
     ],
-    'exif'     => ['Exif', sprintf(PHP_EXTENSION, IMAGE_METAS)]
+    'exif'     => ['Exif', sprintf(PHP_EXTENSION, IMAGE_METAS)],
 ];
 
 // Writable files and directories
@@ -61,7 +61,7 @@ $configs['writable'] = [
     'uploads/smilies/',
     'mainfile.php',
     'include/license.php',
-    'xoops_data/data/secure.php'
+    'xoops_data/data/secure.php',
 ];
 
 // Modules to be installed by default
@@ -70,7 +70,7 @@ $configs['modules'] = [];
 // xoops_lib, xoops_data directories
 $configs['xoopsPathDefault'] = [
     'lib'  => 'xoops_lib',
-    'data' => 'xoops_data'
+    'data' => 'xoops_data',
 ];
 
 // writable xoops_lib, xoops_data directories
@@ -78,7 +78,7 @@ $configs['dataPath'] = [
     'caches'  => [
         'xoops_cache',
         'smarty_cache',
-        'smarty_compile'
+        'smarty_compile',
     ],
-    'configs' => null
+    'configs' => null,
 ];

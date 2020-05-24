@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Moduleinstaller;
+<?php
+
+namespace XoopsModules\Moduleinstaller;
 
 /*
  Utility Class Definition
@@ -12,6 +14,7 @@
  WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
+
 /**
  * Module:  xSitemap
  *
@@ -23,20 +26,14 @@
  * @since        File available since version 1.54
  */
 
-use Xmf\Request;
 use XoopsModules\Moduleinstaller;
 use XoopsModules\Moduleinstaller\Common;
+use XoopsModules\Moduleinstaller\Constants;
 
 /**
  * Class Utility
  */
-class Utility
+class Utility extends Common\SysUtility
 {
-    use Common\VersionChecks; //checkVerXoops, checkVerPhp Traits
-
-    use Common\ServerStats; // getServerStats Trait
-
-    use Common\FilesManagement; // Files Management Trait
-
     //--------------- Custom module methods -----------------------------
 }

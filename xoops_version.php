@@ -12,46 +12,40 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  * @copyright       Michael Beck (mamba)
- * @license         http://www.gnu.org/licenses/gpl-2.0.html GNU Public License
+ * @license         https://www.gnu.org/licenses/gpl-2.0.html GNU Public License
  * @package         moduleinstaller
  * @author          Michael Beck (mamba)
  *
  * ****************************************************************************
  */
 
-// defined('XOOPS_ROOT_PATH') || die('Restricted access');
-
-include __DIR__ . '/preloads/autoloader.php';
+require_once __DIR__ . '/preloads/autoloader.php';
 
 $moduleDirName = basename(__DIR__);
 
-$modversion['version']       = '1.03';
-$modversion['module_status'] = 'Beta 1';
-$modversion['release_date']  = '2018/03/21';
-$modversion['name']          = _MI_INSTALLER_NAME;
-$modversion['description']   = _MI_INSTALLER_DESC;
-$modversion['author']        = 'Michael Beck';
-$modversion['nickname']      = 'Mamba';
-$modversion['credit']        = 'XOOPS Development Team';
-$modversion['credits']       = 'XOOPS Development Team Credits';
-$modversion['help']          = 'page=help';
-$modversion['license']       = 'GNU GPL 2.0';
-$modversion['license_url']   = 'www.gnu.org/licenses/gpl-2.0.html';
-$modversion['official']      = 1; //1 indicates supported by XOOPS Dev Team, 0 means 3rd party supported
-$modversion['image']         = 'assets/images/logoModule.png';
-$modversion['dirname']       = basename(__DIR__);
-//$modversion['dirmoduleadmin'] = '/Frameworks/moduleclasses/moduleadmin';
-//$modversion['icons16']        = '../../Frameworks/moduleclasses/icons/16';
-//$modversion['icons32']        = '../../Frameworks/moduleclasses/icons/32';
-$modversion['modicons16'] = 'assets/images/icons/16';
-$modversion['modicons32'] = 'assets/images/icons/32';
-
-//about
+$modversion['version']             = '1.03';
+$modversion['module_status']       = 'Final';
+$modversion['release_date']        = '2020/05/23';
+$modversion['name']                = _MI_INSTALLER_NAME;
+$modversion['description']         = _MI_INSTALLER_DESC;
+$modversion['author']              = 'Michael Beck';
+$modversion['nickname']            = 'Mamba';
+$modversion['credit']              = 'XOOPS Development Team';
+$modversion['credits']             = 'XOOPS Development Team Credits';
+$modversion['help']                = 'page=help';
+$modversion['license']             = 'GNU GPL 2.0';
+$modversion['license_url']         = 'www.gnu.org/licenses/gpl-2.0.html';
+$modversion['official']            = 1; //1 indicates supported by XOOPS Dev Team, 0 means 3rd party supported
+$modversion['image']               = 'assets/images/logoModule.png';
+$modversion['dirname']             = basename(__DIR__);
+$modversion['modicons16']          = 'assets/images/icons/16';
+$modversion['modicons32']          = 'assets/images/icons/32';
 $modversion['module_website_url']  = 'www.xoops.org/';
 $modversion['module_website_name'] = 'XOOPS';
-$modversion['min_php']             = '5.5';
-$modversion['min_xoops']           = '2.5.9';
+$modversion['min_php']             = '7.2';
+$modversion['min_xoops']           = '2.5.10';
 $modversion['min_admin']           = '1.2';
+$modversion['min_db']              = ['mysql' => '5.5'];
 
 // SQL Tables
 // $modversion['sqlfile']['mysql'] = 'sql/mysql.sql';

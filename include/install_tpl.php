@@ -8,14 +8,15 @@
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
+
 /**
  * Installer template file
  *
  * See the enclosed file license.txt for licensing information.
- * If you did not receive this file, get it at http://www.gnu.org/licenses/gpl-2.0.html
+ * If you did not receive this file, get it at https://www.gnu.org/licenses/gpl-2.0.html
  *
  * @copyright   XOOPS Project (https://xoops.org)
- * @license     http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License (GPL)
+ * @license     https://www.gnu.org/licenses/gpl-2.0.html GNU General Public License (GPL)
  * @package     installer
  * @since       2.3.0
  * @author      Haruki Setoyama  <haruki@planewave.org>
@@ -25,19 +26,17 @@
  * @author      Kris <kris@frxoops.org>
  * @author      DuGris (aka L. JEN) <dugris@frxoops.org>
  **/
+defined('XOOPS_INSTALL') || exit('XOOPS Installation wizard die');
 
-defined('XOOPS_INSTALL') || die('XOOPS Installation wizard die');
-
-require_once  dirname(dirname(dirname(__DIR__))) . '/language/' . $wizard->language . '/global.php';
+require_once dirname(dirname(dirname(__DIR__))) . '/language/' . $wizard->language . '/global.php';
 ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo _LANGCODE; ?>" lang="<?php echo _LANGCODE; ?>">
+<!DOCTYPE html>
+<html xml:lang="<?php echo _LANGCODE; ?>" lang="<?php echo _LANGCODE; ?>">
 
 <head>
     <title>
         <?php echo XOOPS_VERSION . ' : ' . XOOPS_INSTALL_WIZARD; ?>
-        (<?php echo($wizard->pageIndex + 1) . '/' . count($wizard->pages); ?>)
+        (<?php echo ($wizard->pageIndex + 1) . '/' . count($wizard->pages); ?>)
     </title>
     <meta http-equiv="Content-Type" content="text/html; charset=<?php echo _INSTALL_CHARSET ?>">
     <link rel="shortcut icon" type="image/ico" href="../favicon.ico">
@@ -58,21 +57,21 @@ require_once  dirname(dirname(dirname(__DIR__))) . '/language/' . $wizard->langu
 
 <div id="xo-content">
 
-    <form id='<?php echo $wizard->pages[$wizard->currentPage]['name']; ?>' action='<?php echo $_SERVER['PHP_SELF']; ?>'
+    <form id='<?php echo $wizard->pages[$wizard->currentPage]['name']; ?>' action='<?php echo $_SERVER['SCRIPT_NAME']; ?>'
           method='post'>
 
         <?php echo $content; ?>
 
         <div id="buttons">
             <?php if (@$pageHasForm) {
-        ?>
+            ?>
             <button type="submit">
                 <?php
-    } else {
-        ?>
+                } else {
+                ?>
                 <button type="button" accesskey="n" onclick="location.href='<?php echo 'index.php'; ?>'">
                     <?php
-    } ?>
+                    } ?>
                     <?php echo BUTTON_NEXT; ?>
                 </button>
         </div>

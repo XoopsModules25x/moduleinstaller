@@ -1,4 +1,6 @@
-<?php namespace XoopsModules\Moduleinstaller;
+<?php
+
+namespace XoopsModules\Moduleinstaller;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -12,10 +14,10 @@
 
 /**
  * See the enclosed file license.txt for licensing information.
- * If you did not receive this file, get it at http://www.gnu.org/licenses/gpl-2.0.html
+ * If you did not receive this file, get it at https://www.gnu.org/licenses/gpl-2.0.html
  *
  * @copyright   XOOPS Project (https://xoops.org)
- * @license     http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License (GPL)
+ * @license     https://www.gnu.org/licenses/gpl-2.0.html GNU General Public License (GPL)
  * @package     installer
  * @since       2.3.0
  * @author      Haruki Setoyama  <haruki@planewave.org>
@@ -24,7 +26,7 @@
  * @author      Taiwen Jiang <phppp@users.sourceforge.net>
  * @author      DuGris (aka L. JEN) <dugris@frxoops.org>
  */
-class  InstallWizard
+class InstallWizard
 {
     public $language    = 'english';
     public $pages       = [];
@@ -38,18 +40,18 @@ class  InstallWizard
     public function xoInit()
     {
         if (@empty($_SERVER['REQUEST_URI'])) {
-            $_SERVER['REQUEST_URI'] = $_SERVER['PHP_SELF'];
+            $_SERVER['REQUEST_URI'] = $_SERVER['SCRIPT_NAME'];
         }
 
         // Load the main language file
         $this->initLanguage(!empty($_COOKIE['xo_install_lang']) ? $_COOKIE['xo_install_lang'] : 'english');
         // Setup pages
-        require_once  dirname(__DIR__) . '/include/page.php';
+        require_once \dirname(__DIR__) . '/include/page.php';
         $this->pages = $pages;
 
         // Load default configs
-        require_once  dirname(__DIR__) . '/include/config.php';
-        $this->configs = $configs;
+
+        $this->configs = [];
         /*
         // Database type
         $this->db_types  = $db_types;
@@ -83,12 +85,12 @@ class  InstallWizard
             return false;
         }
 
-        $pagename = preg_replace('~(page_)(.*)~', '$2', basename($_SERVER['PHP_SELF'], '.php'));
+        $pagename = \preg_replace('~(page_)(.*)~', '$2', \basename($_SERVER['SCRIPT_NAME'], '.php'));
         $this->setPage($pagename);
 
         // Prevent client caching
-        header('Cache-Control: no-store, no-cache, must-revalidate', false);
-        header('Pragma: no-cache');
+        \header('Cache-Control: no-store, no-cache, must-revalidate', false);
+        \header('Pragma: no-cache');
 
         return true;
     }
@@ -100,20 +102,20 @@ class  InstallWizard
     {
         if (INSTALL_USER != '' && INSTALL_PASSWORD != '') {
             if (!isset($_SERVER['PHP_AUTH_USER'])) {
-                header('WWW-Authenticate: Basic realm="XOOPS Installer"');
-                header('HTTP/1.0 401 Unauthorized');
+                \header('WWW-Authenticate: Basic realm="XOOPS Installer"');
+                \header('HTTP/1.0 401 Unauthorized');
                 echo 'You can not access this XOOPS installer.';
 
                 return false;
             }
             if (INSTALL_USER != '' && INSTALL_USER != $_SERVER['PHP_AUTH_USER']) {
-                header('HTTP/1.0 401 Unauthorized');
+                \header('HTTP/1.0 401 Unauthorized');
                 echo 'You can not access this XOOPS installer.';
 
                 return false;
             }
             if (INSTALL_PASSWORD != $_SERVER['PHP_AUTH_PW']) {
-                header('HTTP/1.0 401 Unauthorized');
+                \header('HTTP/1.0 401 Unauthorized');
                 echo 'You can not access this XOOPS installer.';
 
                 return false;
@@ -125,10 +127,10 @@ class  InstallWizard
         }
 
         if (empty($GLOBALS['xoopsUser']) && !empty($_COOKIE['xo_install_user'])) {
-            install_acceptUser($_COOKIE['xo_install_user']);
+            \install_acceptUser($_COOKIE['xo_install_user']);
         }
         if (empty($GLOBALS['xoopsUser'])) {
-            redirect_header('../user.php');
+            \redirect_header('../user.php');
         }
         if (!$GLOBALS['xoopsUser']->isAdmin()) {
             return false;
@@ -142,7 +144,7 @@ class  InstallWizard
      */
     public function loadLangFile($file)
     {
-        if (file_exists("./language/{$this->language}/{$file}.php")) {
+        if (\file_exists("./language/{$this->language}/{$file}.php")) {
             require_once __DIR__ . "./language/{$this->language}/{$file}.php";
         } else {
             require_once "./../language/english/$file.php";
@@ -154,8 +156,8 @@ class  InstallWizard
      */
     public function initLanguage($language)
     {
-        $language = preg_replace("/[^a-z0-9_\-]/i", '', $language);
-        if (!file_exists("./language/{$language}/install.php")) {
+        $language = \preg_replace("/[^a-z0-9_\-]/i", '', $language);
+        if (!\file_exists("./language/{$language}/install.php")) {
             $language = 'english';
         }
         $this->language = $language;
@@ -169,19 +171,19 @@ class  InstallWizard
      */
     public function setPage($page)
     {
-        $pages = array_keys($this->pages);
-        if ((int)$page && $page >= 0 && $page < count($pages)) {
+        $pages = \array_keys($this->pages);
+        if ((int)$page && $page >= 0 && $page < \count($pages)) {
             $this->pageIndex   = $page;
             $this->currentPage = $pages[$page];
         } elseif (isset($this->pages[$page])) {
             $this->currentPage = $page;
-            $this->pageIndex   = array_search($this->currentPage, $pages);
+            $this->pageIndex   = \array_search($this->currentPage, $pages, true);
         } else {
             return false;
         }
 
         if ($this->pageIndex > 0 && !isset($_COOKIE['xo_install_lang'])) {
-            header('Location: index.php');
+            \header('Location: index.php');
         }
 
         return $this->pageIndex;
@@ -194,7 +196,7 @@ class  InstallWizard
     {
         $proto = ('on' === @$_SERVER['HTTPS']) ? 'https' : 'http';
         $host  = $_SERVER['HTTP_HOST'];
-        $base  = substr($_SERVER['PHP_SELF'], 0, strrpos($_SERVER['PHP_SELF'], '/'));
+        $base  = mb_substr($_SERVER['SCRIPT_NAME'], 0, mb_strrpos($_SERVER['SCRIPT_NAME'], '/'));
 
         return $proto . '://' . $host . $base;
     }
@@ -206,23 +208,23 @@ class  InstallWizard
      */
     public function pageURI($page)
     {
-        $pages     = array_keys($this->pages);
+        $pages     = \array_keys($this->pages);
         $pageIndex = $this->pageIndex;
-        if (!(int)$page{0}) {
-            if ('+' == $page{0}) {
-                $pageIndex += substr($page, 1);
-            } elseif ('-' == $page{0}) {
-                $pageIndex -= substr($page, 1);
+        if (!(int)$page[0]) {
+            if ('+' == $page[0]) {
+                $pageIndex += mb_substr($page, 1);
+            } elseif ('-' == $page[0]) {
+                $pageIndex -= mb_substr($page, 1);
             } else {
-                $pageIndex = (int)array_search($page, $pages);
+                $pageIndex = (int)\array_search($page, $pages, true);
             }
         }
         if (!isset($pages[$pageIndex])) {
-            if (defined('XOOPS_URL')) {
+            if (\defined('XOOPS_URL')) {
                 return XOOPS_URL;
-            } else {
-                return $this->baseLocation();
             }
+
+            return $this->baseLocation();
         }
         $page = $pages[$pageIndex];
 
@@ -238,9 +240,9 @@ class  InstallWizard
     {
         $location = $this->pageURI($page);
         $proto    = !@empty($_SERVER['SERVER_PROTOCOL']) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.1';
-        header("{$proto} {$status} {$message}");
+        \header("{$proto} {$status} {$message}");
         //header( "Status: $status $message" );
-        header("Location: {$location}");
+        \header("Location: {$location}");
     }
 
     /**
@@ -255,7 +257,7 @@ class  InstallWizard
             $ret .= '<fieldset><legend>' . $form->getTitle() . "</legend>\n";
 
             foreach ($form->getElements() as $ele) {
-                if (is_object($ele)) {
+                if (\is_object($ele)) {
                     if (!$ele->isHidden()) {
                         if ('' != ($caption = $ele->getCaption())) {
                             $name = $ele->getName();

@@ -3,7 +3,7 @@
  * Installer main english strings declaration file
  *
  * @copyright   XOOPS Project (https://xoops.org)
- * @license     http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License (GPL)
+ * @license     https://www.gnu.org/licenses/gpl-2.0.html GNU General Public License (GPL)
  * @package     installer
  * @since       2.3.0
  * @author      Haruki Setoyama  <haruki@planewave.org>
@@ -35,8 +35,11 @@ define('RECOMMENDED_EXTENSIONS', 'Recommended extensions');
 define('SETTING_NAME', 'Setting name');
 define('RECOMMENDED', 'Recommended');
 define('CURRENT', 'Current');
-define('RECOMMENDED_EXTENSIONS_MSG', 'These extensions are not required for normal use, but may be necessary to exploit
-    some specific features (like the multi-language or RSS support). Thus, it is recommended to have them installed.');
+define(
+    'RECOMMENDED_EXTENSIONS_MSG',
+    'These extensions are not required for normal use, but may be necessary to exploit
+    some specific features (like the multi-language or RSS support). Thus, it is recommended to have them installed.'
+);
 define('NONE', 'None');
 define('SUCCESS', 'Success');
 define('WARNING', 'Warning');

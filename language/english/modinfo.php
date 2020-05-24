@@ -1,4 +1,5 @@
 <?php
+
 /**
  * ****************************************************************************
  * Installer - MODULE FOR XOOPS
@@ -12,13 +13,12 @@
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  *
  * @copyright       Michael Beck (mamba)
- * @license         http://www.gnu.org/licenses/gpl-2.0.html GNU Public License
+ * @license         https://www.gnu.org/licenses/gpl-2.0.html GNU Public License
  * @package         installer
  * @author          Michael Beck (mamba)
  *
  * ****************************************************************************
  */
-
 define('_MI_INSTALLER_NAME', 'Installer');
 define('_MI_INSTALLER_MENU_00', 'Home');
 define('_MI_INSTALLER_MENU_01', 'Install Modules');

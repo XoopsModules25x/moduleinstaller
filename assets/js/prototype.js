@@ -75,6 +75,7 @@ var Class = (function () {
 
     function subclass() {
     };
+
     function create() {
         var parent = null, properties = $A(arguments);
         if (Object.isFunction(properties[0]))
@@ -634,7 +635,7 @@ Object.extend(String.prototype, (function () {
         length = length || 30;
         truncation = Object.isUndefined(truncation) ? '...' : truncation;
         return this.length > length ?
-        this.slice(0, length - truncation.length) + truncation : String(this);
+            this.slice(0, length - truncation.length) + truncation : String(this);
     }
 
     function strip() {
@@ -689,8 +690,7 @@ Object.extend(String.prototype, (function () {
                 if (key in hash) {
                     if (!Object.isArray(hash[key])) hash[key] = [hash[key]];
                     hash[key].push(value);
-                }
-                else hash[key] = value;
+                } else hash[key] = value;
             }
             return hash;
         });
@@ -1250,7 +1250,7 @@ Array.from = $A;
         }
 
         var k = i >= 0 ? Math.min(i, length - 1) :
-        length - Math.abs(i);
+            length - Math.abs(i);
 
         for (; k >= 0; k--)
             if (k in array && array[k] === item) return k;
@@ -1419,6 +1419,7 @@ Array.from = $A;
     if (!arrayProto.indexOf) arrayProto.indexOf = indexOf;
     if (!arrayProto.lastIndexOf) arrayProto.lastIndexOf = lastIndexOf;
 })();
+
 function $H(object) {
     return new Hash(object);
 };
@@ -1517,8 +1518,8 @@ var Hash = Class.create(Enumerable, (function () {
 
     function inspect() {
         return '#<Hash:{' + this.map(function (pair) {
-                return pair.map(Object.inspect).join(': ');
-            }).join(', ') + '}>';
+            return pair.map(Object.inspect).join(': ');
+        }).join(', ') + '}>';
     }
 
     function clone() {
@@ -1651,16 +1652,16 @@ var Try = {
 var Ajax = {
     getTransport: function () {
         return Try.these(
-                function () {
-                    return new XMLHttpRequest()
-                },
-                function () {
-                    return new ActiveXObject('Msxml2.XMLHTTP')
-                },
-                function () {
-                    return new ActiveXObject('Microsoft.XMLHTTP')
-                }
-            ) || false;
+            function () {
+                return new XMLHttpRequest()
+            },
+            function () {
+                return new ActiveXObject('Msxml2.XMLHTTP')
+            },
+            function () {
+                return new ActiveXObject('Microsoft.XMLHTTP')
+            }
+        ) || false;
     },
 
     activeRequestCount: 0
@@ -1770,8 +1771,7 @@ Ajax.Request = Class.create(Ajax.Base, {
             if (!this.options.asynchronous && this.transport.overrideMimeType)
                 this.onStateChange();
 
-        }
-        catch (e) {
+        } catch (e) {
             this.dispatchException(e);
         }
     },
@@ -1840,8 +1840,8 @@ Ajax.Request = Class.create(Ajax.Base, {
             try {
                 this._complete = true;
                 (this.options['on' + response.status]
-                || this.options['on' + (this.success() ? 'Success' : 'Failure')]
-                || Prototype.emptyFunction)(response, response.headerJSON);
+                    || this.options['on' + (this.success() ? 'Success' : 'Failure')]
+                    || Prototype.emptyFunction)(response, response.headerJSON);
             } catch (e) {
                 this.dispatchException(e);
             }
@@ -1849,7 +1849,7 @@ Ajax.Request = Class.create(Ajax.Base, {
             var contentType = response.getHeader('Content-type');
             if (this.options.evalJS == 'force'
                 || (this.options.evalJS && this.isSameOrigin() && contentType
-                && contentType.match(/^\s*(text|application)\/(x-)?(java|ecma)script(;.*)?\s*$/i)))
+                    && contentType.match(/^\s*(text|application)\/(x-)?(java|ecma)script(;.*)?\s*$/i)))
                 this.evalResponse();
         }
 
@@ -1868,10 +1868,10 @@ Ajax.Request = Class.create(Ajax.Base, {
     isSameOrigin: function () {
         var m = this.url.match(/^\s*https?:\/\/[^\/]*/);
         return !m || (m[0] == '#{protocol}//#{domain}#{port}'.interpolate({
-                protocol: location.protocol,
-                domain: document.domain,
-                port: location.port ? ':' + location.port : ''
-            }));
+            protocol: location.protocol,
+            domain: document.domain,
+            port: location.port ? ':' + location.port : ''
+        }));
     },
 
     getHeader: function (name) {
@@ -2010,10 +2010,8 @@ Ajax.Updater = Class.create(Ajax.Request, {
                     var insertion = {};
                     insertion[options.insertion] = responseText;
                     receiver.insert(insertion);
-                }
-                else options.insertion(receiver, responseText);
-            }
-            else receiver.update(responseText);
+                } else options.insertion(receiver, responseText);
+            } else receiver.update(responseText);
         }
     }
 });
@@ -2047,7 +2045,7 @@ Ajax.PeriodicalUpdater = Class.create(Ajax.Base, {
     updateComplete: function (response) {
         if (this.options.decay) {
             this.decay = (response.responseText == this.lastText ?
-            this.decay * this.options.decay : 1);
+                this.decay * this.options.decay : 1);
 
             this.lastText = response.responseText;
         }
@@ -2113,8 +2111,7 @@ Ajax.PeriodicalUpdater = Class.create(Ajax.Base, {
         try {
             var el = document.createElement('<input name="x">');
             return el.tagName.toLowerCase() === 'input' && el.name === 'x';
-        }
-        catch (err) {
+        } catch (err) {
             return false;
         }
     })();
@@ -2978,8 +2975,7 @@ Ajax.PeriodicalUpdater = Class.create(Ajax.Base, {
             value = value.split('}')[0];
             return value.strip();
         };
-    }
-    else if (onclickValue === '') {
+    } else if (onclickValue === '') {
         _getEv = function (element, attribute) {
             var value = element.getAttribute(attribute);
             if (!value) return null;
@@ -4652,15 +4648,15 @@ Prototype._original_property = window.Sizzle;
         push = arr.push,
         slice = arr.slice,
         indexOf = arr.indexOf || function (elem) {
-                var i = 0,
-                    len = this.length;
-                for (; i < len; i++) {
-                    if (this[i] === elem) {
-                        return i;
-                    }
+            var i = 0,
+                len = this.length;
+            for (; i < len; i++) {
+                if (this[i] === elem) {
+                    return i;
                 }
-                return -1;
-            },
+            }
+            return -1;
+        },
 
         booleans = "checked|selected|async|autofocus|autoplay|controls|defer|disabled|hidden|ismap|loop|multiple|open|readonly|required|scoped",
 
@@ -4747,7 +4743,7 @@ Prototype._original_property = window.Sizzle;
         var match, elem, m, nodeType,
             i, groups, old, nid, newContext, newSelector;
 
-        if (( context ? context.ownerDocument || context : preferredDoc ) !== document) {
+        if ((context ? context.ownerDocument || context : preferredDoc) !== document) {
             setDocument(context);
         }
 
@@ -4906,8 +4902,8 @@ Prototype._original_property = window.Sizzle;
     function siblingCheck(a, b) {
         var cur = b && a,
             diff = cur && a.nodeType === 1 && b.nodeType === 1 &&
-                ( ~b.sourceIndex || MAX_NEGATIVE ) -
-                ( ~a.sourceIndex || MAX_NEGATIVE );
+                (~b.sourceIndex || MAX_NEGATIVE) -
+                (~a.sourceIndex || MAX_NEGATIVE);
 
         if (diff) {
             return diff;
@@ -5036,11 +5032,11 @@ Prototype._original_property = window.Sizzle;
         });
 
         support.getElementsByClassName = rnative.test(doc.getElementsByClassName) && assert(function (div) {
-                div.innerHTML = "<div class='a'></div><div class='a i'></div>";
+            div.innerHTML = "<div class='a'></div><div class='a i'></div>";
 
-                div.firstChild.className = "i";
-                return div.getElementsByClassName("i").length === 2;
-            });
+            div.firstChild.className = "i";
+            return div.getElementsByClassName("i").length === 2;
+        });
 
         support.getById = assert(function (div) {
             docElem.appendChild(div).id = expando;
@@ -5097,10 +5093,10 @@ Prototype._original_property = window.Sizzle;
             };
 
         Expr.find["CLASS"] = support.getElementsByClassName && function (className, context) {
-                if (typeof context.getElementsByClassName !== strundefined && documentIsHTML) {
-                    return context.getElementsByClassName(className);
-                }
-            };
+            if (typeof context.getElementsByClassName !== strundefined && documentIsHTML) {
+                return context.getElementsByClassName(className);
+            }
+        };
 
         /* QSA/matchesSelector
          ---------------------------------------------------------------------- */
@@ -5146,9 +5142,9 @@ Prototype._original_property = window.Sizzle;
         }
 
         if ((support.matchesSelector = rnative.test((matches = docElem.webkitMatchesSelector ||
-                docElem.mozMatchesSelector ||
-                docElem.oMatchesSelector ||
-                docElem.msMatchesSelector)))) {
+            docElem.mozMatchesSelector ||
+            docElem.oMatchesSelector ||
+            docElem.msMatchesSelector)))) {
 
             assert(function (div) {
                 support.disconnectedMatch = matches.call(div, "div");
@@ -5169,11 +5165,11 @@ Prototype._original_property = window.Sizzle;
             function (a, b) {
                 var adown = a.nodeType === 9 ? a.documentElement : a,
                     bup = b && b.parentNode;
-                return a === bup || !!( bup && bup.nodeType === 1 && (
-                        adown.contains ?
-                            adown.contains(bup) :
+                return a === bup || !!(bup && bup.nodeType === 1 && (
+                    adown.contains ?
+                        adown.contains(bup) :
                         a.compareDocumentPosition && a.compareDocumentPosition(bup) & 16
-                    ));
+                ));
             } :
             function (a, b) {
                 if (b) {
@@ -5202,7 +5198,7 @@ Prototype._original_property = window.Sizzle;
                     return compare;
                 }
 
-                compare = ( a.ownerDocument || a ) === ( b.ownerDocument || b ) ?
+                compare = (a.ownerDocument || a) === (b.ownerDocument || b) ?
                     a.compareDocumentPosition(b) :
 
                     1;
@@ -5218,7 +5214,7 @@ Prototype._original_property = window.Sizzle;
                     }
 
                     return sortInput ?
-                        ( indexOf.call(sortInput, a) - indexOf.call(sortInput, b) ) :
+                        (indexOf.call(sortInput, a) - indexOf.call(sortInput, b)) :
                         0;
                 }
 
@@ -5243,7 +5239,7 @@ Prototype._original_property = window.Sizzle;
                             aup ? -1 :
                                 bup ? 1 :
                                     sortInput ?
-                                        ( indexOf.call(sortInput, a) - indexOf.call(sortInput, b) ) :
+                                        (indexOf.call(sortInput, a) - indexOf.call(sortInput, b)) :
                                         0;
 
                 } else if (aup === bup) {
@@ -5279,15 +5275,15 @@ Prototype._original_property = window.Sizzle;
     };
 
     Sizzle.matchesSelector = function (elem, expr) {
-        if (( elem.ownerDocument || elem ) !== document) {
+        if ((elem.ownerDocument || elem) !== document) {
             setDocument(elem);
         }
 
         expr = expr.replace(rattributeQuotes, "='$1']");
 
         if (support.matchesSelector && documentIsHTML &&
-            ( !rbuggyMatches || !rbuggyMatches.test(expr) ) &&
-            ( !rbuggyQSA || !rbuggyQSA.test(expr) )) {
+            (!rbuggyMatches || !rbuggyMatches.test(expr)) &&
+            (!rbuggyQSA || !rbuggyQSA.test(expr))) {
 
             try {
                 var ret = matches.call(elem, expr);
@@ -5304,14 +5300,14 @@ Prototype._original_property = window.Sizzle;
     };
 
     Sizzle.contains = function (context, elem) {
-        if (( context.ownerDocument || context ) !== document) {
+        if ((context.ownerDocument || context) !== document) {
             setDocument(context);
         }
         return contains(context, elem);
     };
 
     Sizzle.attr = function (elem, name) {
-        if (( elem.ownerDocument || elem ) !== document) {
+        if ((elem.ownerDocument || elem) !== document) {
             setDocument(elem);
         }
 
@@ -5415,7 +5411,7 @@ Prototype._original_property = window.Sizzle;
             "ATTR": function (match) {
                 match[1] = match[1].replace(runescape, funescape);
 
-                match[3] = ( match[4] || match[5] || "" ).replace(runescape, funescape);
+                match[3] = (match[4] || match[5] || "").replace(runescape, funescape);
 
                 if (match[2] === "~=") {
                     match[3] = " " + match[3] + " ";
@@ -5442,8 +5438,8 @@ Prototype._original_property = window.Sizzle;
                         Sizzle.error(match[0]);
                     }
 
-                    match[4] = +( match[4] ? match[5] + (match[6] || 1) : 2 * ( match[3] === "even" || match[3] === "odd" ) );
-                    match[5] = +( ( match[7] + match[8] ) || match[3] === "odd" );
+                    match[4] = +(match[4] ? match[5] + (match[6] || 1) : 2 * (match[3] === "even" || match[3] === "odd"));
+                    match[5] = +((match[7] + match[8]) || match[3] === "odd");
 
                 } else if (match[3]) {
                     Sizzle.error(match[0]);
@@ -5516,7 +5512,7 @@ Prototype._original_property = window.Sizzle;
                             operator === "^=" ? check && result.indexOf(check) === 0 :
                                 operator === "*=" ? check && result.indexOf(check) > -1 :
                                     operator === "$=" ? check && result.slice(-check.length) === check :
-                                        operator === "~=" ? ( " " + result + " " ).indexOf(check) > -1 :
+                                        operator === "~=" ? (" " + result + " ").indexOf(check) > -1 :
                                             operator === "|=" ? result === check || result.slice(0, check.length + 1) === check + "-" :
                                                 false;
                 };
@@ -5581,7 +5577,7 @@ Prototype._original_property = window.Sizzle;
                                 while ((node = ++nodeIndex && node && node[dir] ||
                                     (diff = nodeIndex = 0) || start.pop())) {
 
-                                    if (( ofType ? node.nodeName.toLowerCase() === name : node.nodeType === 1 ) && ++diff) {
+                                    if ((ofType ? node.nodeName.toLowerCase() === name : node.nodeType === 1) && ++diff) {
                                         if (useCache) {
                                             (node[expando] || (node[expando] = {}))[type] = [dirruns, diff];
                                         }
@@ -5594,7 +5590,7 @@ Prototype._original_property = window.Sizzle;
                             }
 
                             diff -= last;
-                            return diff === first || ( diff % first === 0 && diff / first >= 0 );
+                            return diff === first || (diff % first === 0 && diff / first >= 0);
                         }
                     };
             },
@@ -5617,7 +5613,7 @@ Prototype._original_property = window.Sizzle;
                                 i = matched.length;
                             while (i--) {
                                 idx = indexOf.call(seed, matched[i]);
-                                seed[idx] = !( matches[idx] = matched[i] );
+                                seed[idx] = !(matches[idx] = matched[i]);
                             }
                         }) :
                         function (elem) {
@@ -5662,7 +5658,7 @@ Prototype._original_property = window.Sizzle;
 
             "contains": markFunction(function (text) {
                 return function (elem) {
-                    return ( elem.textContent || elem.innerText || getText(elem) ).indexOf(text) > -1;
+                    return (elem.textContent || elem.innerText || getText(elem)).indexOf(text) > -1;
                 };
             }),
 
@@ -5675,7 +5671,7 @@ Prototype._original_property = window.Sizzle;
                     var elemLang;
                     do {
                         if ((elemLang = documentIsHTML ?
-                                elem.lang :
+                            elem.lang :
                             elem.getAttribute("xml:lang") || elem.getAttribute("lang"))) {
 
                             elemLang = elemLang.toLowerCase();
@@ -5751,7 +5747,7 @@ Prototype._original_property = window.Sizzle;
                 return elem.nodeName.toLowerCase() === "input" &&
                     elem.type === "text" &&
 
-                    ( (attr = elem.getAttribute("type")) == null || attr.toLowerCase() === "text" );
+                    ((attr = elem.getAttribute("type")) == null || attr.toLowerCase() === "text");
             },
 
             "first": createPositionalPseudo(function () {
@@ -5989,12 +5985,12 @@ Prototype._original_property = window.Sizzle;
 
                 elems = seed || multipleContexts(selector || "*", context.nodeType ? [context] : context, []),
 
-                matcherIn = preFilter && ( seed || !selector ) ?
+                matcherIn = preFilter && (seed || !selector) ?
                     condense(elems, preMap, preFilter, context, xml) :
                     elems,
 
                 matcherOut = matcher ?
-                    postFinder || ( seed ? preFilter : preexisting || postFilter ) ?
+                    postFinder || (seed ? preFilter : preexisting || postFilter) ?
 
                         [] :
 
@@ -6069,10 +6065,10 @@ Prototype._original_property = window.Sizzle;
                 return indexOf.call(checkContext, elem) > -1;
             }, implicitRelative, true),
             matchers = [function (elem, context, xml) {
-                return ( !leadingRelative && ( xml || context !== outermostContext ) ) || (
-                        (checkContext = context).nodeType ?
-                            matchContext(elem, context, xml) :
-                            matchAnyContext(elem, context, xml) );
+                return (!leadingRelative && (xml || context !== outermostContext)) || (
+                    (checkContext = context).nodeType ?
+                        matchContext(elem, context, xml) :
+                        matchAnyContext(elem, context, xml));
             }];
 
         for (; i < len; i++) {
@@ -6091,7 +6087,7 @@ Prototype._original_property = window.Sizzle;
                     return setMatcher(
                         i > 1 && elementMatcher(matchers),
                         i > 1 && toSelector(
-                            tokens.slice(0, i - 1).concat({value: tokens[i - 2].type === " " ? "*" : ""})
+                        tokens.slice(0, i - 1).concat({value: tokens[i - 2].type === " " ? "*" : ""})
                         ).replace(rtrim, "$1"),
                         matcher,
                         i < j && matcherFromTokens(tokens.slice(i, j)),
@@ -6171,7 +6167,7 @@ Prototype._original_property = window.Sizzle;
                     push.apply(results, setMatched);
 
                     if (outermost && !seed && setMatched.length > 0 &&
-                        ( matchedCount + setMatchers.length ) > 1) {
+                        (matchedCount + setMatchers.length) > 1) {
 
                         Sizzle.uniqueSort(results);
                     }
@@ -6240,7 +6236,7 @@ Prototype._original_property = window.Sizzle;
                 support.getById && context.nodeType === 9 && documentIsHTML &&
                 Expr.relative[tokens[1].type]) {
 
-                context = ( Expr.find["ID"](token.matches[0].replace(runescape, funescape), context) || [] )[0];
+                context = (Expr.find["ID"](token.matches[0].replace(runescape, funescape), context) || [])[0];
                 if (!context) {
                     return results;
 
@@ -6260,9 +6256,9 @@ Prototype._original_property = window.Sizzle;
                 }
                 if ((find = Expr.find[type])) {
                     if ((seed = find(
-                            token.matches[0].replace(runescape, funescape),
-                            rsibling.test(tokens[0].type) && testContext(context.parentNode) || context
-                        ))) {
+                        token.matches[0].replace(runescape, funescape),
+                        rsibling.test(tokens[0].type) && testContext(context.parentNode) || context
+                    ))) {
 
                         tokens.splice(i, 1);
                         selector = seed.length && toSelector(tokens);
@@ -6277,7 +6273,7 @@ Prototype._original_property = window.Sizzle;
             }
         }
 
-        ( compiled || compile(selector, match) )(
+        (compiled || compile(selector, match))(
             seed,
             context,
             !documentIsHTML,
@@ -6299,9 +6295,9 @@ Prototype._original_property = window.Sizzle;
     });
 
     if (!assert(function (div) {
-            div.innerHTML = "<a href='#'></a>";
-            return div.firstChild.getAttribute("href") === "#";
-        })) {
+        div.innerHTML = "<a href='#'></a>";
+        return div.firstChild.getAttribute("href") === "#";
+    })) {
         addHandle("type|href|height|width", function (elem, name, isXML) {
             if (!isXML) {
                 return elem.getAttribute(name, name.toLowerCase() === "type" ? 1 : 2);
@@ -6310,10 +6306,10 @@ Prototype._original_property = window.Sizzle;
     }
 
     if (!support.attributes || !assert(function (div) {
-            div.innerHTML = "<input/>";
-            div.firstChild.setAttribute("value", "");
-            return div.firstChild.getAttribute("value") === "";
-        })) {
+        div.innerHTML = "<input/>";
+        div.firstChild.setAttribute("value", "");
+        return div.firstChild.getAttribute("value") === "";
+    })) {
         addHandle("value", function (elem, name, isXML) {
             if (!isXML && elem.nodeName.toLowerCase() === "input") {
                 return elem.defaultValue;
@@ -6322,8 +6318,8 @@ Prototype._original_property = window.Sizzle;
     }
 
     if (!assert(function (div) {
-            return div.getAttribute("disabled") == null;
-        })) {
+        return div.getAttribute("disabled") == null;
+    })) {
         addHandle(booleans, function (elem, name, isXML) {
             var val;
             if (!isXML) {
@@ -6414,11 +6410,11 @@ var Form = {
                 }
                 var encodedKey = encodeURIComponent(key).gsub(/%20/, '+');
                 return result + (result ? "&" : "") + values.map(function (value) {
-                        value = value.gsub(/(\r)?\n/, '\r\n');
-                        value = encodeURIComponent(value);
-                        value = value.gsub(/%20/, '+');
-                        return encodedKey + "=" + value;
-                    }).join("&");
+                    value = value.gsub(/(\r)?\n/, '\r\n');
+                    value = encodeURIComponent(value);
+                    value = value.gsub(/%20/, '+');
+                    return encodedKey + "=" + value;
+                }).join("&");
             };
         }
 
@@ -6641,8 +6637,7 @@ Form.Element.Serializers = (function () {
                     opt.selected = true;
                     return;
                 }
-            }
-            else opt.selected = value.include(currentValue);
+            } else opt.selected = value.include(currentValue);
         }
     }
 
@@ -6867,7 +6862,7 @@ Form.EventObserver = Class.create(Abstract.EventObserver, {
         if (currentTarget && currentTarget.tagName) {
             if (type === 'load' || type === 'error' ||
                 (type === 'click' && currentTarget.tagName.toLowerCase() === 'input'
-                && currentTarget.type === 'radio'))
+                    && currentTarget.type === 'radio'))
                 node = currentTarget;
         }
 
@@ -7392,8 +7387,7 @@ Form.EventObserver = Class.create(Abstract.EventObserver, {
             while (parent && parent !== element) {
                 try {
                     parent = parent.parentNode;
-                }
-                catch (e) {
+                } catch (e) {
                     parent = element;
                 }
             }
@@ -7508,9 +7502,9 @@ var Position = {
         this.offset = Element.cumulativeOffset(element);
 
         return (y >= this.offset[1] &&
-        y < this.offset[1] + element.offsetHeight &&
-        x >= this.offset[0] &&
-        x < this.offset[0] + element.offsetWidth);
+            y < this.offset[1] + element.offsetHeight &&
+            x >= this.offset[0] &&
+            x < this.offset[0] + element.offsetWidth);
     },
 
     withinIncludingScrolloffsets: function (element, x, y) {
@@ -7521,9 +7515,9 @@ var Position = {
         this.offset = Element.cumulativeOffset(element);
 
         return (this.ycomp >= this.offset[1] &&
-        this.ycomp < this.offset[1] + element.offsetHeight &&
-        this.xcomp >= this.offset[0] &&
-        this.xcomp < this.offset[0] + element.offsetWidth);
+            this.ycomp < this.offset[1] + element.offsetHeight &&
+            this.xcomp >= this.offset[0] &&
+            this.xcomp < this.offset[0] + element.offsetWidth);
     },
 
     overlap: function (mode, element) {
@@ -7576,22 +7570,22 @@ if (!document.getElementsByClassName) document.getElementsByClassName = function
             var cond = /\s/.test(className) ? $w(className).map(iter).join('') : iter(className);
             return cond ? document._getElementsByXPath('.//*' + cond, element) : [];
         } : function (element, className) {
-        className = className.toString().strip();
-        var elements = [], classNames = (/\s/.test(className) ? $w(className) : null);
-        if (!classNames && !className) return elements;
+            className = className.toString().strip();
+            var elements = [], classNames = (/\s/.test(className) ? $w(className) : null);
+            if (!classNames && !className) return elements;
 
-        var nodes = $(element).getElementsByTagName('*');
-        className = ' ' + className + ' ';
+            var nodes = $(element).getElementsByTagName('*');
+            className = ' ' + className + ' ';
 
-        for (var i = 0, child, cn; child = nodes[i]; i++) {
-            if (child.className && (cn = ' ' + child.className + ' ') && (cn.include(className) ||
-                (classNames && classNames.all(function (name) {
-                    return !name.toString().blank() && cn.include(' ' + name + ' ');
-                }))))
-                elements.push(Element.extend(child));
-        }
-        return elements;
-    };
+            for (var i = 0, child, cn; child = nodes[i]; i++) {
+                if (child.className && (cn = ' ' + child.className + ' ') && (cn.include(className) ||
+                    (classNames && classNames.all(function (name) {
+                        return !name.toString().blank() && cn.include(' ' + name + ' ');
+                    }))))
+                    elements.push(Element.extend(child));
+            }
+            return elements;
+        };
 
     return function (className, parentElement) {
         return $(parentElement || document.body).getElementsByClassName(className);

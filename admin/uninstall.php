@@ -1,10 +1,11 @@
 <?php
+
 /**
  * See the enclosed file license.txt for licensing information.
- * If you did not receive this file, get it at http://www.gnu.org/licenses/gpl-2.0.html
+ * If you did not receive this file, get it at https://www.gnu.org/licenses/gpl-2.0.html
  *
  * @copyright   XOOPS Project (https://xoops.org)
- * @license     http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License (GPL)
+ * @license     https://www.gnu.org/licenses/gpl-2.0.html GNU General Public License (GPL)
  * @package     installer
  * @since       2.3.0
  * @author      Haruki Setoyama  <haruki@planewave.org>
@@ -17,9 +18,9 @@ require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
 $xoopsOption['checkadmin'] = true;
 $xoopsOption['hascommon']  = true;
-require_once  dirname(__DIR__) . '/include/common.inc.php';
+require_once dirname(__DIR__) . '/include/common.inc.php';
 require_once XOOPS_ROOT_PATH . '/modules/system/admin/modulesadmin/modulesadmin.php';
-defined('XOOPS_INSTALL') || die('XOOPS Installation wizard die');
+defined('XOOPS_INSTALL') || exit('XOOPS Installation wizard die');
 
 if (!@require_once XOOPS_ROOT_PATH . "/language/{$wizard->language}/global.php") {
     require_once XOOPS_ROOT_PATH . '/language/english/global.php';
@@ -76,7 +77,7 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
     }
 
     // Get installed modules
-    /** @var XoopsModuleHandler $moduleHandler */
+    /** @var \XoopsModuleHandler $moduleHandler */
     $moduleHandler  = xoops_getHandler('module');
     $installed_mods = $moduleHandler->getObjects();
     $listed_mods    = [];
@@ -98,7 +99,7 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
         if (in_array($file, $listed_mods)) {
             $value = 0;
             $style = '';
-            if (in_array($file, $wizard->configs['modules'])) {
+            if (isset($wizard->configs['modules'])  && in_array($file, $wizard->configs['modules'])) {
                 $value = 1;
                 $style = " style='background-color:#E6EFC2;'";
             }
@@ -142,5 +143,5 @@ $adminObject->addItemButton(_AM_INSTALLER_SELECT_NONE, 'javascript:unselectAll()
 
 $adminObject->displayButton('left', '');
 
-require_once  dirname(__DIR__) . '/include/install_tpl.php';
+require_once dirname(__DIR__) . '/include/install_tpl.php';
 require_once __DIR__ . '/admin_footer.php';

@@ -18,7 +18,7 @@
     the ../modules directory. Install the module through Admin -> System Module ->
     Modules. <br><br>
     Detailed instructions on installing modules are available in the <a
-        href="https://www.gitbook.com/book/xoops/xoops-operations-guide/" target="_blank">Chapter 2.12 of our XOOPS
+        href="https://xoops.gitbook.io/xoops-operations-guide/" target="_blank">Chapter 2.12 of our XOOPS
     Operations
     Manual</a></p>
 
@@ -39,11 +39,11 @@
 
     <p class="even">
         Tutorial has been started, but we might need your help! Please check out the status of the tutorial <a
-            href="https://www.gitbook.com/book/xoops/moduleinstaller-tutorial/" target="_blank">here </a>.
+            href="https://xoops.gitbook.io/moduleinstaller-tutorial/" target="_blank">here </a>.
         <br><br>To contribute to this Tutorial, <a href="https://github.com/XoopsDocs/moduleinstaller-tutorial/"
                                                    target="_blank">please fork it on GitHub</a>.
         <br> This document describes our <a
-            href="https://www.gitbook.com/book/xoops/xoops-documentation-process/details/" target="_blank">Documentation
+            href="https://xoops.gitbook.io/xoops-documentation-process/details/" target="_blank">Documentation
         Process</a> and it will help you to understand how to contribute.
         <br><br>
         There are more XOOPS Tutorials, so check them out in our <a href="https://www.gitbook.com/@xoops/"

@@ -8,14 +8,15 @@
  but WITHOUT ANY WARRANTY; without even the implied warranty of
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
+
 /**
  * Installer common include file
  *
  * See the enclosed file license.txt for licensing information.
- * If you did not receive this file, get it at http://www.gnu.org/licenses/gpl-2.0.html
+ * If you did not receive this file, get it at https://www.gnu.org/licenses/gpl-2.0.html
  *
  * @copyright   XOOPS Project (https://xoops.org)
- * @license     http://www.gnu.org/licenses/gpl-2.0.html GNU General Public License (GPL)
+ * @license     https://www.gnu.org/licenses/gpl-2.0.html GNU General Public License (GPL)
  * @package     installer
  * @since       2.3.0
  * @author      Haruki Setoyama  <haruki@planewave.org>
@@ -40,8 +41,8 @@ if (empty($xoopsOption['hascommon'])) {
     $xoopsOption['nocommon'] = true;
     session_start();
 }
-require_once  dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
-// defined('XOOPS_ROOT_PATH') || die('Restricted access');
+require_once dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
+
 /*
 error_reporting( 0 );
 if (isset($xoopsLogger)) {
