@@ -21,7 +21,7 @@ namespace XoopsModules\Moduleinstaller;
  * @package      \module\xsitemap\class
  * @license      http://www.fsf.org/copyleft/gpl.html GNU public license
  * @copyright    https://xoops.org 2001-2017 &copy; XOOPS Project
- * @author       ZySpec <owners@zyspec.com>
+ * @author       ZySpec <zyspec@yahoo.com>
  * @author       Mamba <mambax7@gmail.com>
  * @since        File available since version 1.54
  */
