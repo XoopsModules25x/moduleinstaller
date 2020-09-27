@@ -14,6 +14,9 @@
  * @author      Taiwen Jiang <phppp@users.sourceforge.net>
  * @author      DuGris (aka L. JEN) <dugris@frxoops.org>
  **/
+
+use Xmf\Module\Admin;
+
 require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
 $xoopsOption['checkadmin'] = true;
@@ -26,7 +29,6 @@ xoops_loadLanguage('global');
 xoops_loadLanguage('admin/modulesadmin', 'system');
 
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-//require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
 XoopsLoad::load('XoopsLists');
 
 //$xoTheme->addStylesheet( XOOPS_URL . "/modules/" . $xoopsModule->getVar("dirname") . "/assets/css/style.css" );
@@ -74,7 +76,7 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
     //    require_once  dirname(__DIR__) . '/include/modulesadmin.php';
 
     /** @var \XoopsConfigHandler $configHandler */
-$configHandler = xoops_getHandler('config');
+    $configHandler = xoops_getHandler('config');
     $xoopsConfig   = $configHandler->getConfigsByCat(XOOPS_CONF);
 
     $msgs = [];
@@ -109,15 +111,14 @@ $configHandler = xoops_getHandler('config');
 
     // Get installed modules
     /** @var \XoopsModuleHandler $moduleHandler */
-$moduleHandler = xoops_getHandler('module');
+    $moduleHandler  = xoops_getHandler('module');
     $installed_mods = $moduleHandler->getObjects();
     $listed_mods    = [];
     foreach ($installed_mods as $module) {
         $listed_mods[] = $module->getVar('dirname');
     }
 
-    //require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
-XoopsLoad::load('XoopsLists');
+    XoopsLoad::load('XoopsLists');
     $dirlist  = \XoopsLists::getModulesList();
     $toinstal = 0;
 
@@ -151,8 +152,8 @@ XoopsLoad::load('XoopsLists');
             $content .= "    <td class='img' ><img src='" . XOOPS_URL . '/modules/' . $module->getInfo('dirname') . '/' . $module->getInfo('image') . "' alt='" . $module->getInfo('name') . "'></td>\n";
 
             /** @var \XoopsModuleHandler $moduleHandler */
-$moduleHandler = xoops_getHandler('module');
-            $moduleInDB        = $moduleHandler->getByDirname($module->getInfo('dirname'));
+            $moduleHandler = xoops_getHandler('module');
+            $moduleInDB    = $moduleHandler->getByDirname($module->getInfo('dirname'));
             // Save current version for use in the update function
             $prevVersion = round($moduleInDB->getVar('version') / 100, 2);
 
@@ -173,7 +174,7 @@ $moduleHandler = xoops_getHandler('module');
         $content     = "<div class='x2-note confirmMsg'>" . NO_MODULES_FOUND . '</div>';
     }
 }
-$adminObject = \Xmf\Module\Admin::getInstance();
+$adminObject = Admin::getInstance();
 $adminObject->displayNavigation(basename(__FILE__));
 
 $adminObject->addItemButton(_AM_INSTALLER_SELECT_ALL, 'javascript:selectAll();', 'button_ok');

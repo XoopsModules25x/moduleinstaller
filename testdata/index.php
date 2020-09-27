@@ -11,15 +11,17 @@
  * @license         GNU GPL 2 (https://www.gnu.org/licenses/old-licenses/gpl-2.0.html)
  * @package
  * @since           2.5.9
- * @author          Michael Beck (aka Mamba)
+ * @author          Michael Beck (aka Mamba): https://github.com/mambax7
  */
 
+use Xmf\Database\TableLoad;
 use \Xmf\Request;
 use XoopsModules\Moduleinstaller\{
     Helper,
     Common,
     Utility
 };
+use Xmf\Yaml;
 
 require_once dirname(__DIR__, 3) . '/include/cp_header.php';
 require dirname(__DIR__) . '/preloads/autoloader.php';
@@ -71,14 +73,14 @@ function loadSampleData()
 
     // load module tables
     foreach ($tables as $table) {
-        $tabledata = \Xmf\Yaml::readWrapped($language . $table . '.yml');
-        \Xmf\Database\TableLoad::truncateTable($table);
-        \Xmf\Database\TableLoad::loadTableFromArray($table, $tabledata);
+        $tabledata = Yaml::readWrapped($language . $table . '.yml');
+        TableLoad::truncateTable($table);
+        TableLoad::loadTableFromArray($table, $tabledata);
     }
 
     // load permissions
     $table     = 'group_permission';
-    $tabledata = \Xmf\Yaml::readWrapped($language . $table . '.yml');
+    $tabledata = Yaml::readWrapped($language . $table . '.yml');
     $mid       = \Xmf\Module\Helper::getHelper($moduleDirName)->getModule()->getVar('mid');
     loadTableFromArrayWithReplace($table, $tabledata, 'gperm_modid', $mid);
 
@@ -111,14 +113,14 @@ function saveSampleData()
 
     // save module tables
     foreach ($tables as $table) {
-        \Xmf\Database\TableLoad::saveTableToYamlFile($table, $exportFolder . $table . '.yml');
+        TableLoad::saveTableToYamlFile($table, $exportFolder . $table . '.yml');
     }
 
     // save permissions
     $criteria = new \CriteriaCompo();
     $criteria->add(new \Criteria('gperm_modid', \Xmf\Module\Helper::getHelper($moduleDirName)->getModule()->getVar('mid')));
     $skipColumns[] = 'gperm_id';
-    \Xmf\Database\TableLoad::saveTableToYamlFile('group_permission', $exportFolder . 'group_permission.yml', $criteria, $skipColumns);
+    TableLoad::saveTableToYamlFile('group_permission', $exportFolder . 'group_permission.yml', $criteria, $skipColumns);
     unset($criteria);
 
     redirect_header('../admin/index.php', 1, constant('CO_' . $moduleDirNameUpper . '_' . 'SAMPLEDATA_SUCCESS'));

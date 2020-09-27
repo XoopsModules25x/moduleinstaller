@@ -19,6 +19,7 @@ namespace XoopsModules\Moduleinstaller;
  * @since
  * @author       XOOPS Development Team
  */
+
 /**
  * Class Helper
  */
