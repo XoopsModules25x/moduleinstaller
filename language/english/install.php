@@ -195,6 +195,9 @@ define('UNINSTALLED_MODULES', 'The following modules have been uninstalled.<br>P
 define('NO_MODULES_FOUND', 'No modules found.<br>Press <strong>next</strong> to go to the next step.');
 define('NO_INSTALLED_MODULES', 'No module installed.<br>Press <strong>next</strong> to go to the next step.');
 
+define('ACTIVATED_MODULES', 'The following modules have been activated.<br>Press <strong>next</strong> to go to the next step.');
+define('DEACTIVATED_MODULES', 'The following modules have been deactivated.<br>Press <strong>next</strong> to go to the next step.');
+
 define('THEME_NO_SCREENSHOT', 'No screenshot found');
 
 define('IS_VALOR', ' => ');

@@ -14,14 +14,17 @@
  * @author      Taiwen Jiang <phppp@users.sourceforge.net>
  * @author      DuGris (aka L. JEN) <dugris@frxoops.org>
  **/
+use XoopsModules\Moduleinstaller\{Helper
+};
 require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
-
 $xoopsOption['checkadmin'] = true;
 $xoopsOption['hascommon']  = true;
 require_once dirname(__DIR__) . '/include/common.inc.php';
 require_once XOOPS_ROOT_PATH . '/modules/system/admin/modulesadmin/modulesadmin.php';
 //defined('XOOPS_INSTALL') || exit('XOOPS Installation wizard die');
+
+$helper = Helper::getInstance();
 
 xoops_loadLanguage('global');
 xoops_loadLanguage('admin/modulesadmin', 'system');
@@ -35,6 +38,7 @@ XoopsLoad::load('XoopsLists');
 $pageHasForm = true;
 $pageHasHelp = false;
 
+
 if ('POST' === $_SERVER['REQUEST_METHOD']) {
     require_once XOOPS_ROOT_PATH . '/class/xoopsblock.php';
     require_once XOOPS_ROOT_PATH . '/kernel/module.php';
@@ -43,20 +47,22 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
     //    require_once  dirname(__DIR__) . '/include/modulesadmin.php';
 
     /** @var \XoopsConfigHandler $configHandler */
-$configHandler = xoops_getHandler('config');
+    $configHandler = xoops_getHandler('config');
     $xoopsConfig   = $configHandler->getConfigsByCat(XOOPS_CONF);
 
     $msgs = [];
-    foreach ($_REQUEST['modules'] as $dirname => $installmod) {
-        if ($installmod) {
-            $msgs[] = xoops_module_install($dirname);
+    foreach ($_REQUEST['modules'] as $dirname => $notactiveModule) {
+        if ($notactiveModule) {
+            $xoopsModule = XoopsModule::getByDirname($dirname);
+            $mid    = $xoopsModule->getVar('mid');
+            $msgs[] = xoops_module_activate($mid);
         }
     }
 
     $pageHasForm = false;
 
     if (count($msgs) > 0) {
-        $content = "<div class='x2-note successMsg'>" . INSTALLED_MODULES . "</div><ul class='log'>";
+        $content = "<div class='x2-note successMsg'>" . ACTIVATED_MODULES . "</div><ul class='log'>";
         foreach ($msgs as $msg) {
             $content .= "<dt>{$msg}</dt>";
         }
@@ -78,57 +84,57 @@ $configHandler = xoops_getHandler('config');
 
     // Get installed modules
     /** @var \XoopsModuleHandler $moduleHandler */
-$moduleHandler = xoops_getHandler('module');
+    $moduleHandler  = xoops_getHandler('module');
     $installed_mods = $moduleHandler->getObjects();
     $listed_mods    = [];
-    if (count($installed_mods) > 0) {
-        foreach ($installed_mods as $module) {
+    foreach ($installed_mods as $module) {
+        if (!$module->isActive()) {
             $listed_mods[] = $module->getVar('dirname');
         }
     }
+
     //require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
-XoopsLoad::load('XoopsLists');
+    XoopsLoad::load('XoopsLists');
     $dirlist  = \XoopsLists::getModulesList();
     $toinstal = 0;
 
     $javascript = '';
     $content    = "<ul class='log'><li>";
     $content    .= "<table class='module'>\n";
-    //    $content .= "<input type='button' name='getTotal1' id='getTotal1' value='Select All' onclick='selectAll();'> <input type='button' name='getTotal1' id='getTotal1' value='Unselect All' onclick='unselectAll();'><br>";
-
-    if (!isset($wizard->configs['modules'])) {
-        foreach ($dirlist as $file) {
-            clearstatcache();
-            if (!in_array($file, $listed_mods)) {
-                $value = 0;
-                $style = '';
-                if (isset($wizard->configs['modules']) && in_array($file, $wizard->configs['modules'])) {
-                    $value = 1;
-                    $style = " style='background-color:#E6EFC2;'";
-                }
-
-                $file   = trim($file);
-                $module = $moduleHandler->create();
-                if (!$module->loadInfo($file, false)) {
-                    continue;
-                }
-
-                $form     = new \XoopsThemeForm('', 'modules', 'index.php', 'post', true);
-                $moduleYN = new \XoopsFormRadioYN('', 'modules[' . $module->getInfo('dirname') . ']', $value, _YES, _NO);
-                $moduleYN->setExtra("onclick='selectModule(\"" . $file . "\", this)'");
-                $form->addElement($moduleYN);
-
-                $content .= "<tr id='" . $file . "'" . $style . ">\n";
-                $content .= "    <td class='img' ><img src='" . XOOPS_URL . '/modules/' . $module->getInfo('dirname') . '/' . $module->getInfo('image') . "' alt='" . $module->getInfo('name') . "'></td>\n";
-                $content .= '    <td>';
-                $content .= '        ' . $module->getInfo('name') . '&nbsp;' . number_format(round($module->getInfo('version'), 2), 2) . '&nbsp;' . $module->getInfo('module_status') . '&nbsp;(folder: /' . $module->getInfo('dirname') . ')';
-                $content .= '        <br>' . $module->getInfo('description');
-                $content .= "    </td>\n";
-                $content .= "    <td class='yesno'>";
-                $content .= $moduleYN->render();
-                $content .= "    </td></tr>\n";
-                ++$toinstal;
+    //remove System module and itself from the list of modules that can be activated
+    //    $dirlist = array_diff($dirlist, array('system', 'moduleinstaller'));
+    $dirlist = array_diff($dirlist, ['system', 'moduleinstaller']);
+    foreach ($dirlist as $file) {
+        clearstatcache();
+        if (in_array($file, $listed_mods)) {
+            $value = 0;
+            $style = '';
+            if (isset($wizard->configs['modules']) && in_array($file, $wizard->configs['modules'])) {
+                $value = 1;
+                $style = " style='background-color:#E6EFC2;'";
             }
+
+            $file   = trim($file);
+            $module = $moduleHandler->create();
+            if (!$module->loadInfo($file, false)) {
+                continue;
+            }
+
+            $form     = new \XoopsThemeForm('', 'modules', 'index.php', 'post', true);
+            $moduleYN = new \XoopsFormRadioYN('', 'modules[' . $module->getInfo('dirname') . ']', $value, _YES, _NO);
+            $moduleYN->setExtra("onclick='selectModule(\"" . $file . "\", this)'");
+            $form->addElement($moduleYN);
+
+            $content .= "<tr id='" . $file . "'" . $style . ">\n";
+            $content .= "    <td class='img' ><img src='" . XOOPS_URL . '/modules/' . $module->getInfo('dirname') . '/' . $module->getInfo('image') . "' alt='" . $module->getInfo('name') . "'></td>\n";
+            $content .= '    <td>';
+            $content .= '        ' . $module->getInfo('name') . '&nbsp;' . number_format(round($module->getInfo('version'), 2), 2) . '&nbsp;' . $module->getInfo('module_status') . '&nbsp;(folder: /' . $module->getInfo('dirname') . ')';
+            $content .= '        <br>' . $module->getInfo('description');
+            $content .= "    </td>\n";
+            $content .= "    <td class='yesno'>";
+            $content .= $moduleYN->render();
+            $content .= "    </td></tr>\n";
+            ++$toinstal;
         }
     }
     $content .= '</table>';
@@ -138,7 +144,6 @@ XoopsLoad::load('XoopsLists');
         $content     = "<div class='x2-note confirmMsg'>" . NO_MODULES_FOUND . '</div>';
     }
 }
-
 $adminObject = \Xmf\Module\Admin::getInstance();
 $adminObject->displayNavigation(basename(__FILE__));
 

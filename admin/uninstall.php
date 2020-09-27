@@ -20,16 +20,14 @@ $xoopsOption['checkadmin'] = true;
 $xoopsOption['hascommon']  = true;
 require_once dirname(__DIR__) . '/include/common.inc.php';
 require_once XOOPS_ROOT_PATH . '/modules/system/admin/modulesadmin/modulesadmin.php';
-defined('XOOPS_INSTALL') || exit('XOOPS Installation wizard die');
+//defined('XOOPS_INSTALL') || exit('XOOPS Installation wizard die');
 
-if (!@require_once XOOPS_ROOT_PATH . "/language/{$wizard->language}/global.php") {
-    require_once XOOPS_ROOT_PATH . '/language/english/global.php';
-}
-if (!@require_once XOOPS_ROOT_PATH . "/modules/system/language/{$wizard->language}/admin/modulesadmin.php") {
-    require_once XOOPS_ROOT_PATH . '/modules/system/language/english/admin/modulesadmin.php';
-}
+xoops_loadLanguage('global');
+xoops_loadLanguage('admin/modulesadmin', 'system');
+
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
+//require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
+XoopsLoad::load('XoopsLists');
 
 //$xoTheme->addStylesheet( XOOPS_URL . "/modules/" . $xoopsModule->getVar("dirname") . "/assets/css/style.css" );
 
@@ -44,7 +42,8 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
     //    require_once  dirname(__DIR__) . '/include/modulesadmin.php';
 
     /** @var \XoopsConfigHandler $configHandler */
-$configHandler = xoops_getHandler('config');
+    $configHandler = xoops_getHandler('config');
+
     $xoopsConfig   = $configHandler->getConfigsByCat(XOOPS_CONF);
 
     $msgs = [];
@@ -86,7 +85,8 @@ $moduleHandler = xoops_getHandler('module');
         $listed_mods[] = $module->getVar('dirname');
     }
 
-    require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
+    //require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
+XoopsLoad::load('XoopsLists');
     $dirlist  = \XoopsLists::getModulesList();
     $toinstal = 0;
 
@@ -100,7 +100,7 @@ $moduleHandler = xoops_getHandler('module');
         if (in_array($file, $listed_mods)) {
             $value = 0;
             $style = '';
-            if (isset($wizard->configs['modules'])  && in_array($file, $wizard->configs['modules'])) {
+            if (isset($wizard->configs['modules']) && in_array($file, $wizard->configs['modules'])) {
                 $value = 1;
                 $style = " style='background-color:#E6EFC2;'";
             }
