@@ -20,16 +20,14 @@ $xoopsOption['checkadmin'] = true;
 $xoopsOption['hascommon']  = true;
 require_once dirname(__DIR__) . '/include/common.inc.php';
 require_once XOOPS_ROOT_PATH . '/modules/system/admin/modulesadmin/modulesadmin.php';
-defined('XOOPS_INSTALL') || exit('XOOPS Installation wizard die');
+//defined('XOOPS_INSTALL') || exit('XOOPS Installation wizard die');
 
-if (!@require_once XOOPS_ROOT_PATH . "/language/{$wizard->language}/global.php") {
-    require_once XOOPS_ROOT_PATH . '/language/english/global.php';
-}
-if (!@require_once XOOPS_ROOT_PATH . "/modules/system/language/{$wizard->language}/admin/modulesadmin.php") {
-    require_once XOOPS_ROOT_PATH . '/modules/system/language/english/admin/modulesadmin.php';
-}
+xoops_loadLanguage('global');
+xoops_loadLanguage('admin/modulesadmin', 'system');
+
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
-require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
+//require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
+XoopsLoad::load('XoopsLists');
 
 //$xoTheme->addStylesheet( XOOPS_URL . "/modules/" . $xoopsModule->getVar("dirname") . "/assets/css/style.css" );
 
@@ -75,7 +73,8 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
     require_once XOOPS_ROOT_PATH . '/include/version.php';
     //    require_once  dirname(__DIR__) . '/include/modulesadmin.php';
 
-    $configHandler = xoops_getHandler('config');
+    /** @var \XoopsConfigHandler $configHandler */
+$configHandler = xoops_getHandler('config');
     $xoopsConfig   = $configHandler->getConfigsByCat(XOOPS_CONF);
 
     $msgs = [];
@@ -110,14 +109,15 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
 
     // Get installed modules
     /** @var \XoopsModuleHandler $moduleHandler */
-    $moduleHandler  = xoops_getHandler('module');
+$moduleHandler = xoops_getHandler('module');
     $installed_mods = $moduleHandler->getObjects();
     $listed_mods    = [];
     foreach ($installed_mods as $module) {
         $listed_mods[] = $module->getVar('dirname');
     }
 
-    require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
+    //require_once XOOPS_ROOT_PATH . '/class/xoopslists.php';
+XoopsLoad::load('XoopsLists');
     $dirlist  = \XoopsLists::getModulesList();
     $toinstal = 0;
 
@@ -150,7 +150,8 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
             $content .= "<tr id='" . $file . "'" . $style . ">\n";
             $content .= "    <td class='img' ><img src='" . XOOPS_URL . '/modules/' . $module->getInfo('dirname') . '/' . $module->getInfo('image') . "' alt='" . $module->getInfo('name') . "'></td>\n";
 
-            $moduleHandlerInDB = xoops_getHandler('module');
+            /** @var \XoopsModuleHandler $moduleHandler */
+$moduleHandler = xoops_getHandler('module');
             $moduleInDB        = $moduleHandler->getByDirname($module->getInfo('dirname'));
             // Save current version for use in the update function
             $prevVersion = round($moduleInDB->getVar('version') / 100, 2);

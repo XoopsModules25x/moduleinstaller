@@ -41,6 +41,18 @@ $adminmenu[] = [
 ];
 
 $adminmenu[] = [
+    'title' => _MI_INSTALLER_MENU_04,
+    'link'  => 'admin/activate.php',
+    'icon'  => $pathIcon32 . '/button_ok.png',
+];
+
+$adminmenu[] = [
+    'title' => _MI_INSTALLER_MENU_05,
+    'link'  => 'admin/deactivate.php',
+    'icon'  => $pathIcon32 . '/link_break.png',
+];
+
+$adminmenu[] = [
     'title' => _MI_INSTALLER_ADMIN_ABOUT,
     'link'  => 'admin/about.php',
     'icon'  => $pathIcon32 . '/about.png',
