@@ -17,6 +17,7 @@
 
 use XoopsModules\Moduleinstaller\{Helper
 };
+use Xmf\Module\Admin;
 
 require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
@@ -54,8 +55,9 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
     $msgs = [];
     foreach ($_REQUEST['modules'] as $dirname => $activeModule) {
         if ($activeModule) {
-            $mid       = \Xmf\Module\Helper::getHelper($dirname)->getModule()->getVar('mid');
-            $msgs[] = xoops_module_deactivate($mid);
+            $xoopsModule = XoopsModule::getByDirname($dirname);
+            $mid         = $xoopsModule->getVar('mid');
+            $msgs[]      = xoops_module_deactivate($mid);
         }
     }
 
@@ -143,7 +145,7 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
         $content     = "<div class='x2-note confirmMsg'>" . NO_MODULES_FOUND . '</div>';
     }
 }
-$adminObject = \Xmf\Module\Admin::getInstance();
+$adminObject = Admin::getInstance();
 $adminObject->displayNavigation(basename(__FILE__));
 
 $adminObject->addItemButton(_AM_INSTALLER_SELECT_ALL, 'javascript:selectAll();', 'button_ok');
