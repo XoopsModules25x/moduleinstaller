@@ -14,8 +14,11 @@
  * @author      Taiwen Jiang <phppp@users.sourceforge.net>
  * @author      DuGris (aka L. JEN) <dugris@frxoops.org>
  **/
+
 use XoopsModules\Moduleinstaller\{Helper
 };
+use Xmf\Module\Admin;
+
 require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
 $xoopsOption['checkadmin'] = true;
@@ -38,7 +41,6 @@ XoopsLoad::load('XoopsLists');
 $pageHasForm = true;
 $pageHasHelp = false;
 
-
 if ('POST' === $_SERVER['REQUEST_METHOD']) {
     require_once XOOPS_ROOT_PATH . '/class/xoopsblock.php';
     require_once XOOPS_ROOT_PATH . '/kernel/module.php';
@@ -54,8 +56,8 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
     foreach ($_REQUEST['modules'] as $dirname => $notactiveModule) {
         if ($notactiveModule) {
             $xoopsModule = XoopsModule::getByDirname($dirname);
-            $mid    = $xoopsModule->getVar('mid');
-            $msgs[] = xoops_module_activate($mid);
+            $mid         = $xoopsModule->getVar('mid');
+            $msgs[]      = xoops_module_activate($mid);
         }
     }
 
@@ -144,7 +146,7 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
         $content     = "<div class='x2-note confirmMsg'>" . NO_MODULES_FOUND . '</div>';
     }
 }
-$adminObject = \Xmf\Module\Admin::getInstance();
+$adminObject = Admin::getInstance();
 $adminObject->displayNavigation(basename(__FILE__));
 
 $adminObject->addItemButton(_AM_INSTALLER_SELECT_ALL, 'javascript:selectAll();', 'button_ok');

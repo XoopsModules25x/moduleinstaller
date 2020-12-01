@@ -41,7 +41,7 @@ if (empty($xoopsOption['hascommon'])) {
     $xoopsOption['nocommon'] = true;
     session_start();
 }
-require_once dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
+require_once dirname(__DIR__, 3) . '/mainfile.php';
 
 /*
 error_reporting( 0 );

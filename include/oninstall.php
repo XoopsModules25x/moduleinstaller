@@ -18,6 +18,7 @@
  */
 
 use XoopsModules\Moduleinstaller;
+use XoopsModules\Moduleinstaller\Utility;
 
 //require_once __DIR__ . '/setup.php';
 
@@ -30,8 +31,7 @@ use XoopsModules\Moduleinstaller;
 function xoops_module_pre_install_moduleinstaller(\XoopsModule $module)
 {
     require_once dirname(__DIR__) . '/preloads/autoloader.php';
-    /** @var Moduleinstaller\Utility $utility */
-    $utility      = new \XoopsModules\Moduleinstaller\Utility();
+    $utility      = new Utility();
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);
 
@@ -53,13 +53,13 @@ function xoops_module_pre_install_moduleinstaller(\XoopsModule $module)
  */
 function xoops_module_install_moduleinstaller(\XoopsModule $module)
 {
-    require_once dirname(dirname(dirname(__DIR__))) . '/mainfile.php';
+    require_once dirname(__DIR__, 3) . '/mainfile.php';
 
     $moduleDirName = basename(dirname(__DIR__));
 
     /** @var Moduleinstaller\Helper $helper */
     $helper       = Moduleinstaller\Helper::getInstance();
-    $utility      = new Moduleinstaller\Utility();
+    $utility      = new Utility();
     $configurator = new Moduleinstaller\Common\Configurator();
     // Load language files
     $helper->loadLanguage('admin');
@@ -70,7 +70,7 @@ function xoops_module_install_moduleinstaller(\XoopsModule $module)
     $moduleId = $xoopsModule->getVar('mid');
     // $moduleId2        = $helper->getModule()->mid();
     /** @var \XoopsGroupPermHandler $grouppermHandler */
-$grouppermHandler = xoops_getHandler('groupperm');
+    $grouppermHandler = xoops_getHandler('groupperm');
     // access rights ------------------------------------------
     $grouppermHandler->addRight($moduleDirName . '_approve', 1, XOOPS_GROUP_ADMIN, $moduleId);
     $grouppermHandler->addRight($moduleDirName . '_submit', 1, XOOPS_GROUP_ADMIN, $moduleId);

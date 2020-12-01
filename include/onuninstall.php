@@ -9,6 +9,7 @@
  */
 
 use XoopsModules\Moduleinstaller;
+use XoopsModules\Moduleinstaller\Utility;
 
 /**
  * Prepares system prior to attempting to uninstall module
@@ -37,8 +38,7 @@ function xoops_module_uninstall_moduleinstaller(\XoopsModule $module)
     /** @var Moduleinstaller\Helper $helper */
     $helper = Moduleinstaller\Helper::getInstance();
 
-    /** @var Moduleinstaller\Utility $utility */
-    $utility = new \XoopsModules\Moduleinstaller\Utility();
+    $utility = new Utility();
     $success = true;
     $helper->loadLanguage('admin');
 
@@ -51,7 +51,7 @@ function xoops_module_uninstall_moduleinstaller(\XoopsModule $module)
         $dirInfo = new \SplFileInfo($old_dir);
         if ($dirInfo->isDir()) {
             // The directory exists so delete it
-            if (false === $utility::rrmdir($old_dir)) {
+            if (!$utility::rrmdir($old_dir)) {
                 $module->setErrors(sprintf(constant('CO_' . $moduleDirNameUpper . '_ERROR_BAD_DEL_PATH'), $old_dir));
                 $success = false;
             }
