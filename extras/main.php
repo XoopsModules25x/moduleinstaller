@@ -10,11 +10,9 @@
  */
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
+ * @copyright    XOOPS Project (https://xoops.org)
  * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
- * @package
- * @since
- * @author       XOOPS Development Team, Kazumi Ono (AKA onokazu)
+ * @author      XOOPS Development Team, Kazumi Ono (AKA onokazu)
  */
 
 // Check users rights
@@ -86,7 +84,7 @@ switch ($op) {
             $listed_mods[$i]['credits']       = $module->getInfo('credits');
             $listed_mods[$i]['license']       = $module->getInfo('license');
             $listed_mods[$i]['description']   = $module->getInfo('description');
-            if (round($module->getInfo('version'), 2) != $listed_mods[$i]['version']) {
+            if (round((float)$module->getInfo('version'), 2) != $listed_mods[$i]['version']) {
                 $listed_mods[$i]['warning_update'] = true;
             } else {
                 $listed_mods[$i]['warning_update'] = false;

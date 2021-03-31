@@ -10,27 +10,28 @@
  */
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
+ * @copyright    XOOPS Project (https://xoops.org)
  * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
- * @package
- * @since
- * @author       XOOPS Development Team
+ * @author      XOOPS Development Team
  */
 
 use Xmf\Module\Admin;
-use XoopsModules\Moduleinstaller;
+use XoopsModules\Moduleinstaller\{
+    Helper,
+    Utility
+};
 
 require_once dirname(__DIR__) . '/preloads/autoloader.php';
 
-$moduleDirName      = basename(dirname(__DIR__));
+$moduleDirName      = \basename(\dirname(__DIR__));
 $moduleDirNameUpper = mb_strtoupper($moduleDirName); //$capsDirName
 
 /** @var \XoopsDatabase $db */
-/** @var Moduleinstaller\Helper $helper */
-/** @var Moduleinstaller\Utility $utility */
+/** @var Helper $helper */
+/** @var Utility $utility */
 $db      = \XoopsDatabaseFactory::getDatabaseConnection();
-$helper  = Moduleinstaller\Helper::getInstance();
-$utility = new Moduleinstaller\Utility();
+$helper  = Helper::getInstance();
+$utility = new Utility();
 //$configurator = new Moduleinstaller\Common\Configurator();
 
 $helper->loadLanguage('common');

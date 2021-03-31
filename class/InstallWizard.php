@@ -157,11 +157,7 @@ class InstallWizard
      */
     public function loadLangFile($file)
     {
-        if (file_exists("./language/{$this->language}/{$file}.php")) {
-            require_once __DIR__ . "./language/{$this->language}/{$file}.php";
-        } else {
-            require_once "./../language/english/$file.php";
-        }
+        xoops_loadLanguage($file, 'moduleinstaller');
     }
 
     /**

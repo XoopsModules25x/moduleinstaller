@@ -10,11 +10,9 @@
  */
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
+ * @copyright    XOOPS Project (https://xoops.org)
  * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
- * @package
- * @since
- * @author       XOOPS Development Team, Kazumi Ono (AKA onokazu)
+ * @author      XOOPS Development Team, Kazumi Ono (AKA onokazu)
  * @param mixed $dirname
  */
 
@@ -309,7 +307,7 @@ function xoops_module_install($dirname)
             $configs = $module->getInfo('config');
             if (false !== $configs) {
                 if (0 != $module->getVar('hascomments')) {
-                    require_once XOOPS_ROOT_PATH . '/include/comment_constants.php';
+                    require XOOPS_ROOT_PATH . '/include/comment_constants.php';
                     $configs[] = [
                         'name'        => 'com_rule',
                         'title'       => '_CM_COMRULES',
@@ -335,7 +333,7 @@ function xoops_module_install($dirname)
                 }
             } elseif (0 != $module->getVar('hascomments')) {
                 $configs = [];
-                require_once XOOPS_ROOT_PATH . '/include/comment_constants.php';
+                require XOOPS_ROOT_PATH . '/include/comment_constants.php';
                 $configs[] = [
                     'name'        => 'com_rule',
                     'title'       => '_CM_COMRULES',
@@ -1156,7 +1154,7 @@ function xoops_module_update($dirname)
         $configs = $module->getInfo('config');
         if (false !== $configs) {
             if (0 != $module->getVar('hascomments')) {
-                require_once XOOPS_ROOT_PATH . '/include/comment_constants.php';
+                require XOOPS_ROOT_PATH . '/include/comment_constants.php';
                 $configs[] = [
                     'name'        => 'com_rule',
                     'title'       => '_CM_COMRULES',
@@ -1182,7 +1180,7 @@ function xoops_module_update($dirname)
             }
         } elseif (0 != $module->getVar('hascomments')) {
             $configs = [];
-            require_once XOOPS_ROOT_PATH . '/include/comment_constants.php';
+            require XOOPS_ROOT_PATH . '/include/comment_constants.php';
             $configs[] = [
                 'name'        => 'com_rule',
                 'title'       => '_CM_COMRULES',

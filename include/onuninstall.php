@@ -33,7 +33,7 @@ function xoops_module_uninstall_moduleinstaller(\XoopsModule $module)
 {
     //    return true;
 
-    $moduleDirName      = basename(dirname(__DIR__));
+    $moduleDirName      = \basename(\dirname(__DIR__));
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
     /** @var Moduleinstaller\Helper $helper */
     $helper = Moduleinstaller\Helper::getInstance();

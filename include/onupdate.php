@@ -10,11 +10,9 @@
  */
 
 /**
- * @copyright    XOOPS Project https://xoops.org/
+ * @copyright    XOOPS Project (https://xoops.org)
  * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
- * @package
- * @since
- * @author       XOOPS Development Team
+ * @author      XOOPS Development Team
  */
 
 use XoopsModules\Moduleinstaller;
@@ -24,17 +22,7 @@ if ((!defined('XOOPS_ROOT_PATH')) || !($GLOBALS['xoopsUser'] instanceof \XoopsUs
     exit('Restricted access' . PHP_EOL);
 }
 
-/**
- * @param string $tablename
- *
- * @return bool
- */
-function tableExists($tablename)
-{
-    $result = $GLOBALS['xoopsDB']->queryF("SHOW TABLES LIKE '$tablename'");
 
-    return $GLOBALS['xoopsDB']->getRowsNum($result) > 0;
-}
 
 /**
  * Prepares system prior to attempting to install module
@@ -44,7 +32,7 @@ function tableExists($tablename)
  */
 function xoops_module_pre_update_moduleinstaller(\XoopsModule $module)
 {
-    $moduleDirName = basename(dirname(__DIR__));
+    $moduleDirName = \basename(\dirname(__DIR__));
     /** @var Moduleinstaller\Helper $helper */
     /** @var Moduleinstaller\Utility $utility */
     $helper  = Moduleinstaller\Helper::getInstance();
@@ -65,7 +53,7 @@ function xoops_module_pre_update_moduleinstaller(\XoopsModule $module)
  */
 function xoops_module_update_moduleinstaller(\XoopsModule $module, $previousVersion = null)
 {
-    $moduleDirName      = basename(dirname(__DIR__));
+    $moduleDirName      = \basename(\dirname(__DIR__));
     $moduleDirNameUpper = mb_strtoupper($moduleDirName);
 
     /** @var Moduleinstaller\Helper $helper */ /** @var Moduleinstaller\Utility $utility */

@@ -19,10 +19,10 @@
 use Xmf\Module\Admin;
 use XoopsModules\Moduleinstaller;
 
-require_once dirname(__DIR__, 3) . '/include/cp_header.php';
+require dirname(__DIR__, 3) . '/include/cp_header.php';
 require_once dirname(__DIR__) . '/include/common.php';
 
-$moduleDirName = basename(dirname(__DIR__));
+$moduleDirName = \basename(\dirname(__DIR__));
 /** @var Moduleinstaller\Helper $helper */
 $helper      = Moduleinstaller\Helper::getInstance();
 $adminObject = Admin::getInstance();
