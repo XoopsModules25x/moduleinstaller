@@ -49,7 +49,7 @@ class Helper extends \Xmf\Module\Helper
     {
         static $instance;
         if (null === $instance) {
-            $instance = new static($debug);
+            $instance = new self($debug);
         }
 
         return $instance;
