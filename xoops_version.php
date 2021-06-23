@@ -25,7 +25,7 @@ $moduleDirName = basename(__DIR__);
 
 $modversion['version']             = '1.04';
 $modversion['module_status']       = 'RC-2';
-$modversion['release_date']        = '2020/12/01';
+$modversion['release_date']        = '2021/06/20';
 $modversion['name']                = _MI_INSTALLER_NAME;
 $modversion['description']         = _MI_INSTALLER_DESC;
 $modversion['author']              = 'Michael Beck';
@@ -42,7 +42,7 @@ $modversion['modicons16']          = 'assets/images/icons/16';
 $modversion['modicons32']          = 'assets/images/icons/32';
 $modversion['module_website_url']  = 'www.xoops.org/';
 $modversion['module_website_name'] = 'XOOPS';
-$modversion['min_php']             = '7.2';
+$modversion['min_php']             = '7.3';
 $modversion['min_xoops']           = '2.5.10';
 $modversion['min_admin']           = '1.2';
 $modversion['min_db']              = ['mysql' => '5.5'];
