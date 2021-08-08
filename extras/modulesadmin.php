@@ -814,7 +814,7 @@ function xoops_module_update($dirname)
 
     $myts = \MyTextSanitizer::getInstance();
 
-    $dirname = htmlspecialchars(trim($dirname));
+    $dirname = htmlspecialchars(trim($dirname), ENT_QUOTES | ENT_HTML5);
     /** @var \XoopsModuleHandler $moduleHandler */
     $moduleHandler = xoops_getHandler('module');
     $module        = $moduleHandler->getByDirname($dirname);
@@ -856,7 +856,7 @@ function xoops_module_update($dirname)
         }
         $msgs[] = '<strong>' . _VERSION . ':</strong> ' . $module->getInfo('version') . '&nbsp;' . $module->getInfo('module_status');
         if (false !== $module->getInfo('author') && '' != trim($module->getInfo('author'))) {
-            $msgs[] = '<strong>' . _AUTHOR . ':</strong> ' . htmlspecialchars(trim($module->getInfo('author')));
+            $msgs[] = '<strong>' . _AUTHOR . ':</strong> ' . htmlspecialchars(trim($module->getInfo('author')), ENT_QUOTES | ENT_HTML5);
         }
         $msgs[] = '</div><div class="logger">';
         $msgs[] = _AM_SYSTEM_MODULES_MODULE_DATA_UPDATE;
