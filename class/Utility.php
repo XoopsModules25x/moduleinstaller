@@ -28,7 +28,7 @@ namespace XoopsModules\Moduleinstaller;
 
 use XoopsModules\Moduleinstaller;
 use XoopsModules\Moduleinstaller\Common;
-use XoopsModules\Moduleinstaller\Constants;
+//use XoopsModules\Moduleinstaller\Constants;
 
 /**
  * Class Utility

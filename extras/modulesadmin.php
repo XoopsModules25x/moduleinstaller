@@ -110,7 +110,7 @@ function xoops_module_install($dirname)
             }
         }
 
-        if (false === $error) {
+        if (!$error) {
             $sqlfile = $module->getInfo('sqlfile');
             if (is_array($sqlfile) && !empty($sqlfile[XOOPS_DB_TYPE])) {
                 $sql_file_path = XOOPS_ROOT_PATH . '/modules/' . $dirname . '/' . $sqlfile[XOOPS_DB_TYPE];
@@ -155,7 +155,7 @@ function xoops_module_install($dirname)
                         }
                     }
                     // if there was an error, delete the tables created so far, so the next installation will not fail
-                    if (true === $error) {
+                    if ($error) {
                         foreach ($created_tables as $ct) {
                             $db->query('DROP TABLE ' . $db->prefix($ct));
                         }
@@ -814,7 +814,7 @@ function xoops_module_update($dirname)
 
     $myts = \MyTextSanitizer::getInstance();
 
-    $dirname = htmlspecialchars(trim($dirname));
+    $dirname = htmlspecialchars(trim($dirname), ENT_QUOTES | ENT_HTML5);
     /** @var \XoopsModuleHandler $moduleHandler */
     $moduleHandler = xoops_getHandler('module');
     $module        = $moduleHandler->getByDirname($dirname);
@@ -856,7 +856,7 @@ function xoops_module_update($dirname)
         }
         $msgs[] = '<strong>' . _VERSION . ':</strong> ' . $module->getInfo('version') . '&nbsp;' . $module->getInfo('module_status');
         if (false !== $module->getInfo('author') && '' != trim($module->getInfo('author'))) {
-            $msgs[] = '<strong>' . _AUTHOR . ':</strong> ' . htmlspecialchars(trim($module->getInfo('author')));
+            $msgs[] = '<strong>' . _AUTHOR . ':</strong> ' . htmlspecialchars(trim($module->getInfo('author')), ENT_QUOTES | ENT_HTML5);
         }
         $msgs[] = '</div><div class="logger">';
         $msgs[] = _AM_SYSTEM_MODULES_MODULE_DATA_UPDATE;
@@ -885,7 +885,7 @@ function xoops_module_update($dirname)
                 // START irmtfan solve templates duplicate issue
                 // if (!in_array($tpl['file'], $delng)) { // irmtfan bug fix: remove codes for delete templates
                 $type = ($tpl['type'] ?? 'module');
-                if (preg_match("/\.css$/i", $tpl['file'])) {
+                if (preg_match('/\.css$/i', $tpl['file'])) {
                     $type = 'css';
                 }
                 $criteria = new \CriteriaCompo();

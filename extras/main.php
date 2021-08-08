@@ -228,9 +228,9 @@ switch ($op) {
         foreach ($module as $mid) {
             $mid                          = (int)$mid;
             $modifs_mods[$i]['mid']       = $mid;
-            $modifs_mods[$i]['oldname']   = htmlspecialchars(($oldname[$mid]));
-            $modifs_mods[$i]['newname']   = htmlspecialchars(trim(($newname[$mid])));
-            $modifs_mods[$i]['newstatus'] = isset($newstatus[$mid]) ? htmlspecialchars($newstatus[$mid]) : 0;
+            $modifs_mods[$i]['oldname']   = htmlspecialchars(($oldname[$mid]), ENT_QUOTES | ENT_HTML5);
+            $modifs_mods[$i]['newname']   = htmlspecialchars(trim(($newname[$mid])), ENT_QUOTES | ENT_HTML5);
+            $modifs_mods[$i]['newstatus'] = isset($newstatus[$mid]) ? htmlspecialchars($newstatus[$mid], ENT_QUOTES | ENT_HTML5) : 0;
             ++$i;
         }
         $xoopsTpl->assign('modifs_mods', $modifs_mods);
@@ -320,7 +320,7 @@ switch ($op) {
         xoops_cp_footer();
         break;
     case 'install':
-        $module = htmlspecialchars($module);
+        $module = htmlspecialchars($module, ENT_QUOTES | ENT_HTML5);
         // Get module handler
         /** @var \XoopsModuleHandler $moduleHandler */
         $moduleHandler = xoops_getHandler('module');
@@ -375,7 +375,7 @@ switch ($op) {
         xoops_cp_footer();
         break;
     case 'uninstall':
-        $module = htmlspecialchars($module);
+        $module = htmlspecialchars($module, ENT_QUOTES | ENT_HTML5);
         // Get module handler
         /** @var \XoopsModuleHandler $moduleHandler */
         $moduleHandler = xoops_getHandler('module');
@@ -429,7 +429,7 @@ switch ($op) {
         xoops_cp_footer();
         break;
     case 'update':
-        $module = htmlspecialchars($module);
+        $module = htmlspecialchars($module, ENT_QUOTES | ENT_HTML5);
         // Get module handler
         /** @var \XoopsModuleHandler $moduleHandler */
         $moduleHandler = xoops_getHandler('module');

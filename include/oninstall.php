@@ -33,7 +33,7 @@ function xoops_module_pre_install_moduleinstaller(\XoopsModule $module)
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);
 
-    if (false !== $xoopsSuccess && false !== $phpSuccess) {
+    if ($xoopsSuccess && $phpSuccess) {
         $moduleTables = &$module->getInfo('tables');
         foreach ($moduleTables as $table) {
             $GLOBALS['xoopsDB']->queryF('DROP TABLE IF EXISTS ' . $GLOBALS['xoopsDB']->prefix($table) . ';');
@@ -55,7 +55,6 @@ function xoops_module_install_moduleinstaller(\XoopsModule $module)
 
     $moduleDirName = \basename(\dirname(__DIR__));
 
-    /** @var Moduleinstaller\Helper $helper */
     $helper       = Moduleinstaller\Helper::getInstance();
     $utility      = new Utility();
     $configurator = new Moduleinstaller\Common\Configurator();
