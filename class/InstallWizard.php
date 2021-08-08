@@ -176,7 +176,7 @@ class InstallWizard
     /**
      * @param $page
      *
-     * @return bool|mixed
+     * @return false|int|string
      */
     public function setPage($page)
     {
