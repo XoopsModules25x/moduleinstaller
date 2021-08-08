@@ -110,7 +110,7 @@ function xoops_module_install($dirname)
             }
         }
 
-        if (false === $error) {
+        if (!$error) {
             $sqlfile = $module->getInfo('sqlfile');
             if (is_array($sqlfile) && !empty($sqlfile[XOOPS_DB_TYPE])) {
                 $sql_file_path = XOOPS_ROOT_PATH . '/modules/' . $dirname . '/' . $sqlfile[XOOPS_DB_TYPE];
@@ -155,7 +155,7 @@ function xoops_module_install($dirname)
                         }
                     }
                     // if there was an error, delete the tables created so far, so the next installation will not fail
-                    if (true === $error) {
+                    if ($error) {
                         foreach ($created_tables as $ct) {
                             $db->query('DROP TABLE ' . $db->prefix($ct));
                         }
