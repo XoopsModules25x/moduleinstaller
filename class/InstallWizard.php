@@ -59,7 +59,7 @@ class InstallWizard
         // Load the main language file
         $this->initLanguage(!empty($_COOKIE['xo_install_lang']) ? $_COOKIE['xo_install_lang'] : 'english');
         // Setup pages
-        require_once dirname(__DIR__) . '/include/page.php';
+        require_once \dirname(__DIR__) . '/include/page.php';
         $this->pages = $pages;
 
         // Load default configs
@@ -98,12 +98,12 @@ class InstallWizard
             return false;
         }
 
-        $pagename = preg_replace('~(page_)(.*)~', '$2', basename($_SERVER['SCRIPT_NAME'], '.php'));
+        $pagename = \preg_replace('~(page_)(.*)~', '$2', \basename($_SERVER['SCRIPT_NAME'], '.php'));
         $this->setPage($pagename);
 
         // Prevent client caching
-        header('Cache-Control: no-store, no-cache, must-revalidate', false);
-        header('Pragma: no-cache');
+        \header('Cache-Control: no-store, no-cache, must-revalidate', false);
+        \header('Pragma: no-cache');
 
         return true;
     }
@@ -115,20 +115,20 @@ class InstallWizard
     {
         if (INSTALL_USER != '' && INSTALL_PASSWORD != '') {
             if (!isset($_SERVER['PHP_AUTH_USER'])) {
-                header('WWW-Authenticate: Basic realm="XOOPS Installer"');
-                header('HTTP/1.0 401 Unauthorized');
+                \header('WWW-Authenticate: Basic realm="XOOPS Installer"');
+                \header('HTTP/1.0 401 Unauthorized');
                 echo 'You can not access this XOOPS installer.';
 
                 return false;
             }
             if (INSTALL_USER != '' && INSTALL_USER != $_SERVER['PHP_AUTH_USER']) {
-                header('HTTP/1.0 401 Unauthorized');
+                \header('HTTP/1.0 401 Unauthorized');
                 echo 'You can not access this XOOPS installer.';
 
                 return false;
             }
             if (INSTALL_PASSWORD != $_SERVER['PHP_AUTH_PW']) {
-                header('HTTP/1.0 401 Unauthorized');
+                \header('HTTP/1.0 401 Unauthorized');
                 echo 'You can not access this XOOPS installer.';
 
                 return false;
@@ -143,7 +143,7 @@ class InstallWizard
             install_acceptUser($_COOKIE['xo_install_user']);
         }
         if (empty($GLOBALS['xoopsUser'])) {
-            redirect_header('../user.php');
+            \redirect_header('../user.php');
         }
         if (!$GLOBALS['xoopsUser']->isAdmin()) {
             return false;
@@ -157,7 +157,7 @@ class InstallWizard
      */
     public function loadLangFile($file)
     {
-        xoops_loadLanguage($file, 'moduleinstaller');
+        \xoops_loadLanguage($file, 'moduleinstaller');
     }
 
     /**
@@ -165,8 +165,8 @@ class InstallWizard
      */
     public function initLanguage($language)
     {
-        $language = preg_replace("/[^a-z0-9_\-]/i", '', $language);
-        if (!file_exists("./language/{$language}/install.php")) {
+        $language = \preg_replace("/[^a-z0-9_\-]/i", '', $language);
+        if (!\file_exists("./language/{$language}/install.php")) {
             $language = 'english';
         }
         $this->language = $language;
@@ -180,19 +180,19 @@ class InstallWizard
      */
     public function setPage($page)
     {
-        $pages = array_keys($this->pages);
-        if ((int)$page && $page >= 0 && $page < count($pages)) {
+        $pages = \array_keys($this->pages);
+        if ((int)$page && $page >= 0 && $page < \count($pages)) {
             $this->pageIndex   = $page;
             $this->currentPage = $pages[$page];
         } elseif (isset($this->pages[$page])) {
             $this->currentPage = $page;
-            $this->pageIndex   = array_search($this->currentPage, $pages, true);
+            $this->pageIndex   = \array_search($this->currentPage, $pages, true);
         } else {
             return false;
         }
 
         if ($this->pageIndex > 0 && !isset($_COOKIE['xo_install_lang'])) {
-            header('Location: index.php');
+            \header('Location: index.php');
         }
 
         return $this->pageIndex;
@@ -217,7 +217,7 @@ class InstallWizard
      */
     public function pageURI($page)
     {
-        $pages     = array_keys($this->pages);
+        $pages     = \array_keys($this->pages);
         $pageIndex = $this->pageIndex;
         if (!(int)$page[0]) {
             if ('+' == $page[0]) {
@@ -225,11 +225,11 @@ class InstallWizard
             } elseif ('-' == $page[0]) {
                 $pageIndex -= mb_substr($page, 1);
             } else {
-                $pageIndex = (int)array_search($page, $pages, true);
+                $pageIndex = (int)\array_search($page, $pages, true);
             }
         }
         if (!isset($pages[$pageIndex])) {
-            if (defined('XOOPS_URL')) {
+            if (\defined('XOOPS_URL')) {
                 return XOOPS_URL;
             }
 
@@ -249,9 +249,9 @@ class InstallWizard
     {
         $location = $this->pageURI($page);
         $proto    = !@empty($_SERVER['SERVER_PROTOCOL']) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.1';
-        header("{$proto} {$status} {$message}");
+        \header("{$proto} {$status} {$message}");
         //header( "Status: $status $message" );
-        header("Location: {$location}");
+        \header("Location: {$location}");
     }
 
     /**
@@ -266,7 +266,7 @@ class InstallWizard
             $ret .= '<fieldset><legend>' . $form->getTitle() . "</legend>\n";
 
             foreach ($form->getElements() as $ele) {
-                if (is_object($ele)) {
+                if (\is_object($ele)) {
                     if (!$ele->isHidden()) {
                         if ('' != ($caption = $ele->getCaption())) {
                             $name = $ele->getName();

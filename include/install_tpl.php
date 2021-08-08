@@ -28,7 +28,7 @@
  **/
 defined('XOOPS_INSTALL') || exit('XOOPS Installation wizard die');
 
-require_once dirname(__DIR__, 3) . '/language/' . $wizard->language . '/global.php';
+require_once \dirname(__DIR__, 3) . '/language/' . $wizard->language . '/global.php';
 ?>
 <!DOCTYPE html>
 <html xml:lang="<?php echo _LANGCODE; ?>" lang="<?php echo _LANGCODE; ?>">

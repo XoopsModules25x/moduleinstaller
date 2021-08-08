@@ -23,7 +23,7 @@ require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
 $xoopsOption['checkadmin'] = true;
 $xoopsOption['hascommon']  = true;
-require_once dirname(__DIR__) . '/include/common.inc.php';
+require_once \dirname(__DIR__) . '/include/common.inc.php';
 require_once XOOPS_ROOT_PATH . '/modules/system/admin/modulesadmin/modulesadmin.php';
 //defined('XOOPS_INSTALL') || exit('XOOPS Installation wizard die');
 
@@ -46,7 +46,7 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
     require_once XOOPS_ROOT_PATH . '/kernel/module.php';
     require_once XOOPS_ROOT_PATH . '/include/cp_functions.php';
     require_once XOOPS_ROOT_PATH . '/include/version.php';
-    //    require_once  dirname(__DIR__) . '/include/modulesadmin.php';
+    //    require_once  \dirname(__DIR__) . '/include/modulesadmin.php';
 
     /** @var \XoopsConfigHandler $configHandler */
     $configHandler = xoops_getHandler('config');
@@ -155,5 +155,5 @@ $adminObject->addItemButton(_AM_INSTALLER_SELECT_NONE, 'javascript:unselectAll()
 
 $adminObject->displayButton('left', '');
 
-require_once dirname(__DIR__) . '/include/install_tpl.php';
+require_once \dirname(__DIR__) . '/include/install_tpl.php';
 require_once __DIR__ . '/admin_footer.php';

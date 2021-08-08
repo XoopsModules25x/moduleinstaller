@@ -45,7 +45,7 @@ class Helper extends \Xmf\Module\Helper
      *
      * @return \XoopsModules\Moduleinstaller\Helper
      */
-    public static function getInstance($debug = false)
+    public static function getInstance(bool $debug = false): Helper
     {
         static $instance;
         if (null === $instance) {
@@ -74,8 +74,8 @@ class Helper extends \Xmf\Module\Helper
     {
         $ret = false;
 
-        $class = __NAMESPACE__ . '\\' . ucfirst($name) . 'Handler';
-        if (!class_exists($class)) {
+        $class = __NAMESPACE__ . '\\' . \ucfirst($name) . 'Handler';
+        if (!\class_exists($class)) {
             throw new RuntimeException("Class '$class' not found");
         }
         /** @var \XoopsMySQLDatabase $db */

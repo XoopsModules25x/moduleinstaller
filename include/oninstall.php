@@ -28,7 +28,7 @@ use XoopsModules\Moduleinstaller\Utility;
  */
 function xoops_module_pre_install_moduleinstaller(\XoopsModule $module)
 {
-    require_once dirname(__DIR__) . '/preloads/autoloader.php';
+    require_once \dirname(__DIR__) . '/preloads/autoloader.php';
     $utility      = new Utility();
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);
@@ -51,7 +51,7 @@ function xoops_module_pre_install_moduleinstaller(\XoopsModule $module)
  */
 function xoops_module_install_moduleinstaller(\XoopsModule $module)
 {
-    require_once dirname(__DIR__, 3) . '/mainfile.php';
+    require_once \dirname(__DIR__, 3) . '/mainfile.php';
 
     $moduleDirName = \basename(\dirname(__DIR__));
 
@@ -86,7 +86,7 @@ function xoops_module_install_moduleinstaller(\XoopsModule $module)
 
     //  ---  COPY blank.png FILES ---------------
     if (count($configurator->copyBlankFiles) > 0) {
-        $file = dirname(__DIR__) . '/assets/images/blank.png';
+        $file = \dirname(__DIR__) . '/assets/images/blank.png';
         foreach (array_keys($configurator->copyBlankFiles) as $i) {
             $dest = $configurator->copyBlankFiles[$i] . '/blank.png';
             $utility::copyFile($file, $dest);
