@@ -157,7 +157,7 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
             // Save current version for use in the update function
             $prevVersion = round($moduleInDB->getVar('version') / 100, 2);
 
-            $content = round($module->getInfo('version'), 2) != $prevVersion ? $content . "    <td ><span style='color: #FF0000; font-weight: bold;'>" : $content . '    <td><span>';
+            $content = round((float)$module->getInfo('version'), 2) != $prevVersion ? $content . "    <td ><span style='color: #FF0000; font-weight: bold;'>" : $content . '    <td><span>';
             $content .= '        ' . $module->getInfo('name') . '&nbsp;' . number_format(round((float)$module->getInfo('version'), 2), 2) . '&nbsp;' . $module->getInfo('module_status') . '&nbsp;(folder: /' . $module->getInfo('dirname') . ')';
             $content .= '        <br>' . $module->getInfo('description');
             $content .= "    </span></td>\n";
