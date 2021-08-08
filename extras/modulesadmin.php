@@ -885,7 +885,7 @@ function xoops_module_update($dirname)
                 // START irmtfan solve templates duplicate issue
                 // if (!in_array($tpl['file'], $delng)) { // irmtfan bug fix: remove codes for delete templates
                 $type = ($tpl['type'] ?? 'module');
-                if (preg_match("/\.css$/i", $tpl['file'])) {
+                if (preg_match('/\.css$/i', $tpl['file'])) {
                     $type = 'css';
                 }
                 $criteria = new \CriteriaCompo();

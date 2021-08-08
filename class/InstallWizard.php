@@ -165,7 +165,7 @@ class InstallWizard
      */
     public function initLanguage($language)
     {
-        $language = \preg_replace("/[^a-z0-9_\-]/i", '', $language);
+        $language = \preg_replace('/[^a-z0-9_\-]/i', '', $language);
         if (!\file_exists("./language/{$language}/install.php")) {
             $language = 'english';
         }
