@@ -55,7 +55,6 @@ function xoops_module_install_moduleinstaller(\XoopsModule $module)
 
     $moduleDirName = \basename(\dirname(__DIR__));
 
-    /** @var Moduleinstaller\Helper $helper */
     $helper       = Moduleinstaller\Helper::getInstance();
     $utility      = new Utility();
     $configurator = new Moduleinstaller\Common\Configurator();
