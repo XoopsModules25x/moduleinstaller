@@ -1,6 +1,17 @@
-<h5>1.04 RC-2  [2020-12-01]</h5>  Dev: Xoops 2.5.11, PHP 7.4.13, PHP 8.0
+<h5>1.04 Final  [2021-12-01]</h5>  Dev: Xoops 2.5.11, PHP 7.4.22, PHP 8.0.8
+<hr>
+- 1.04 Final Release
+
+<h5>1.04 RC-2  [NOT RELEASED]</h5>  Dev: Xoops 2.5.11, PHP 7.4.13, PHP 8.0
 <hr>
 - fixed InstallWizard name (SebT34/mamba)
+- simplify loading of language files (mamba)
+- language updates (mamba)
+- image update for PHP8 (mamba)
+- add round((float) (mamba)
+- remove function cloneRecord (mamba)
+- min PHP 7.3 (mamba)
+- Unqualified function/constant reference (mamba)
 
 <h5>1.04 RC-1  [2020-12-01]</h5>  Dev: Xoops 2.5.11, PHP 7.4.13, PHP 8.0
 <hr>
