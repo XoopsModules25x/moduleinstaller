@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Moduleinstaller;
 
@@ -15,12 +15,10 @@ namespace XoopsModules\Moduleinstaller;
 use RuntimeException;
 use XoopsDatabaseFactory;
 
-
-
 /**
  * @copyright    XOOPS Project (https://xoops.org)
- * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
- * @author      XOOPS Development Team
+ * @license      GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author       XOOPS Development Team
  */
 
 /**
@@ -45,7 +43,7 @@ class Helper extends \Xmf\Module\Helper
      *
      * @return \XoopsModules\Moduleinstaller\Helper
      */
-    public static function getInstance(bool $debug = false): Helper
+    public static function getInstance(bool $debug = false): self
     {
         static $instance;
         if (null === $instance) {
@@ -83,6 +81,7 @@ class Helper extends \Xmf\Module\Helper
         $helper = self::getInstance();
         $ret    = new $class($db, $helper);
         $this->addLog("Getting handler '{$name}'");
+
         return $ret;
     }
 }

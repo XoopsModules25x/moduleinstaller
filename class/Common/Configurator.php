@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Moduleinstaller\Common;
 
@@ -12,13 +12,11 @@ namespace XoopsModules\Moduleinstaller\Common;
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
  */
 
-
-
 /**
  * Configurator Class
  *
  * @copyright   XOOPS Project (https://xoops.org)
- * @license     http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @license     https://www.fsf.org/copyleft/gpl.html GNU public license
  * @author      XOOPS Development Team
  */
 
@@ -46,7 +44,6 @@ class Configurator
      */
     public function __construct()
     {
-
         $config = require \dirname(__DIR__, 2) . '/config/config.php';
 
         $this->name            = $config->name;
@@ -62,8 +59,7 @@ class Configurator
         $this->moduleStats     = $config->moduleStats;
         $this->modCopyright    = $config->modCopyright;
 
-        $this->icons = include \dirname(__DIR__, 2) . '/config/icons.php';
-        $this->paths = include \dirname(__DIR__, 2) . '/config/paths.php';
-
+        $this->icons = require \dirname(__DIR__, 2) . '/config/icons.php';
+        $this->paths = require \dirname(__DIR__, 2) . '/config/paths.php';
     }
 }

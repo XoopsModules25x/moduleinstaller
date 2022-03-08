@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Moduleinstaller;
 
@@ -12,26 +12,12 @@ namespace XoopsModules\Moduleinstaller;
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 /**
  * See the enclosed file license.txt for licensing information.
  * If you did not receive this file, get it at https://www.gnu.org/licenses/gpl-2.0.html
  *
  * @copyright   XOOPS Project (https://xoops.org)
  * @license     https://www.gnu.org/licenses/gpl-2.0.html GNU General Public License (GPL)
- * @package     installer
  * @since       2.3.0
  * @author      Haruki Setoyama  <haruki@planewave.org>
  * @author      Kazumi Ono <webmaster@myweb.ne.jp>
@@ -155,7 +141,7 @@ class InstallWizard
     /**
      * @param $file
      */
-    public function loadLangFile($file)
+    public function loadLangFile($file): void
     {
         \xoops_loadLanguage($file, 'moduleinstaller');
     }
@@ -163,7 +149,7 @@ class InstallWizard
     /**
      * @param $language
      */
-    public function initLanguage($language)
+    public function initLanguage($language): void
     {
         $language = \preg_replace('/[^a-z0-9_\-]/i', '', $language);
         if (!\file_exists("./language/{$language}/install.php")) {
@@ -245,7 +231,7 @@ class InstallWizard
      * @param int    $status
      * @param string $message
      */
-    public function redirectToPage($page, $status = 303, $message = 'See other')
+    public function redirectToPage($page, $status = 303, $message = 'See other'): void
     {
         $location = $this->pageURI($page);
         $proto    = !@empty($_SERVER['SERVER_PROTOCOL']) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.1';

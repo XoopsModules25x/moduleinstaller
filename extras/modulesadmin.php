@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -11,8 +11,8 @@
 
 /**
  * @copyright    XOOPS Project (https://xoops.org)
- * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
- * @author      XOOPS Development Team, Kazumi Ono (AKA onokazu)
+ * @license      GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author       XOOPS Development Team, Kazumi Ono (AKA onokazu)
  * @param mixed $dirname
  */
 
@@ -120,7 +120,7 @@ function xoops_module_install($dirname)
                 } else {
                     $msgs[] = '<p>' . sprintf(_AM_SYSTEM_MODULES_SQL_FOUND, "<strong>{$sql_file_path}</strong>") . '<br >' . _AM_SYSTEM_MODULES_CREATE_TABLES;
                     require_once XOOPS_ROOT_PATH . '/class/database/sqlutility.php';
-                    $sql_query = fread(fopen($sql_file_path, 'r'), filesize($sql_file_path));
+                    $sql_query = fread(fopen($sql_file_path, 'rb'), filesize($sql_file_path));
                     $sql_query = trim($sql_query);
                     SqlUtility::splitMySqlFile($pieces, $sql_query);
                     $created_tables = [];
@@ -134,14 +134,14 @@ function xoops_module_install($dirname)
                             break;
                         }
                         // check if the table name is reserved
-                        if (!in_array($prefixed_query[4], $reservedTables)) {
+                        if (!in_array($prefixed_query[4], $reservedTables, true)) {
                             // not reserved, so try to create one
                             if (!$db->query($prefixed_query[0])) {
                                 $errs[] = $db->error();
                                 $error  = true;
                                 break;
                             }
-                            if (!in_array($prefixed_query[4], $created_tables)) {
+                            if (!in_array($prefixed_query[4], $created_tables, true)) {
                                 $msgs[]           = '&nbsp;&nbsp;' . sprintf(_AM_SYSTEM_MODULES_TABLE_CREATED, '<strong>' . $db->prefix($prefixed_query[4]) . '</strong>');
                                 $created_tables[] = $prefixed_query[4];
                             } else {
@@ -721,7 +721,7 @@ function xoops_module_uninstall($dirname)
             $msgs[] = _AM_SYSTEM_MODULES_DELETE_MOD_TABLES;
             foreach ($modtables as $table) {
                 // prevent deletion of reserved core tables!
-                if (!in_array($table, $reservedTables)) {
+                if (!in_array($table, $reservedTables, true)) {
                     $sql = 'DROP TABLE ' . $db->prefix($table);
                     if (!$db->query($sql)) {
                         $msgs[] = '&nbsp;&nbsp;<span style="color:#ff0000;">' . sprintf(_AM_SYSTEM_MODULES_TABLE_DROPPED_ERROR, '<strong>' . $db->prefix($table) . '<strong>') . '</span>';
@@ -1092,8 +1092,8 @@ function xoops_module_update($dirname)
             }
             $block_arr = \XoopsBlock::getByModule($module->getVar('mid'));
             foreach ($block_arr as $block) {
-                if (!in_array($block->getVar('show_func'), $showfuncs)
-                    || !in_array($block->getVar('func_file'), $funcfiles)) {
+                if (!in_array($block->getVar('show_func'), $showfuncs, true)
+                    || !in_array($block->getVar('func_file'), $funcfiles, true)) {
                     $sql = sprintf('DELETE FROM `%s` WHERE bid = %u', $xoopsDB->prefix('newblocks'), $block->getVar('bid'));
                     if (!$xoopsDB->query($sql)) {
                         $msgs[] = '&nbsp;&nbsp;<span style="color:#ff0000;">' . sprintf(_AM_SYSTEM_MODULES_BLOCK_DELETE_ERROR, '<strong>' . $block->getVar('name') . '</strong>') . sprintf(_AM_SYSTEM_MODULES_BLOCK_ID, '<strong>' . $block->getVar('bid') . '</strong>') . '</span>';
@@ -1263,7 +1263,7 @@ function xoops_module_update($dirname)
             $order         = 0;
             foreach ($configs as $config) {
                 // only insert ones that have been deleted previously with success
-                if (!in_array($config['name'], $config_delng)) {
+                if (!in_array($config['name'], $config_delng, true)) {
                     $confobj = $configHandler->createConfig();
                     $confobj->setVar('conf_modid', $newmid);
                     $confobj->setVar('conf_catid', 0);

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -11,8 +11,8 @@
 
 /**
  * @copyright    XOOPS Project (https://xoops.org)
- * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
- * @author      XOOPS Development Team, Kazumi Ono (AKA onokazu)
+ * @license      GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author       XOOPS Development Team, Kazumi Ono (AKA onokazu)
  */
 
 // Check users rights
@@ -35,7 +35,7 @@ if (isset($_POST)) {
 $op     = Request::getString('op', 'list');
 $module = Request::getString('module', '');
 
-if (in_array($op, ['confirm', 'submit', 'install_ok', 'update_ok', 'uninstall_ok'])) {
+if (in_array($op, ['confirm', 'submit', 'install_ok', 'update_ok', 'uninstall_ok'], true)) {
     if (!$GLOBALS['xoopsSecurity']->check()) {
         $op = 'list';
     }
@@ -101,7 +101,7 @@ switch ($op) {
             if (file_exists(XOOPS_ROOT_PATH . '/modules/' . $file . '/xoops_version.php')) {
                 clearstatcache();
                 $file = trim($file);
-                if (!in_array($file, $install_mods)) {
+                if (!in_array($file, $install_mods, true)) {
                     ++$i;
                 }
             }
@@ -149,7 +149,7 @@ switch ($op) {
             if (file_exists(XOOPS_ROOT_PATH . '/modules/' . $file . '/xoops_version.php')) {
                 clearstatcache();
                 $file = trim($file);
-                if (!in_array($file, $install_mods)) {
+                if (!in_array($file, $install_mods, true)) {
                     $module = $moduleHandler->create();
                     $module->loadInfo($file);
                     $toinstall_mods[$i]['name']          = $module->getInfo('name');
@@ -454,7 +454,6 @@ switch ($op) {
         xoops_cp_footer();
         break;
     case 'update_ok':
-
         //--------------------------
 
         $ret   = [];

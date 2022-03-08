@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /**
  * See the enclosed file license.txt for licensing information.
@@ -6,7 +6,6 @@
  *
  * @copyright   XOOPS Project (https://xoops.org)
  * @license     https://www.gnu.org/licenses/gpl-2.0.html GNU General Public License (GPL)
- * @package     installer
  * @since       2.3.0
  * @author      Haruki Setoyama  <haruki@planewave.org>
  * @author      Kazumi Ono <webmaster@myweb.ne.jp>
@@ -129,10 +128,10 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
     //    $dirlist = array_diff($dirlist, array('system', 'moduleinstaller'));
     foreach ($dirlist as $file) {
         clearstatcache();
-        if (in_array($file, $listed_mods)) {
+        if (in_array($file, $listed_mods, true)) {
             $value = 0;
             $style = '';
-            if (isset($wizard->configs['modules']) && in_array($file, $wizard->configs['modules'])) {
+            if (isset($wizard->configs['modules']) && in_array($file, $wizard->configs['modules'], true)) {
                 $value = 1;
                 $style = " style='background-color:#E6EFC2;'";
             }
