@@ -16,7 +16,7 @@ namespace XoopsModules\Moduleinstaller\Common;
  * Configurator Class
  *
  * @copyright   XOOPS Project (https://xoops.org)
- * @license     https://www.fsf.org/copyleft/gpl.html GNU public license
+ * @license     GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author      XOOPS Development Team
  */
 
@@ -25,19 +25,19 @@ namespace XoopsModules\Moduleinstaller\Common;
  */
 class Configurator
 {
-    public $name;
-    public $paths           = [];
-    public $uploadFolders   = [];
-    public $copyBlankFiles  = [];
-    public $copyTestFolders = [];
-    public $templateFolders = [];
-    public $oldFiles        = [];
-    public $oldFolders      = [];
-    public $renameTables    = [];
-    public $renameColumns   = [];
-    public $moduleStats     = [];
-    public $modCopyright;
-    public $icons;
+    public string $name;
+    public array  $paths           = [];
+    public array  $uploadFolders   = [];
+    public array  $copyBlankFiles  = [];
+    public array  $copyTestFolders = [];
+    public array  $templateFolders = [];
+    public array  $oldFiles        = [];
+    public array  $oldFolders      = [];
+    public array  $renameTables    = [];
+    public array  $renameColumns   = [];
+    public array  $moduleStats     = [];
+    public string $modCopyright;
+    public array  $icons           = [];
 
     /**
      * Configurator constructor.
@@ -47,7 +47,7 @@ class Configurator
         $config = require \dirname(__DIR__, 2) . '/config/config.php';
 
         $this->name            = $config->name;
-        $this->paths           = $config->paths;
+//        $this->paths           = $config->paths;
         $this->uploadFolders   = $config->uploadFolders;
         $this->copyBlankFiles  = $config->copyBlankFiles;
         $this->copyTestFolders = $config->copyTestFolders;

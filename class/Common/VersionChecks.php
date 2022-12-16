@@ -16,7 +16,7 @@ use XoopsModule;
 
 /**
  * @copyright   XOOPS Project (https://xoops.org)
- * @license     https://www.fsf.org/copyleft/gpl.html GNU public license
+ * @license     GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author      mamba <mambax7@gmail.com>
  */
 trait VersionChecks
@@ -39,7 +39,7 @@ trait VersionChecks
         \xoops_loadLanguage('common', $moduleDirName);
 
         //check for minimum XOOPS version
-        $currentVer = mb_substr(\XOOPS_VERSION, 6); // get the numeric part of string
+        $currentVer = mb_substr((string) \XOOPS_VERSION, 6); // get the numeric part of string
         if (null === $requiredVer) {
             $requiredVer = '' . $module->getInfo('min_xoops'); //making sure it's a string
         }
@@ -47,7 +47,7 @@ trait VersionChecks
 
         if (\version_compare($currentVer, $requiredVer, '<')) {
             $success = false;
-            $module->setErrors(\sprintf(\constant('CO_' . $moduleDirNameUpper . '_ERROR_BAD_XOOPS'), $requiredVer, $currentVer));
+            $module->setErrors(\sprintf(\constant('CO_' . $moduleDirNameUpper . '_' . 'ERROR_BAD_XOOPS'), $requiredVer, $currentVer));
         }
 
         return $success;
@@ -78,7 +78,7 @@ trait VersionChecks
 
         if (false !== $reqVer && '' !== $reqVer) {
             if (\version_compare($verNum, $reqVer, '<')) {
-                $module->setErrors(\sprintf(\constant('CO_' . $moduleDirNameUpper . '_ERROR_BAD_PHP'), $reqVer, $verNum));
+                $module->setErrors(\sprintf(\constant('CO_' . $moduleDirNameUpper . '_' . 'ERROR_BAD_PHP'), $reqVer, $verNum));
                 $success = false;
             }
         }
@@ -113,7 +113,7 @@ trait VersionChecks
                 } elseif (false !== \mb_strpos($curlReturn, 'Not Found')) {
                     \trigger_error('Repository Not Found: ' . $infoReleasesUrl);
                 } else {
-                    $file              = json_decode($curlReturn, false);
+                    $file              = json_decode($curlReturn, false, 512, JSON_THROW_ON_ERROR);
                     $latestVersionLink = \sprintf("https://github.com/$repository/archive/%s.zip", $file ? \reset($file)->tag_name : $default);
                     $latestVersion     = $file[0]->tag_name;
                     $prerelease        = $file[0]->prerelease;
@@ -121,7 +121,7 @@ trait VersionChecks
                         $update = \constant('CO_' . $moduleDirNameUpper . '_' . 'NEW_VERSION') . $latestVersion;
                     }
                     //"PHP-standardized" version
-                    $latestVersion = \mb_strtolower($latestVersion);
+                    $latestVersion = \mb_strtolower((string) $latestVersion);
                     if (false !== mb_strpos($latestVersion, 'final')) {
                         $latestVersion = \str_replace('_', '', \mb_strtolower($latestVersion));
                         $latestVersion = \str_replace('final', '', \mb_strtolower($latestVersion));

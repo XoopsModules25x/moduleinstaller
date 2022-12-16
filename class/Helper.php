@@ -26,8 +26,10 @@ use XoopsDatabaseFactory;
  */
 class Helper extends \Xmf\Module\Helper
 {
-    public $debug;
-
+    /**
+     * @var bool
+     */
+    public $debug = false;
     /**
      * @param bool $debug
      */

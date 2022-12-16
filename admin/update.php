@@ -136,7 +136,7 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
                 $style = " style='background-color:#E6EFC2;'";
             }
 
-            $file   = trim($file);
+            $file   = trim((string) $file);
             $module = $moduleHandler->create();
             if (!$module->loadInfo($file, false)) {
                 continue;
@@ -154,10 +154,10 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
             $moduleHandler = xoops_getHandler('module');
             $moduleInDB    = $moduleHandler->getByDirname($module->getInfo('dirname'));
             // Save current version for use in the update function
-            $prevVersion = round($moduleInDB->getVar('version') / 100, 2);
+            $prevVersion = $moduleInDB->getVar('version');
 
-            $content = round((float)$module->getInfo('version'), 2) != $prevVersion ? $content . "    <td ><span style='color: #FF0000; font-weight: bold;'>" : $content . '    <td><span>';
-            $content .= '        ' . $module->getInfo('name') . '&nbsp;' . number_format(round((float)$module->getInfo('version'), 2), 2) . '&nbsp;' . $module->getInfo('module_status') . '&nbsp;(folder: /' . $module->getInfo('dirname') . ')';
+            $content = str_replace("\n", '', (string)$module->getInfo('version')) != $prevVersion ? $content . "    <td ><span style='color: #FF0000; font-weight: bold;'>" : $content . '    <td><span>';
+            $content .= '        ' . $module->getInfo('name') . '&nbsp;' . $module->getInfo('version') . '&nbsp;' . $module->getInfo('module_status') . '&nbsp;(folder: /' . $module->getInfo('dirname') . ')';
             $content .= '        <br>' . $module->getInfo('description');
             $content .= "    </span></td>\n";
             $content .= "    <td class='yesno'>";

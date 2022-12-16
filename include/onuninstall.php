@@ -5,7 +5,7 @@
  *
  * @author          XOOPS Module Development Team
  * @copyright       {@link https://xoops.org 2001-2016 XOOPS Project}
- * @license         {@link https://www.fsf.org/copyleft/gpl.html GNU public license}
+ * @license         {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2.0 or later}
  * @link            https://xoops.org XOOPS
  */
 
@@ -52,7 +52,7 @@ function xoops_module_uninstall_moduleinstaller(\XoopsModule $module)
         if ($dirInfo->isDir()) {
             // The directory exists so delete it
             if (!$utility::rrmdir($old_dir)) {
-                $module->setErrors(sprintf(constant('CO_' . $moduleDirNameUpper . '_ERROR_BAD_DEL_PATH'), $old_dir));
+                $module->setErrors(sprintf(constant('CO_' . $moduleDirNameUpper . '_' . 'ERROR_BAD_DEL_PATH'), $old_dir));
                 $success = false;
             }
         }

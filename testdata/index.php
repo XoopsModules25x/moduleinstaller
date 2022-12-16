@@ -112,6 +112,7 @@ function loadSampleData(): void
 
 function saveSampleData(): void
 {
+    $skipColumns = [];
     global $xoopsConfig;
     $moduleDirName      = \basename(\dirname(__DIR__));
     $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
@@ -151,7 +152,7 @@ function exportSchema(): void
         //        $migrate->saveCurrentSchema();
         //
         //        redirect_header('../admin/index.php', 1, constant('CO_' . $moduleDirNameUpper . '_' . 'EXPORT_SCHEMA_SUCCESS'));
-    } catch (\Throwable $e) {
+    } catch (\Throwable $exception) {
         exit(constant('CO_' . $moduleDirNameUpper . '_' . 'EXPORT_SCHEMA_ERROR'));
     }
 }
@@ -159,7 +160,7 @@ function exportSchema(): void
 /**
  * loadTableFromArrayWithReplace
  *
- * @param string $table  value with should be used insead of original value of $search
+ * @param string $table  value which should be used instead of original value of $search
  *
  * @param array  $data   array of rows to insert
  *                       Each element of the outer array represents a single table row.

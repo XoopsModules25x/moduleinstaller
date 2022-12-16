@@ -16,7 +16,7 @@ namespace XoopsModules\Moduleinstaller\Common;
  * Breadcrumb Class
  *
  * @copyright   XOOPS Project (https://xoops.org)
- * @license     https://www.fsf.org/copyleft/gpl.html GNU public license
+ * @license     GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @author      lucio <lucio.rota@gmail.com>
  *
  * Example:
@@ -33,7 +33,7 @@ namespace XoopsModules\Moduleinstaller\Common;
 class Breadcrumb
 {
     public  $dirname;
-    private $bread = [];
+    private array $bread = [];
 
     public function __construct()
     {

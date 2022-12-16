@@ -114,7 +114,7 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
                 $style = " style='background-color:#E6EFC2;'";
             }
 
-            $file   = trim($file);
+            $file   = trim((string) $file);
             $module = $moduleHandler->create();
             if (!$module->loadInfo($file, false)) {
                 continue;
@@ -128,7 +128,7 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
             $content .= "<tr id='" . $file . "'" . $style . ">\n";
             $content .= "    <td class='img' ><img src='" . XOOPS_URL . '/modules/' . $module->getInfo('dirname') . '/' . $module->getInfo('image') . "' alt='" . $module->getInfo('name') . "'></td>\n";
             $content .= '    <td>';
-            $content .= '        ' . $module->getInfo('name') . '&nbsp;' . number_format(round((float)$module->getInfo('version'), 2), 2) . '&nbsp;' . $module->getInfo('module_status') . '&nbsp;(folder: /' . $module->getInfo('dirname') . ')';
+            $content .= '        ' . $module->getInfo('name') . '&nbsp;' . $module->getInfo('version') . '&nbsp;' . $module->getInfo('module_status') . '&nbsp;(folder: /' . $module->getInfo('dirname') . ')';
             $content .= '        <br>' . $module->getInfo('description');
             $content .= "    </td>\n";
             $content .= "    <td class='yesno'>";
@@ -139,7 +139,7 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
     }
     $content .= '</table>';
     $content .= "</li></ul><script type='text/javascript'>" . $javascript . '</script>';
-    if (0 == $toinstal) {
+    if (0 === $toinstal) {
         $pageHasForm = false;
         $content     = "<div class='x2-note confirmMsg'>" . NO_MODULES_FOUND . '</div>';
     }

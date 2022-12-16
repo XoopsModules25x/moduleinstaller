@@ -84,7 +84,7 @@ class InstallWizard
             return false;
         }
 
-        $pagename = \preg_replace('~(page_)(.*)~', '$2', \basename($_SERVER['SCRIPT_NAME'], '.php'));
+        $pagename = \preg_replace('~(page_)(.*)~', '$2', \basename((string) $_SERVER['SCRIPT_NAME'], '.php'));
         $this->setPage($pagename);
 
         // Prevent client caching
@@ -151,7 +151,7 @@ class InstallWizard
      */
     public function initLanguage($language): void
     {
-        $language = \preg_replace('/[^a-z0-9_\-]/i', '', $language);
+        $language = \preg_replace('/[^a-z0-9_\-]/i', '', (string) $language);
         if (!\file_exists("./language/{$language}/install.php")) {
             $language = 'english';
         }
@@ -191,7 +191,7 @@ class InstallWizard
     {
         $proto = ('on' === @$_SERVER['HTTPS']) ? 'https' : 'http';
         $host  = $_SERVER['HTTP_HOST'];
-        $base  = mb_substr($_SERVER['SCRIPT_NAME'], 0, mb_strrpos($_SERVER['SCRIPT_NAME'], '/'));
+        $base  = mb_substr((string) $_SERVER['SCRIPT_NAME'], 0, mb_strrpos((string) $_SERVER['SCRIPT_NAME'], '/'));
 
         return $proto . '://' . $host . $base;
     }
@@ -207,9 +207,9 @@ class InstallWizard
         $pageIndex = $this->pageIndex;
         if (!(int)$page[0]) {
             if ('+' == $page[0]) {
-                $pageIndex += mb_substr($page, 1);
+                $pageIndex += mb_substr((string) $page, 1);
             } elseif ('-' == $page[0]) {
-                $pageIndex -= mb_substr($page, 1);
+                $pageIndex -= mb_substr((string) $page, 1);
             } else {
                 $pageIndex = (int)\array_search($page, $pages, true);
             }

@@ -35,7 +35,7 @@ require_once \dirname(__DIR__, 3) . '/language/' . $wizard->language . '/global.
 <head>
     <title>
         <?php echo XOOPS_VERSION . ' : ' . XOOPS_INSTALL_WIZARD; ?>
-        (<?php echo ($wizard->pageIndex + 1) . '/' . count($wizard->pages); ?>)
+        (<?php echo ($wizard->pageIndex + 1) . '/' . (is_countable($wizard->pages) ? count($wizard->pages) : 0); ?>)
     </title>
     <meta http-equiv="Content-Type" content="text/html; charset=<?php echo _INSTALL_CHARSET ?>">
     <link rel="shortcut icon" type="image/ico" href="../favicon.ico">

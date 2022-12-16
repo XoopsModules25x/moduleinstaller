@@ -84,7 +84,7 @@ switch ($op) {
             $listed_mods[$i]['credits']       = $module->getInfo('credits');
             $listed_mods[$i]['license']       = $module->getInfo('license');
             $listed_mods[$i]['description']   = $module->getInfo('description');
-            if (round((float)$module->getInfo('version'), 2) != $listed_mods[$i]['version']) {
+            if ($module->getInfo('version') != $listed_mods[$i]['version']) {
                 $listed_mods[$i]['warning_update'] = true;
             } else {
                 $listed_mods[$i]['warning_update'] = false;
@@ -100,7 +100,7 @@ switch ($op) {
         foreach ($dirlist as $file) {
             if (file_exists(XOOPS_ROOT_PATH . '/modules/' . $file . '/xoops_version.php')) {
                 clearstatcache();
-                $file = trim($file);
+                $file = trim((string) $file);
                 if (!in_array($file, $install_mods, true)) {
                     ++$i;
                 }
@@ -148,7 +148,7 @@ switch ($op) {
         foreach ($dirlist as $file) {
             if (file_exists(XOOPS_ROOT_PATH . '/modules/' . $file . '/xoops_version.php')) {
                 clearstatcache();
-                $file = trim($file);
+                $file = trim((string) $file);
                 if (!in_array($file, $install_mods, true)) {
                     $module = $moduleHandler->create();
                     $module->loadInfo($file);
@@ -228,9 +228,9 @@ switch ($op) {
         foreach ($module as $mid) {
             $mid                          = (int)$mid;
             $modifs_mods[$i]['mid']       = $mid;
-            $modifs_mods[$i]['oldname']   = htmlspecialchars(($oldname[$mid]), ENT_QUOTES | ENT_HTML5);
-            $modifs_mods[$i]['newname']   = htmlspecialchars(trim(($newname[$mid])), ENT_QUOTES | ENT_HTML5);
-            $modifs_mods[$i]['newstatus'] = isset($newstatus[$mid]) ? htmlspecialchars($newstatus[$mid], ENT_QUOTES | ENT_HTML5) : 0;
+            $modifs_mods[$i]['oldname']   = htmlspecialchars(((string) $oldname[$mid]), ENT_QUOTES | ENT_HTML5);
+            $modifs_mods[$i]['newname']   = htmlspecialchars(trim(((string) $newname[$mid])), ENT_QUOTES | ENT_HTML5);
+            $modifs_mods[$i]['newstatus'] = isset($newstatus[$mid]) ? htmlspecialchars((string) $newstatus[$mid], ENT_QUOTES | ENT_HTML5) : 0;
             ++$i;
         }
         $xoopsTpl->assign('modifs_mods', $modifs_mods);
@@ -252,7 +252,7 @@ switch ($op) {
                 $error = true;
             }
             $blocks = \XoopsBlock::getByModule($module_id);
-            $bcount = count($blocks);
+            $bcount = is_countable($blocks) ? count($blocks) : 0;
             foreach ($blocks as $iValue) {
                 $iValue->setVar('isactive', !$old);
                 $iValue->store();
@@ -288,7 +288,7 @@ switch ($op) {
             } elseif (1 == $oldstatus[$mid]) {
                 $ret[] = xoops_module_deactivate($mid);
             }
-            $newname[$mid] = trim($newname[$mid]);
+            $newname[$mid] = trim((string) $newname[$mid]);
             if ($oldname[$mid] != $newname[$mid]) {
                 $ret[] = xoops_module_change($mid, $newname[$mid]);
                 $write = true;
@@ -320,15 +320,15 @@ switch ($op) {
         xoops_cp_footer();
         break;
     case 'install':
-        $module = htmlspecialchars($module, ENT_QUOTES | ENT_HTML5);
+        $module = htmlspecialchars((string) $module, ENT_QUOTES | ENT_HTML5);
         // Get module handler
         /** @var \XoopsModuleHandler $moduleHandler */
         $moduleHandler = xoops_getHandler('module');
         $mod           = $moduleHandler->create();
         $mod->loadInfoAsVar($module);
         // Construct message
-        if (false !== $mod->getInfo('image') && '' != trim($mod->getInfo('image'))) {
-            $msgs = '<img src="' . XOOPS_URL . '/modules/' . $mod->getVar('dirname', 'n') . '/' . trim($mod->getInfo('image')) . '" alt="">';
+        if (false !== $mod->getInfo('image') && '' != trim((string) $mod->getInfo('image'))) {
+            $msgs = '<img src="' . XOOPS_URL . '/modules/' . $mod->getVar('dirname', 'n') . '/' . trim((string) $mod->getInfo('image')) . '" alt="">';
         }
         $msgs .= '<br><span style="font-size:smaller;">' . $mod->getVar('name', 's') . '</span><br><br>' . _AM_SYSTEM_MODULES_RUSUREINS;
         // Call Header
@@ -375,14 +375,14 @@ switch ($op) {
         xoops_cp_footer();
         break;
     case 'uninstall':
-        $module = htmlspecialchars($module, ENT_QUOTES | ENT_HTML5);
+        $module = htmlspecialchars((string) $module, ENT_QUOTES | ENT_HTML5);
         // Get module handler
         /** @var \XoopsModuleHandler $moduleHandler */
         $moduleHandler = xoops_getHandler('module');
         $mod           = $moduleHandler->getByDirname($module);
         // Construct message
-        if (false !== $mod->getInfo('image') && '' != trim($mod->getInfo('image'))) {
-            $msgs = '<img src="' . XOOPS_URL . '/modules/' . $mod->getVar('dirname', 'n') . '/' . trim($mod->getInfo('image')) . '" alt="">';
+        if (false !== $mod->getInfo('image') && '' != trim((string) $mod->getInfo('image'))) {
+            $msgs = '<img src="' . XOOPS_URL . '/modules/' . $mod->getVar('dirname', 'n') . '/' . trim((string) $mod->getInfo('image')) . '" alt="">';
         }
         $msgs .= '<br><span style="font-size:smaller;">' . $mod->getVar('name') . '</span><br><br>' . _AM_SYSTEM_MODULES_RUSUREUNINS;
         // Call Header
@@ -429,14 +429,14 @@ switch ($op) {
         xoops_cp_footer();
         break;
     case 'update':
-        $module = htmlspecialchars($module, ENT_QUOTES | ENT_HTML5);
+        $module = htmlspecialchars((string) $module, ENT_QUOTES | ENT_HTML5);
         // Get module handler
         /** @var \XoopsModuleHandler $moduleHandler */
         $moduleHandler = xoops_getHandler('module');
         $mod           = $moduleHandler->getByDirname($module);
         // Construct message
-        if (false !== $mod->getInfo('image') && '' != trim($mod->getInfo('image'))) {
-            $msgs = '<img src="' . XOOPS_URL . '/modules/' . $mod->getVar('dirname', 'n') . '/' . trim($mod->getInfo('image')) . '" alt="">';
+        if (false !== $mod->getInfo('image') && '' != trim((string) $mod->getInfo('image'))) {
+            $msgs = '<img src="' . XOOPS_URL . '/modules/' . $mod->getVar('dirname', 'n') . '/' . trim((string) $mod->getInfo('image')) . '" alt="">';
         }
         $msgs .= '<br><span style="font-size:smaller;">' . $mod->getVar('name', 's') . '</span><br><br>' . _AM_SYSTEM_MODULES_RUSUREUPD;
         // Call Header
