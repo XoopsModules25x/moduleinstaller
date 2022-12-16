@@ -133,7 +133,7 @@ function saveSampleData(): void
 
     // save permissions
     $criteria = new \CriteriaCompo();
-    $criteria->add(new \Criteria('gperm_modid', $helper->getModule()->getVar('mid')));
+    $criteria->add(new \Criteria('gperm_modid', (string)$helper->getModule()->getVar('mid')));
     $skipColumns[] = 'gperm_id';
     TableLoad::saveTableToYamlFile('group_permission', $exportFolder . 'group_permission.yml', $criteria, $skipColumns);
     unset($criteria);

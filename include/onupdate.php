@@ -45,7 +45,7 @@ function xoops_module_pre_update_moduleinstaller(\XoopsModule $module)
 /**
  * Performs tasks required during update of the module
  * @param \XoopsModule $module {@link XoopsModule}
- * @param null         $previousVersion
+ * @param int|null  $previousVersion
  *
  * @return bool true if update successful, false if not
  */
