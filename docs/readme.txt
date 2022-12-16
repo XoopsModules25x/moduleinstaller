@@ -14,7 +14,7 @@ Install/uninstall
 ---------------------
 No special measures necessary, follow the standard installation process – extract the module folder into the ../modules directory. Install the module through Admin -> System Module -> Modules.
 
-Detailed instructions on installing modules are available in the XOOPS Operations Manual: http://goo.gl/adT2i
+Detailed instructions on installing modules are available in the XOOPS Operations Manual: https://goo.gl/adT2i
 
 If you would like to use the "Update" Tab, you need to copy the files from /extras folder to this folder:
 

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -15,7 +15,6 @@
  *
  * @copyright   XOOPS Project (https://xoops.org)
  * @license     https://www.gnu.org/licenses/gpl-2.0.html GNU General Public License (GPL)
- * @package     installer
  * @since       2.3.0
  * @author      Haruki Setoyama  <haruki@planewave.org>
  * @author      Kazumi Ono <webmaster@myweb.ne.jp>

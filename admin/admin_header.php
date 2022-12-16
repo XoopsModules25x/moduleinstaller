@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /**
  * Module Installer module
  *
@@ -11,23 +12,29 @@
  *
  * @copyright           XOOPS Project (https://xoops.org)
  * @license             https://www.gnu.org/licenses/gpl-2.0.html GNU Public License
- * @package             moduleinstaller
  * @since               1.0
  * @author              XOOPS Module Team
  **/
 
 use Xmf\Module\Admin;
-use XoopsModules\Moduleinstaller;
+use XoopsModules\Moduleinstaller\{
+    Helper
+};
+
+/** @var Admin $adminObject */
+/** @var Helper $helper */
+
+require dirname(__DIR__) . '/preloads/autoloader.php';
 
 require \dirname(__DIR__, 3) . '/include/cp_header.php';
 require_once \dirname(__DIR__) . '/include/common.php';
 
 $moduleDirName = \basename(\dirname(__DIR__));
-$helper      = Moduleinstaller\Helper::getInstance();
-$adminObject = Admin::getInstance();
+$helper        = Helper::getInstance();
+$adminObject   = Admin::getInstance();
 
-$pathIcon16    = Admin::iconUrl('', 16);
-$pathIcon32    = Admin::iconUrl('', 32);
+$pathIcon16    = Admin::iconUrl('', '16');
+$pathIcon32    = Admin::iconUrl('', '32');
 $pathModIcon32 = $helper->getModule()->getInfo('modicons32');
 
 // Load language files

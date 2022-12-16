@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /**
  * See the enclosed file license.txt for licensing information.
@@ -6,7 +6,6 @@
  *
  * @copyright   XOOPS Project (https://xoops.org)
  * @license     https://www.gnu.org/licenses/gpl-2.0.html GNU General Public License (GPL)
- * @package     installer
  * @since       2.3.0
  * @author      Haruki Setoyama  <haruki@planewave.org>
  * @author      Kazumi Ono <webmaster@myweb.ne.jp>
@@ -129,15 +128,15 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
     //    $dirlist = array_diff($dirlist, array('system', 'moduleinstaller'));
     foreach ($dirlist as $file) {
         clearstatcache();
-        if (in_array($file, $listed_mods)) {
+        if (in_array($file, $listed_mods, true)) {
             $value = 0;
             $style = '';
-            if (isset($wizard->configs['modules']) && in_array($file, $wizard->configs['modules'])) {
+            if (isset($wizard->configs['modules']) && in_array($file, $wizard->configs['modules'], true)) {
                 $value = 1;
                 $style = " style='background-color:#E6EFC2;'";
             }
 
-            $file   = trim($file);
+            $file   = trim((string) $file);
             $module = $moduleHandler->create();
             if (!$module->loadInfo($file, false)) {
                 continue;
@@ -155,10 +154,10 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
             $moduleHandler = xoops_getHandler('module');
             $moduleInDB    = $moduleHandler->getByDirname($module->getInfo('dirname'));
             // Save current version for use in the update function
-            $prevVersion = round($moduleInDB->getVar('version') / 100, 2);
+            $prevVersion = $moduleInDB->getVar('version');
 
-            $content = round((float)$module->getInfo('version'), 2) != $prevVersion ? $content . "    <td ><span style='color: #FF0000; font-weight: bold;'>" : $content . '    <td><span>';
-            $content .= '        ' . $module->getInfo('name') . '&nbsp;' . number_format(round((float)$module->getInfo('version'), 2), 2) . '&nbsp;' . $module->getInfo('module_status') . '&nbsp;(folder: /' . $module->getInfo('dirname') . ')';
+            $content = str_replace("\n", '', (string)$module->getInfo('version')) != $prevVersion ? $content . "    <td ><span style='color: #FF0000; font-weight: bold;'>" : $content . '    <td><span>';
+            $content .= '        ' . $module->getInfo('name') . '&nbsp;' . $module->getInfo('version') . '&nbsp;' . $module->getInfo('module_status') . '&nbsp;(folder: /' . $module->getInfo('dirname') . ')';
             $content .= '        <br>' . $module->getInfo('description');
             $content .= "    </span></td>\n";
             $content .= "    <td class='yesno'>";

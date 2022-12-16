@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /**
  * See the enclosed file license.txt for licensing information.
@@ -6,7 +6,6 @@
  *
  * @copyright   XOOPS Project (https://xoops.org)
  * @license     https://www.gnu.org/licenses/gpl-2.0.html GNU General Public License (GPL)
- * @package     installer
  * @since       2.3.0
  * @author      Haruki Setoyama  <haruki@planewave.org>
  * @author      Kazumi Ono <webmaster@myweb.ne.jp>
@@ -83,7 +82,7 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
     $moduleHandler  = xoops_getHandler('module');
     $installed_mods = $moduleHandler->getObjects();
     $listed_mods    = [];
-    if (count($installed_mods) > 0) {
+    if ((is_countable($installed_mods) ? count($installed_mods) : 0) > 0) {
         foreach ($installed_mods as $module) {
             $listed_mods[] = $module->getVar('dirname');
         }
@@ -101,15 +100,15 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
     if (!isset($wizard->configs['modules'])) {
         foreach ($dirlist as $file) {
             clearstatcache();
-            if (!in_array($file, $listed_mods)) {
+            if (!in_array($file, $listed_mods, true)) {
                 $value = 0;
                 $style = '';
-                if (isset($wizard->configs['modules']) && in_array($file, $wizard->configs['modules'])) {
+                if (isset($wizard->configs['modules']) && in_array($file, $wizard->configs['modules'], true)) {
                     $value = 1;
                     $style = " style='background-color:#E6EFC2;'";
                 }
 
-                $file   = trim($file);
+                $file   = trim((string) $file);
                 $module = $moduleHandler->create();
                 if (!$module->loadInfo($file, false)) {
                     continue;
@@ -123,7 +122,7 @@ if ('POST' === $_SERVER['REQUEST_METHOD']) {
                 $content .= "<tr id='" . $file . "'" . $style . ">\n";
                 $content .= "    <td class='img' ><img src='" . XOOPS_URL . '/modules/' . $module->getInfo('dirname') . '/' . $module->getInfo('image') . "' alt='" . $module->getInfo('name') . "'></td>\n";
                 $content .= '    <td>';
-                $content .= '        ' . $module->getInfo('name') . '&nbsp;' . number_format(round((float)$module->getInfo('version'), 2), 2) . '&nbsp;' . $module->getInfo('module_status') . '&nbsp;(folder: /' . $module->getInfo('dirname') . ')';
+                $content .= '        ' . $module->getInfo('name') . '&nbsp;' . $module->getInfo('version') . '&nbsp;' . $module->getInfo('module_status') . '&nbsp;(folder: /' . $module->getInfo('dirname') . ')';
                 $content .= '        <br>' . $module->getInfo('description');
                 $content .= "    </td>\n";
                 $content .= "    <td class='yesno'>";

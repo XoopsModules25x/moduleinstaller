@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /**
  * Module Installer
  *
@@ -11,7 +11,6 @@
  *
  * @copyright           XOOPS Project (https://xoops.org)
  * @license             https://www.gnu.org/licenses/gpl-2.0.html GNU Public License
- * @package             moduleinstaller
  * @since               1.0
  * @author              Michael Beck (Mamba)
  **/

@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 /**
  * ****************************************************************************
@@ -14,7 +14,6 @@
  *
  * @copyright       Michael Beck (mamba)
  * @license         https://www.gnu.org/licenses/gpl-2.0.html GNU Public License
- * @package         installer
  * @author          Michael Beck (mamba)
  *
  * ****************************************************************************

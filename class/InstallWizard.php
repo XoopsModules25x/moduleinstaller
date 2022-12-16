@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Moduleinstaller;
 
@@ -12,26 +12,12 @@ namespace XoopsModules\Moduleinstaller;
  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 /**
  * See the enclosed file license.txt for licensing information.
  * If you did not receive this file, get it at https://www.gnu.org/licenses/gpl-2.0.html
  *
  * @copyright   XOOPS Project (https://xoops.org)
  * @license     https://www.gnu.org/licenses/gpl-2.0.html GNU General Public License (GPL)
- * @package     installer
  * @since       2.3.0
  * @author      Haruki Setoyama  <haruki@planewave.org>
  * @author      Kazumi Ono <webmaster@myweb.ne.jp>
@@ -98,7 +84,7 @@ class InstallWizard
             return false;
         }
 
-        $pagename = \preg_replace('~(page_)(.*)~', '$2', \basename($_SERVER['SCRIPT_NAME'], '.php'));
+        $pagename = \preg_replace('~(page_)(.*)~', '$2', \basename((string) $_SERVER['SCRIPT_NAME'], '.php'));
         $this->setPage($pagename);
 
         // Prevent client caching
@@ -155,7 +141,7 @@ class InstallWizard
     /**
      * @param $file
      */
-    public function loadLangFile($file)
+    public function loadLangFile($file): void
     {
         \xoops_loadLanguage($file, 'moduleinstaller');
     }
@@ -163,9 +149,9 @@ class InstallWizard
     /**
      * @param $language
      */
-    public function initLanguage($language)
+    public function initLanguage($language): void
     {
-        $language = \preg_replace('/[^a-z0-9_\-]/i', '', $language);
+        $language = \preg_replace('/[^a-z0-9_\-]/i', '', (string) $language);
         if (!\file_exists("./language/{$language}/install.php")) {
             $language = 'english';
         }
@@ -205,7 +191,7 @@ class InstallWizard
     {
         $proto = ('on' === @$_SERVER['HTTPS']) ? 'https' : 'http';
         $host  = $_SERVER['HTTP_HOST'];
-        $base  = mb_substr($_SERVER['SCRIPT_NAME'], 0, mb_strrpos($_SERVER['SCRIPT_NAME'], '/'));
+        $base  = mb_substr((string) $_SERVER['SCRIPT_NAME'], 0, mb_strrpos((string) $_SERVER['SCRIPT_NAME'], '/'));
 
         return $proto . '://' . $host . $base;
     }
@@ -221,9 +207,9 @@ class InstallWizard
         $pageIndex = $this->pageIndex;
         if (!(int)$page[0]) {
             if ('+' == $page[0]) {
-                $pageIndex += mb_substr($page, 1);
+                $pageIndex += mb_substr((string) $page, 1);
             } elseif ('-' == $page[0]) {
-                $pageIndex -= mb_substr($page, 1);
+                $pageIndex -= mb_substr((string) $page, 1);
             } else {
                 $pageIndex = (int)\array_search($page, $pages, true);
             }
@@ -245,7 +231,7 @@ class InstallWizard
      * @param int    $status
      * @param string $message
      */
-    public function redirectToPage($page, $status = 303, $message = 'See other')
+    public function redirectToPage($page, $status = 303, $message = 'See other'): void
     {
         $location = $this->pageURI($page);
         $proto    = !@empty($_SERVER['SERVER_PROTOCOL']) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.1';

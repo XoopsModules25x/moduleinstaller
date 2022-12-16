@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -17,7 +17,6 @@
  *
  * @copyright   XOOPS Project (https://xoops.org)
  * @license     https://www.gnu.org/licenses/gpl-2.0.html GNU General Public License (GPL)
- * @package     installer
  * @since       2.3.0
  * @author      Haruki Setoyama  <haruki@planewave.org>
  * @author      Kazumi Ono <webmaster@myweb.ne.jp>
@@ -36,7 +35,7 @@ require_once \dirname(__DIR__, 3) . '/language/' . $wizard->language . '/global.
 <head>
     <title>
         <?php echo XOOPS_VERSION . ' : ' . XOOPS_INSTALL_WIZARD; ?>
-        (<?php echo ($wizard->pageIndex + 1) . '/' . count($wizard->pages); ?>)
+        (<?php echo ($wizard->pageIndex + 1) . '/' . (is_countable($wizard->pages) ? count($wizard->pages) : 0); ?>)
     </title>
     <meta http-equiv="Content-Type" content="text/html; charset=<?php echo _INSTALL_CHARSET ?>">
     <link rel="shortcut icon" type="image/ico" href="../favicon.ico">

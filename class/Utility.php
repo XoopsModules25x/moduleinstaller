@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Moduleinstaller;
 
@@ -18,17 +18,16 @@ namespace XoopsModules\Moduleinstaller;
 /**
  * Module:  xSitemap
  *
- * @package      \module\xsitemap\class
- * @license      http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @license      GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @copyright    https://xoops.org 2001-2017 &copy; XOOPS Project
  * @author       ZySpec <zyspec@yahoo.com>
  * @author       Mamba <mambax7@gmail.com>
  * @since        File available since version 1.54
  */
 
-use XoopsModules\Moduleinstaller;
-use XoopsModules\Moduleinstaller\Common;
-//use XoopsModules\Moduleinstaller\Constants;
+use XoopsModules\Moduleinstaller\{
+    Common
+};
 
 /**
  * Class Utility

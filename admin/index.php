@@ -1,4 +1,5 @@
-<?php
+<?php declare(strict_types=1);
+
 /**
  * Module Installer module
  *
@@ -11,13 +12,11 @@
  *
  * @copyright   XOOPS Project (https://xoops.org)
  * @license     https://www.gnu.org/licenses/gpl-2.0.html GNU Public License
- * @package     moduleinstaller
  * @since       1.0
  * @author      XOOPS Development Team
  **/
 
 use Xmf\Module\Admin;
-use XoopsModules\Moduleinstaller;
 
 //require_once  \dirname(__DIR__, 3) . '/include/cp_header.php';
 require_once __DIR__ . '/admin_header.php';

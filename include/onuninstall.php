@@ -1,10 +1,11 @@
-<?php
+<?php declare(strict_types=1);
+
 /**
  * uninstall.php - cleanup on module uninstall
  *
  * @author          XOOPS Module Development Team
  * @copyright       {@link https://xoops.org 2001-2016 XOOPS Project}
- * @license         {@link http://www.fsf.org/copyleft/gpl.html GNU public license}
+ * @license         {@link https://www.gnu.org/licenses/gpl-2.0.html GNU GPL 2.0 or later}
  * @link            https://xoops.org XOOPS
  */
 
@@ -34,8 +35,8 @@ function xoops_module_uninstall_moduleinstaller(\XoopsModule $module)
     //    return true;
 
     $moduleDirName      = \basename(\dirname(__DIR__));
-    $moduleDirNameUpper = mb_strtoupper($moduleDirName);
-    $helper = Moduleinstaller\Helper::getInstance();
+    $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
+    $helper             = Moduleinstaller\Helper::getInstance();
 
     $utility = new Utility();
     $success = true;
@@ -51,7 +52,7 @@ function xoops_module_uninstall_moduleinstaller(\XoopsModule $module)
         if ($dirInfo->isDir()) {
             // The directory exists so delete it
             if (!$utility::rrmdir($old_dir)) {
-                $module->setErrors(sprintf(constant('CO_' . $moduleDirNameUpper . '_ERROR_BAD_DEL_PATH'), $old_dir));
+                $module->setErrors(sprintf(constant('CO_' . $moduleDirNameUpper . '_' . 'ERROR_BAD_DEL_PATH'), $old_dir));
                 $success = false;
             }
         }

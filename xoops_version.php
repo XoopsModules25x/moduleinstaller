@@ -1,4 +1,4 @@
-<?php
+<?php declare(strict_types=1);
 /**
  * ****************************************************************************
  * ModuleInstaller - MODULE FOR XOOPS
@@ -13,7 +13,6 @@
  *
  * @copyright       Michael Beck (mamba)
  * @license         https://www.gnu.org/licenses/gpl-2.0.html GNU Public License
- * @package         moduleinstaller
  * @author          Michael Beck (mamba)
  *
  * ****************************************************************************
@@ -23,9 +22,9 @@ require_once __DIR__ . '/preloads/autoloader.php';
 
 $moduleDirName = basename(__DIR__);
 
-$modversion['version']             = '1.5.1';
-$modversion['module_status']       = 'Beta 1';
-$modversion['release_date']        = '2022/02/20';
+$modversion['version']             = '1.5.1-Final';
+$modversion['module_status']       = '';
+$modversion['release_date']        = '2022/12/15';
 $modversion['name']                = _MI_INSTALLER_NAME;
 $modversion['description']         = _MI_INSTALLER_DESC;
 $modversion['author']              = 'Michael Beck';
@@ -42,7 +41,7 @@ $modversion['modicons16']          = 'assets/images/icons/16';
 $modversion['modicons32']          = 'assets/images/icons/32';
 $modversion['module_website_url']  = 'www.xoops.org/';
 $modversion['module_website_name'] = 'XOOPS';
-$modversion['min_php']             = '7.3';
+$modversion['min_php']             = '7.4';
 $modversion['min_xoops']           = '2.5.10';
 $modversion['min_admin']           = '1.2';
 $modversion['min_db']              = ['mysql' => '5.5'];
